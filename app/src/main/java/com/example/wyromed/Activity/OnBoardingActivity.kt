@@ -83,9 +83,11 @@ class OnBoardingActivity : AppCompatActivity(){
     private fun  initActionButton() {
         btn_signup_to_layout.onClick {
             startActivity<SignUpActivity>()
+            finish()
         }
         btn_signin_to_layout.onClick {
             startActivity<SignInActivity>()
+            finish()
         }
     }
 }

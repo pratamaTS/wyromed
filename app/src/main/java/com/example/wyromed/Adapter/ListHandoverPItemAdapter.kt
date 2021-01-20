@@ -14,7 +14,8 @@ import com.example.wyromed.ViewHolder.ListHandoverRentalItemViewHolder
 
 class ListHandoverPItemAdapter(
     private var mContext: Context,
-    orderPurchasedItemList: ArrayList<HandoverPurchasedItem>
+    orderPurchasedItemList: ArrayList<HandoverPurchasedItem>,
+    private var confirm: Boolean
 ) :
     RecyclerView.Adapter<ListHandoverPurchasedItemViewHolder>() {
     private val orderPurchasedItemList: ArrayList<HandoverPurchasedItem>
@@ -26,10 +27,21 @@ class ListHandoverPItemAdapter(
 
     override fun onBindViewHolder(holder: ListHandoverPurchasedItemViewHolder, position: Int) {
         holder.tvNamaBarangBeli.text = orderPurchasedItemList[position].name
-        holder.tvJumlahBarangBeli.text = orderPurchasedItemList[position].quantity.toString()
 
-        holder.tvTitleJumlahBarangBeli.visibility = View.VISIBLE
-        holder.tvJumlahBarangBeli.visibility = View.VISIBLE
+        if(confirm == false){
+            holder.tvJumlahBarangBeli.text = orderPurchasedItemList[position].quantity.toString()
+
+            holder.tvTitleJumlahBarangBeli.visibility = View.VISIBLE
+            holder.tvJumlahBarangBeli.visibility = View.VISIBLE
+        }else{
+            holder.tvTitleJumlahBarangBeli.visibility = View.GONE
+            holder.tvJumlahBarangBeli.visibility = View.GONE
+
+            holder.tvTitleStatus.visibility = View.VISIBLE
+            holder.tvAccepted.visibility = View.VISIBLE
+
+            holder.tvAccepted.text = "ACCEPTED"
+        }
     }
 
     override fun getItemCount(): Int {

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
 import com.example.wyromed.Activity.Interface.DetailMessageBookingInterface
 import com.example.wyromed.Activity.Interface.HeaderMessageBookingInterface
 import com.example.wyromed.Activity.Interface.UpdateStatusBookingInterface
@@ -47,6 +48,9 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface, Deta
     var btnCancelPesanan: Button? = null
     var btnConfirmPesanan: Button? = null
     var btnCheckPesanan: Button? = null
+    var layoutBtnCancelPesanan: NeomorphFrameLayout? = null
+    var layoutBtnConfirmPesanan: NeomorphFrameLayout? = null
+    var layoutBtnCheckPesanan: NeomorphFrameLayout? = null
     var choose: Int = 0
     var id: Int = 0
     var title: String? = null
@@ -67,6 +71,9 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface, Deta
         tvTanggalPesanan = findViewById(R.id.tv_tgl_pesanan)
         tvNoPesanan = findViewById(R.id.tv_nomor_pesanan)
         tvStatusPesanan = findViewById(R.id.tv_status_pesanan)
+        layoutBtnCancelPesanan = findViewById(R.id.layout_btn_cancel_pesanan)
+        layoutBtnConfirmPesanan = findViewById(R.id.layout_btn_confirm_pesanan)
+        layoutBtnCheckPesanan = findViewById(R.id.layout_btn_check_pesanan)
 
         user?.token_type = intent.getStringExtra("token_type")
         user?.token = intent.getStringExtra("token")
@@ -123,8 +130,9 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface, Deta
     }
 
     private fun setVisibility(){
-        btnCancelPesanan?.visibility = View.GONE
-        btnConfirmPesanan?.text = "Check"
+        layoutBtnCancelPesanan?.visibility = View.GONE
+        layoutBtnConfirmPesanan?.visibility = View.GONE
+        layoutBtnCheckPesanan?.visibility = View.VISIBLE
     }
 
     override fun onSuccessHeaderMessageBooking(

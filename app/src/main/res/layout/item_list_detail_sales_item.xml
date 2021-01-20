@@ -10,29 +10,32 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/tv_detail_sales_item_name"
+        android:id="@+id/tv_sales_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        tools:text="Phillips VT-1208LL"
         android:textSize="16sp"
         android:textColor="@color/colorGray"
         android:fontFamily="@font/montserrat_regular"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_detail_sales_item_price"
+        android:id="@+id/tv_sales_item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:text=""
+        tools:text="Rp. 2.000.000,00"
         android:textColor="@color/colorGrey"
         android:fontFamily="@font/montserrat_regular"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_sales_item_name"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sales_item_name"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_detail_sales_kali"
+        android:id="@+id/tv_sales_kali"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -41,30 +44,30 @@
         android:text="X"
         android:textColor="@color/colorGrey"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_detail_sales_item_price"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_sales_item_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_sales_item_price"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sales_item_name"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_detail_sales_kuantitas_item"
+        android:id="@+id/tv_sales_kuantitas_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="3dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text=""
+        tools:text="2"
         android:textColor="@color/colorGrey"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_detail_sales_kali"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_sales_item_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_sales_kali"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sales_item_name"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_detail_sales_total_price_item"
+        android:id="@+id/tv_sales_total_price_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
-        android:text=""
+        tools:text="Rp. 4.000.000,00"
         android:textColor="@color/colorGray"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

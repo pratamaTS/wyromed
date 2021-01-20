@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SalesOrderActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGreen">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/ic_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back_white"
+                    android:background="#00000000"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/todo"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/app_bar_sales_order"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    tools:ignore="RelativeOverlap" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/detail_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/tv_title_detail_sales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/title_detail_sales"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_no_sales_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="A-112"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sales_order_date_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_sales_order_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/date_detail_sales"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="29 July 2020"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/hospital_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sales_order_date_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/hospital_detail_sales"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_hospital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="RS. Omni Pulomas"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/patient_name_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hospital_sales_order_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/patient_name_detail_sales"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_patient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Farhan Hidayat"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/medical_record_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/patient_name_sales_order_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/medical_record_detail_sales"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_medical_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="MR-111-1111"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/payment_status_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medical_record_sales_order_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/payment_status_sales_order"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_payment_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="BPJS"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/payment_method_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment_status_sales_order_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/payment_method_sales_order"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_payment_method"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/hint_select_payment_method"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/due_date_sales_order_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment_method_sales_order_layout"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/due_date_sales_order"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_sales_order_due_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/btn_open_calendar_due_date"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/hint_select_due_date"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageButton
+                    android:id="@+id/btn_open_calendar_due_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/toogle_garis"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/garis_putus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/due_date_sales_order_layout"
+                tools:ignore="MissingConstraints" />
+
+            <RelativeLayout
+                android:id="@+id/sales_order__rental_item_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toogle_garis"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/tv_title_rental_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/title_rental_item_detail_sales"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sales_order_rental_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sales_order__rental_item_layout" />
+
+            <ImageView
+                android:id="@+id/toogle_garis2"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/garis_putus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_sales_order_rental_item"
+                tools:ignore="MissingConstraints" />
+
+            <RelativeLayout
+                android:id="@+id/sales_order_purchased_item_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toogle_garis2"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/tv_title_purchased_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/title_purchased_item_detail_sales"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sales_order_puchased_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sales_order_purchased_item_layout" />
+
+            <ImageView
+                android:id="@+id/toogle_garis3"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/garis_putus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_sales_order_puchased_item"
+                tools:ignore="MissingConstraints" />
+
+            <RelativeLayout
+                android:id="@+id/sales_order_total_sales_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toogle_garis3"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/tv_title_total_price_sales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/title_total_price_detail_sales"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_price_sales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Rp. 5.830.000,00"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sales_order_total_sales_layout"
+                tools:ignore="MissingConstraints">
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:id="@+id/layout_btn_finish_so"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:neomorph_background_color="@color/light"
+                    app:neomorph_corner_radius="25dp"
+                    app:neomorph_elevation="6dp"
+                    app:neomorph_highlight_color="@color/neomorph_highlight_color"
+                    app:neomorph_shadow_color="@color/neomorph_shadow_color"
+                    app:neomorph_shadow_type="outer"
+                    app:neomorph_view_type="rectangular"
+                    tools:ignore="MissingConstraints">
+
+                    <Button
+                        android:id="@+id/btn_finish_so"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_button_circle_green"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="@string/btn_finish_so"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:id="@+id/layout_btn_send_so"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout_btn_finish_so"
+                    app:neomorph_background_color="@color/light"
+                    app:neomorph_corner_radius="25dp"
+                    app:neomorph_elevation="6dp"
+                    app:neomorph_highlight_color="@color/neomorph_highlight_color"
+                    app:neomorph_shadow_color="@color/neomorph_shadow_color"
+                    app:neomorph_shadow_type="outer"
+                    app:neomorph_view_type="rectangular"
+                    tools:ignore="MissingConstraints">
+
+                    <Button
+                        android:id="@+id/btn_send_so"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_button_circle_white"
+                        app:backgroundTint="@null"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="@string/btn_send_so"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="18sp" />
+
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

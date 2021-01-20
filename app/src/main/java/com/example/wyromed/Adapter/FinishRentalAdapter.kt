@@ -11,7 +11,9 @@ import com.example.wyromed.ViewHolder.FinishRentalViewHolder
 
 class FinishRentalAdapter(
     private val context: Context,
-    finishRentalItemList: ArrayList<HandoverRentalItem>
+    finishRentalItemList: ArrayList<HandoverRentalItem>,
+    var minutesOperation: Long,
+    var secondsOperation: Long
 ) :
     RecyclerView.Adapter<FinishRentalViewHolder>() {
     private val finishRentalItemList: ArrayList<HandoverRentalItem>
@@ -24,7 +26,7 @@ class FinishRentalAdapter(
     override fun onBindViewHolder(holder: FinishRentalViewHolder, position: Int) {
         holder.tvNamaBarangRental.setText(finishRentalItemList[position].product_name)
         holder.tvStatusOperation.setText("FINISHED")
-        holder.tvTotalTimer.setText("2 Hours; 20 Min")
+        holder.tvTotalTimer.text = minutesOperation.toString() + "minutes; " + secondsOperation.toString() + "seconds"
     }
 
     override fun getItemCount(): Int {

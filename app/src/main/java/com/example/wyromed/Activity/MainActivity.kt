@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,8 @@ import com.example.wyromed.Fragment.InboxFragment
 import com.example.wyromed.Fragment.ProfileFragment
 import com.example.wyromed.R
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import org.jetbrains.anko.toast
+
 
 class MainActivity : BaseActivity(){
     private val TAG = MainActivity::class.java.simpleName
@@ -21,6 +24,7 @@ class MainActivity : BaseActivity(){
     val formDetailFragment: Booking1Fragment = Booking1Fragment()
     var botnav: ChipNavigationBar? = null
     var fragmentManager: FragmentManager? = null
+    var count: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Check Session
@@ -60,5 +64,14 @@ class MainActivity : BaseActivity(){
                 }
             }
         })
+    }
+
+    override fun onBackPressed() {
+        count = count + 1
+
+        when(count){
+            1-> toast("Press back again to close the application")
+            2-> finish()
+        }
     }
 }

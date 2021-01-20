@@ -107,6 +107,7 @@ class InboxFragment : Fragment(), RecyclerItemTouchHelperListener, InboxInterfac
     override fun onSuccessGetInbox(dataInbox: ArrayList<DataInbox?>?) {
         listMessages = dataInbox as ArrayList<DataInbox>
 
+        listMessagesSearch.clear()
         listMessagesSearch.addAll(listMessages)
 
         adapter = ListMessageAdapter(requireContext(), listMessagesSearch, this)

@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
                     android:fontFamily="@font/montserrat_bold"
-                    tools:text="ACCEPTED"
+                    tools:text="@string/tv_accepted"
                     android:textColor="@color/colorGreen"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +156,19 @@
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_start_rental_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/tv_start"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_operation_rental_order" />
 
                 <Chronometer
                     android:id="@+id/tv_stopwatch_rental_order"

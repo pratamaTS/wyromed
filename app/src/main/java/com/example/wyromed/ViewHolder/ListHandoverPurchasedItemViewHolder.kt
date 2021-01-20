@@ -9,10 +9,14 @@ class ListHandoverPurchasedItemViewHolder(itemView: View) : RecyclerView.ViewHol
     var tvNamaBarangBeli: TextView
     var tvTitleJumlahBarangBeli: TextView
     var tvJumlahBarangBeli: TextView
+    var tvTitleStatus: TextView
+    var tvAccepted: TextView
 
     init {
         tvNamaBarangBeli = itemView.findViewById(R.id.tv_nama_barang_purchased_order)
         tvTitleJumlahBarangBeli = itemView.findViewById(R.id.tv_title_amount_qty_purchased_order)
         tvJumlahBarangBeli = itemView.findViewById(R.id.tv_amount_qty_purchased_order)
+        tvTitleStatus = itemView.findViewById(R.id.tv_title_status_purchased_order)
+        tvAccepted = itemView.findViewById(R.id.tv_status_purchased_order)
     }
 }

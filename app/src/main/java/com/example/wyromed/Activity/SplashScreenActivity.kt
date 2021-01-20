@@ -18,11 +18,6 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(onBoarding)
             finish()
         }
-//        Handler().postDelayed({
-//            val onBoarding = Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
-//            startActivity(onBoarding)
-//            finish()
-//        }, SPLASH_SCREEN.toLong())
     }
 
     companion object {

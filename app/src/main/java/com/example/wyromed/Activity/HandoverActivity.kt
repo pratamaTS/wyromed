@@ -56,14 +56,19 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
         layoutBtnAccept = findViewById(R.id.layout_btn_accept)
         layoutBtnStart = findViewById(R.id.layout_btn_start)
 
-        //Visibity Button
-        layoutBtnAccept?.setVisibility(View.VISIBLE)
-        layoutBtnStart?.setVisibility(View.INVISIBLE)
-
         user?.token_type = intent.getStringExtra("token_type")
         user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
         confirm = intent.getBooleanExtra("confirm", false)
+
+        //Visibity Button
+        if(confirm == false) {
+            layoutBtnAccept?.setVisibility(View.VISIBLE)
+            layoutBtnStart?.setVisibility(View.INVISIBLE)
+        }else{
+            layoutBtnAccept?.setVisibility(View.INVISIBLE)
+            layoutBtnStart?.setVisibility(View.VISIBLE)
+        }
 
         //SET LISTENER
         initActionButton()
@@ -88,24 +93,26 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
     private fun initActionButton() {
         back!!.onClick { this }
         btnAccept!!.onClick {
-            if (confirm == false) {
-                startActivity<ConfirmSignatureActivity>(
-                    ConfirmSignatureActivity.TAGS.TOKENTYPE to user?.token_type,
-                    ConfirmSignatureActivity.TAGS.TOKEN to user?.token,
-                    ConfirmSignatureActivity.TAGS.ID to id,
-                    ConfirmSignatureActivity.TAGS.CONFIRM to confirm,
-                    finish()
-                )
-            } else {
-                startActivity<InUseActivity>(
-                    InUseActivity.TAGS.TOKENTYPE to user?.token_type,
-                    InUseActivity.TAGS.TOKEN to user?.token,
-                    InUseActivity.TAGS.MESSAGE to message,
-                    InUseActivity.TAGS.ID to id,
-                    InUseActivity.TAGS.RENTAL to orderRentalItemList,
-                    InUseActivity.TAGS.BMHP to orderPurchasedItemList
-                )
-            }
+            startActivity<ConfirmSignatureActivity>(
+                ConfirmSignatureActivity.TAGS.TOKENTYPE to user?.token_type,
+                ConfirmSignatureActivity.TAGS.TOKEN to user?.token,
+                ConfirmSignatureActivity.TAGS.ID to id,
+                ConfirmSignatureActivity.TAGS.CONFIRM to confirm,
+            )
+
+            finish()
+        }
+
+        btnStart!!.onClick{
+            startActivity<InUseActivity>(
+                InUseActivity.TAGS.TOKENTYPE to user?.token_type,
+                InUseActivity.TAGS.TOKEN to user?.token,
+                InUseActivity.TAGS.MESSAGE to message,
+                InUseActivity.TAGS.ID to id,
+                InUseActivity.TAGS.RENTAL to orderRentalItemList,
+                InUseActivity.TAGS.BMHP to orderPurchasedItemList
+            )
+            finish()
         }
     }
 
@@ -128,7 +135,7 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
                 )
 
                 //Set up adapter Rental
-                rentalItemAdapter = ListHandoverRItemAdapter(this, orderRentalItemList)
+                rentalItemAdapter = ListHandoverRItemAdapter(this, orderRentalItemList, confirm)
                 rvOrderRental!!.setLayoutManager(LinearLayoutManager(this))
                 rvOrderRental!!.setAdapter(rentalItemAdapter)
                 rvOrderRental!!.setHasFixedSize(false)
@@ -144,7 +151,7 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
                 )
 
                 //Set up adapter Purchased
-                purchasedItemAdapter = ListHandoverPItemAdapter(this, orderPurchasedItemList)
+                purchasedItemAdapter = ListHandoverPItemAdapter(this, orderPurchasedItemList, confirm)
                 rvOrderPurchased!!.setLayoutManager(LinearLayoutManager(this))
                 rvOrderPurchased!!.setAdapter(purchasedItemAdapter)
                 rvOrderPurchased!!.setHasFixedSize(false)

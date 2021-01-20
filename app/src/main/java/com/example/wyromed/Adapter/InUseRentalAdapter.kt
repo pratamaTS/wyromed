@@ -16,9 +16,11 @@ class InUseRentalAdapter(private val context: Context, private val chronoTickLis
     private val inUseItemList: ArrayList<HandoverRentalItem>
     var resume: Boolean = false
     var elapsedTime: Long = 0
+    var minutes: Long = 0
+    var seconds: Long = 0
 
     interface RentalChronoTickListener {
-        fun onRentalChronoTickListener(chronoRental: Chronometer)
+        fun onRentalChronoTickListener(chronoRental: Chronometer, minutes: Long, second: Long)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InUseRentalViewHolder {
@@ -34,20 +36,20 @@ class InUseRentalAdapter(private val context: Context, private val chronoTickLis
 
         holder.tvCountTimer.setOnChronometerTickListener(Chronometer.OnChronometerTickListener {
             if (!resume) {
-                val minutes: Long =
+                minutes =
                     (SystemClock.elapsedRealtime() - holder.tvCountTimer.getBase()) / 1000 / 60
-                val seconds: Long =
+                seconds =
                     (SystemClock.elapsedRealtime() - holder.tvCountTimer.getBase()) / 1000 % 60
                 elapsedTime = SystemClock.elapsedRealtime()
             } else {
-                val minutes: Long = (elapsedTime - holder.tvCountTimer.getBase()) / 1000 / 60
-                val seconds: Long = (elapsedTime - holder.tvCountTimer.getBase()) / 1000 % 60
+                minutes = (elapsedTime - holder.tvCountTimer.getBase()) / 1000 / 60
+                seconds = (elapsedTime - holder.tvCountTimer.getBase()) / 1000 % 60
                 elapsedTime = elapsedTime + 1000
             }
         })
 
         holder.tvCountTimer.start()
-        chronoTickListener.onRentalChronoTickListener(holder.tvCountTimer)
+        chronoTickListener.onRentalChronoTickListener(holder.tvCountTimer, minutes, seconds)
     }
 
     override fun getItemCount(): Int {

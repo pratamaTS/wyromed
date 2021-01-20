@@ -3,6 +3,7 @@ package com.example.wyromed.Activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Chronometer
@@ -19,7 +20,7 @@ import org.jetbrains.anko.startActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
-class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListener, InUsePurchasedAdapter.PurchasedChronoTickListener {
+class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListener {
     object TAGS{
         val TOKEN = "token"
         val TOKENTYPE = "token_type"
@@ -39,7 +40,8 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
     var id: Int = 0
     var message: String = ""
     var btnStopChronoRental: Chronometer? = null
-    var btnStopChronoPurchased: Chronometer? = null
+    var minutesOperation: Long = 0
+    var secondsOperation: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +66,7 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
         rvOrderRental?.setHasFixedSize(false)
 
         //Setup adapter purchased
-        inUsePurchasedAdapter = InUsePurchasedAdapter(this, this, inUseItemPurchased)
+        inUsePurchasedAdapter = InUsePurchasedAdapter(this, inUseItemPurchased)
         rvOrderPurchased?.setLayoutManager(LinearLayoutManager(this))
         rvOrderPurchased?.setAdapter(inUsePurchasedAdapter)
         rvOrderPurchased?.setHasFixedSize(false)
@@ -72,28 +74,70 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
         initActionButton()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        //Setup adapter rental
+        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental)
+        rvOrderRental?.setLayoutManager(LinearLayoutManager(this))
+        rvOrderRental?.setAdapter(inUseRentalAdapter)
+        rvOrderRental?.setHasFixedSize(false)
+
+        //Setup adapter purchased
+        inUsePurchasedAdapter = InUsePurchasedAdapter(this, inUseItemPurchased)
+        rvOrderPurchased?.setLayoutManager(LinearLayoutManager(this))
+        rvOrderPurchased?.setAdapter(inUsePurchasedAdapter)
+        rvOrderPurchased?.setHasFixedSize(false)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //Setup adapter rental
+        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental)
+        rvOrderRental?.setLayoutManager(LinearLayoutManager(this))
+        rvOrderRental?.setAdapter(inUseRentalAdapter)
+        rvOrderRental?.setHasFixedSize(false)
+
+        //Setup adapter purchased
+        inUsePurchasedAdapter = InUsePurchasedAdapter(this, inUseItemPurchased)
+        rvOrderPurchased?.setLayoutManager(LinearLayoutManager(this))
+        rvOrderPurchased?.setAdapter(inUsePurchasedAdapter)
+        rvOrderPurchased?.setHasFixedSize(false)
+    }
+
     private fun initActionButton(){
         back?.onClick { finish() }
         btnFinish?.onClick {
 
             btnStopChronoRental?.stop()
-            btnStopChronoPurchased?.stop()
+
+            Log.d("minutesOps1", minutesOperation.toString())
+            Log.d("secondsOps1", secondsOperation.toString())
 
             startActivity<FinishOperationActivity>(
                 FinishOperationActivity.TAGS.TOKENTYPE to user?.token_type,
                 FinishOperationActivity.TAGS.TOKEN to user?.token,
                 FinishOperationActivity.TAGS.MESSAGE to message,
                 FinishOperationActivity.TAGS.ID to id,
+                FinishOperationActivity.TAGS.MINUTESOPS to minutesOperation,
+                FinishOperationActivity.TAGS.SECONDSOPS to secondsOperation,
                 FinishOperationActivity.TAGS.RENTAL to inUseItemRental,
                 FinishOperationActivity.TAGS.BMHP to inUseItemPurchased)
+
+            finish()
         }
     }
 
-    override fun onRentalChronoTickListener(chronoRental: Chronometer) {
+    override fun onRentalChronoTickListener(chronoRental: Chronometer, minutes: Long, second: Long) {
+        var chronometerInstance: Chronometer? = null
         btnStopChronoRental = chronoRental
+        minutesOperation = minutes
+        secondsOperation = second
+
+        Log.d("minutes", minutes.toString())
+        Log.d("seconds", second.toString())
+        Log.d("minutesOps", minutesOperation.toString())
+        Log.d("secondsOps", secondsOperation.toString())
     }
 
-    override fun onPurchasedChronoTickListener(chronoPurchased: Chronometer) {
-        btnStopChronoPurchased = chronoPurchased
-    }
 }

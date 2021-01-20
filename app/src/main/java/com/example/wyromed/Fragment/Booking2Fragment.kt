@@ -192,7 +192,7 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
                 day = thisDay
                 year = thisYear
                 edtStartDate!!.setText("" + thisDay + "/" + month + "/" + thisYear)
-                calendarEndDate.set(thisYear, month!!, thisDay);
+                calendarEndDate.set(thisYear, thisMonth, thisDay)
 
                 dateStartValue =  year.toString() + "-" + month.toString() + "-" + day.toString()
                 Log.d("start date rental", dateStartValue.toString())

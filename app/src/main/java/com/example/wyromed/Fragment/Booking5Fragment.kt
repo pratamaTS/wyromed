@@ -188,7 +188,10 @@ class Booking5Fragment : Fragment(), BookingInterface {
             startActivity<OrderedActivity>(
             OrderedActivity.TAGS.TOKENTYPE to tokenType,
             OrderedActivity.TAGS.TOKEN to token,
-            OrderedActivity.TAGS.MESSAGE to message) }
+            OrderedActivity.TAGS.MESSAGE to message)
+
+            activity?.finish()
+        }
 
         openDialog.show()
     }

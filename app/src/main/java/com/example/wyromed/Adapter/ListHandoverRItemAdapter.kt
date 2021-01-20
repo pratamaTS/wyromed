@@ -12,7 +12,8 @@ import java.lang.String
 
 class ListHandoverRItemAdapter(
     private var mContext: Context,
-    orderRentalItemList: ArrayList<HandoverRentalItem>
+    orderRentalItemList: ArrayList<HandoverRentalItem>,
+    private var confirm: Boolean
 ) :
     RecyclerView.Adapter<ListHandoverRentalItemViewHolder>() {
     private val orderRentalItemList: ArrayList<HandoverRentalItem>
@@ -24,10 +25,19 @@ class ListHandoverRItemAdapter(
 
     override fun onBindViewHolder(holder: ListHandoverRentalItemViewHolder, position: Int) {
         holder.tvNamaBarangRental.text = orderRentalItemList[position].product_name
-        holder.tvJumlahBarangRental.text = orderRentalItemList[position].quantity.toString()
 
-        holder.tvTitleJumlahBarangRental.visibility = View.VISIBLE
-        holder.tvJumlahBarangRental.visibility = View.VISIBLE
+        if(confirm == false) {
+            holder.tvJumlahBarangRental.text = orderRentalItemList[position].quantity.toString()
+
+            holder.tvTitleJumlahBarangRental.visibility = View.VISIBLE
+            holder.tvJumlahBarangRental.visibility = View.VISIBLE
+        }else{
+            holder.tvTitleJumlahBarangRental.visibility = View.GONE
+            holder.tvJumlahBarangRental.visibility = View.GONE
+
+            holder.tvTitleOperation.visibility = View.VISIBLE
+            holder.tvStartOperation.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {

@@ -24,6 +24,8 @@ class FinishOperationActivity: BaseActivity() {
         val TOKENTYPE = "token_type"
         val MESSAGE = "message"
         val ID = "id"
+        val MINUTESOPS = "minutes_ops"
+        val SECONDSOPS = "seconds_ops"
         val RENTAL = "rental"
         val BMHP = "bmhp"
     }
@@ -37,6 +39,8 @@ class FinishOperationActivity: BaseActivity() {
     var finishRentalItemList: ArrayList<HandoverRentalItem> = ArrayList()
     var finishPurchaseItemList: ArrayList<HandoverPurchasedItem> = ArrayList()
     var id: Int = 0
+    var minutesOperation: Long = 0
+    var secondsOperation: Long = 0
     var message: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +56,14 @@ class FinishOperationActivity: BaseActivity() {
         user?.token_type = intent.getStringExtra("token_type")
         user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
+        minutesOperation = intent.getLongExtra("minutes_ops",0)
+        secondsOperation = intent.getLongExtra("seconds_ops",0)
         finishRentalItemList = intent.getParcelableArrayListExtra<HandoverRentalItem>("rental") as ArrayList<HandoverRentalItem>
         finishPurchaseItemList = intent.getParcelableArrayListExtra<HandoverPurchasedItem>("bmhp") as ArrayList<HandoverPurchasedItem>
 
 
         //Setup adapter rental
-        finishRentalAdapter = FinishRentalAdapter(this, finishRentalItemList)
+        finishRentalAdapter = FinishRentalAdapter(this, finishRentalItemList, minutesOperation, secondsOperation)
         rvOrderRental?.setLayoutManager(LinearLayoutManager(this))
         rvOrderRental?.setAdapter(finishRentalAdapter)
         rvOrderRental?.setHasFixedSize(false)
@@ -67,17 +73,6 @@ class FinishOperationActivity: BaseActivity() {
         rvOrderPurchased?.setLayoutManager(LinearLayoutManager(this))
         rvOrderPurchased?.setAdapter(finishPurchasedAdapter)
         rvOrderPurchased?.setHasFixedSize(false)
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.ic_back -> finish()
-            R.id.btn_submit_sales -> {
-                val submitSales = Intent(this@FinishOperationActivity, ReceiptActivity::class.java)
-                startActivity(submitSales)
-            }
-        }
     }
 
     private fun initActionButton(){
@@ -91,6 +86,7 @@ class FinishOperationActivity: BaseActivity() {
                 ReceiptActivity.TAGS.RENTAL to finishRentalItemList,
                 ReceiptActivity.TAGS.BMHP to finishPurchaseItemList
             )
+            finish()
         }
     }
 }

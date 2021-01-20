@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:id="@+id/bottom_sheet_container_edit"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/title_edit_price_item"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center" />
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/neomorph_edit_price_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <EditText
+            android:id="@+id/et_edit_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:background="@drawable/container_edit_text"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/et_hint_price"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorGreen"
+            android:textSize="16sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_save_new_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:neomorph_background_color="@color/light"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <Button
+            android:id="@+id/btn_save_new_price"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_circle_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/btn_save_new_price"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+</LinearLayout>

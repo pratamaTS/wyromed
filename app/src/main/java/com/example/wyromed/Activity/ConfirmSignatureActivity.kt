@@ -2,15 +2,21 @@ package com.example.wyromed.Activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.provider.MediaStore.Images
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -27,6 +33,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.io.*
 
+
 class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     object TAGS{
         val TOKEN = "token"
@@ -41,6 +48,8 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     var id: Int = 0
     var back: ImageButton? = null
     var confirm: Boolean = false
+    var uri: Uri? = null
+    var stringUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -148,26 +157,91 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
                     val resolver = this.contentResolver
 
                     val contentValues = ContentValues().apply {
-                        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-                        put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/Wyromed")
-                    }
-
-                    val uri = resolver.insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        contentValues
-                    )
-
-                    resolver.openOutputStream(uri!!).use {
-                        MediaStore.Images.Media.insertImage(
-                            contentResolver,
-                            signature,
-                            String.format(
+                        put(
+                            Images.Media.TITLE, String.format(
                                 "Nurse_Confirm_Signature_%d",
                                 System.currentTimeMillis()
-                            ),
-                            "Nurse Confirmation Signature"
+                            )
                         )
-                        result = true
+                        put(
+                            Images.Media.DISPLAY_NAME, String.format(
+                                "Nurse_Confirm_Signature_%d",
+                                System.currentTimeMillis()
+                            )
+                        )
+                        put(Images.Media.DESCRIPTION, "Nurse Confirmation Signature")
+                        put(Images.Media.MIME_TYPE, "image/jpeg")
+                        // Add the date meta data to ensure the image is added at the front of the gallery
+                        // Add the date meta data to ensure the image is added at the front of the gallery
+                        put(Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+                        put(Images.Media.DATE_TAKEN, System.currentTimeMillis())
+                        put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/Wyromed/Signature")
+                    }
+
+                    try {
+                         uri = resolver.insert(
+                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                             contentValues
+                         )
+                        if (signature != null) {
+                            val imageOut: OutputStream = resolver.openOutputStream(uri!!)!!
+                            try {
+                                signature.compress(Bitmap.CompressFormat.JPEG, 80, imageOut)
+                                if(Build.VERSION.SDK_INT == 30){
+                                   MediaStore.Images.Media.insertImage(
+                                       contentResolver,
+                                        signature,
+                                        String.format(
+                                          "Nurse_Confirm_Signature_%d",
+                                            System.currentTimeMillis()
+                                        ),
+                                        "Nurse Confirmation Signature"
+                                    )
+                                }else {
+                                    val photo: File = File(
+                                        getAlbumStorageDir("Wyromed/Signature"),
+                                        String.format(
+                                            "Nurse_Confirm_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    )
+                                    saveBitmapToJPG(signature, photo)
+                                    scanMediaFile(photo)
+                                }
+                            } finally {
+                                imageOut.close()
+                                result = true
+                            }
+                            val id = ContentUris.parseId(uri!!)
+                            // Wait until MINI_KIND thumbnail is generated.
+                            val miniThumb = Images.Thumbnails.getThumbnail(
+                                resolver,
+                                id,
+                                Images.Thumbnails.MINI_KIND,
+                                null
+                            )
+                            // This is for backward compatibility.
+                            storeThumbnail(
+                                resolver,
+                                miniThumb,
+                                id,
+                                50f,
+                                50f,
+                                Images.Thumbnails.MICRO_KIND
+                            )
+                        } else {
+                            resolver.delete(uri!!, null, null)
+                            uri = null
+                        }
+                    } catch (e: Exception) {
+                        if (uri != null) {
+                            resolver.delete(uri!!, null, null)
+                            uri = null
+                        }
+                    }
+
+                    if (uri != null) {
+                        stringUrl = uri.toString()
                     }
                 }
 
@@ -176,6 +250,56 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
             e.printStackTrace()
         }
         return result
+    }
+
+    private fun storeThumbnail(
+        cr: ContentResolver,
+        source: Bitmap,
+        id: Long,
+        width: Float,
+        height: Float,
+        kind: Int
+    ): Bitmap? {
+
+        // create the matrix to scale it
+        val matrix = Matrix()
+        val scaleX = width / source.width
+        val scaleY = height / source.height
+        matrix.setScale(scaleX, scaleY)
+        val thumb = Bitmap.createBitmap(
+            source, 0, 0,
+            source.width,
+            source.height, matrix,
+            true
+        )
+        val values = ContentValues(4)
+        values.put(Images.Thumbnails.KIND, kind)
+        values.put(Images.Thumbnails.IMAGE_ID, id.toInt())
+        values.put(Images.Thumbnails.HEIGHT, thumb.height)
+        values.put(Images.Thumbnails.WIDTH, thumb.width)
+        val url = cr.insert(Images.Thumbnails.EXTERNAL_CONTENT_URI, values)
+        return try {
+            val thumbOut = cr.openOutputStream(url!!)
+            thumb.compress(Bitmap.CompressFormat.JPEG, 100, thumbOut)
+            thumbOut!!.close()
+            thumb
+        } catch (ex: FileNotFoundException) {
+            null
+        } catch (ex: IOException) {
+            null
+        }
+    }
+
+    fun getAlbumStorageDir(albumName: String?): File? {
+        //Get the directory for the user's public picture directory.
+        val file = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+            albumName
+        )
+        if (!file.mkdirs()) {
+            file.mkdirs()
+        }
+        return file
     }
 
         private fun scanMediaFile(photo: File) {
@@ -207,8 +331,6 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
 
     override fun onSuccessUpdateStatusBooking(msg: String?) {
         confirm = true
-        val intent = Intent(applicationContext, HandoverActivity::class.java)
-        Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         startActivity<HandoverActivity>(
             HandoverActivity.TAGS.TOKENTYPE to user?.token_type,
@@ -217,6 +339,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
             HandoverActivity.TAGS.ID to id,
             HandoverActivity.TAGS.CONFIRM to confirm
         )
+        finish()
     }
 
     override fun onErrorUpdateStatusBooking(msg: String?) {

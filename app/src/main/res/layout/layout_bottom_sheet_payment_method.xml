@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:id="@+id/bottom_sheet_container_payment_method">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/title_select_payment_method"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center" />
+
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <RadioButton
+            android:id="@+id/radio_cash"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/rd_cash"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/montserrat_regular"
+            android:checked="false"
+            android:button="@null"
+            android:drawableEnd="@drawable/custom_radio_button"
+            android:paddingStart="16dp"
+            android:paddingEnd="18dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_credit"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/rd_credit"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/montserrat_regular"
+            android:checked="false"
+            android:button="@null"
+            android:drawableEnd="@drawable/custom_radio_button"
+            android:paddingStart="16dp"
+            android:paddingEnd="18dp"/>
+
+    </RadioGroup>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_choose_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:neomorph_background_color="@color/light"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <Button
+            android:id="@+id/btn_choose_payment_method"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_circle_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/btn_choose_payment"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+</LinearLayout>

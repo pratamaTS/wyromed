@@ -8,12 +8,12 @@ import com.example.wyromed.R
 
 class InUsePurchasedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvNamaBarangPurchased: TextView
-    var tvTitleOperation: TextView
-    var tvCountTimer: Chronometer
+    var tvTitleStatus: TextView
+    var tvStatus: TextView
 
     init {
         tvNamaBarangPurchased = itemView.findViewById(R.id.tv_nama_barang_purchased_order)
-        tvTitleOperation = itemView.findViewById(R.id.tv_title_operation_purchased_order)
-        tvCountTimer = itemView.findViewById(R.id.tv_stopwatch_purchased_order)
+        tvTitleStatus = itemView.findViewById(R.id.tv_title_status_purchased_order)
+        tvStatus = itemView.findViewById(R.id.tv_status_purchased_order)
     }
 }

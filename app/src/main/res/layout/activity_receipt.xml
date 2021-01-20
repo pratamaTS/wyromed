@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ReceiptActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorGreen">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/ic_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_back_white"
+                        android:background="#00000000"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/todo"
+                        android:layout_alignParentStart="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/app_bar_receipt"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"
+                        tools:ignore="RelativeOverlap" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_rental_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/order_status_rental"
+                        android:textSize="20sp"
+                        android:textColor="@color/colorGrey"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/montserrat_bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_order_rental_item"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorGrey"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_order_rental_receipt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_purchased_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_rental_item"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/order_status_purchased"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/title_order_purchased_item"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="14sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_order_purchased_receipt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_crate_so"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:neomorph_background_color="@color/light"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/btn_create_so"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_circle_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/btn_create"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

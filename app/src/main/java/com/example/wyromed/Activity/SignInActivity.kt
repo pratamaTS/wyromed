@@ -80,12 +80,15 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
         }
         btn_forgot_password.onClick {
             startActivity<ForgotPasswordActivity>()
+            finish()
         }
         btn_register_layout.onClick {
             startActivity<SignUpActivity>()
+            finish()
         }
         btn_signup_to_layout.onClick {
             startActivity<OnBoardingActivity>()
+            finish()
         }
     }
 
@@ -95,6 +98,7 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
             BaseActivity.TAGS.TOKEN to token,
             BaseActivity.TAGS.MESSAGE to message
         )
+        finish()
     }
 
     override fun onErrorLogin(msg: String?) {

@@ -40,6 +40,7 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
     var tokenType: String? = null
     var token: String? = null
     var formatted: String? = null
+    var count: Int = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -60,10 +61,35 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         formatted = current.format(formatter)
 
-        models?.add(0, Carousel(R.drawable.illustration_booking, formatted.toString(), "Booking", totalBookingOrder.toString()))
-        models?.add(1, Carousel(R.drawable.illustration_sales, formatted.toString(), "Sales", totalSslesOrder.toString()))
-        models?.add(2, Carousel(R.drawable.illustration_stock, formatted.toString(), "Stock", totalStock.toString()))
-
+        if(count == 0) {
+            models?.add(
+                0,
+                Carousel(
+                    R.drawable.illustration_booking,
+                    formatted.toString(),
+                    "Booking",
+                    totalBookingOrder.toString()
+                )
+            )
+            models?.add(
+                1,
+                Carousel(
+                    R.drawable.illustration_sales,
+                    formatted.toString(),
+                    "Sales",
+                    totalSslesOrder.toString()
+                )
+            )
+            models?.add(
+                2,
+                Carousel(
+                    R.drawable.illustration_stock,
+                    formatted.toString(),
+                    "Stock",
+                    totalStock.toString()
+                )
+            )
+        }
         getTotal()
 
         return view
@@ -77,6 +103,8 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
 
     override fun onSuccessGetTotalBookingOrder(dataTotalBookingOrder: Int?) {
         totalBookingOrder = dataTotalBookingOrder.toString()
+
+        count = 1
 
         models?.set(0, Carousel(R.drawable.illustration_booking, formatted.toString(), "Booking", totalBookingOrder.toString()))
 

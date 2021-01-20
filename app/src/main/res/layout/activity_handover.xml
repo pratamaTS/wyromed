@@ -143,7 +143,6 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
     <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
         android:id="@+id/layout_btn_accept"
         android:layout_width="0dp"

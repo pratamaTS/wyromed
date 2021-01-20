@@ -61,6 +61,10 @@ class OrderedActivity: BaseActivity(), OrderedInterface {
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+
     private fun getBookingOrdered() {
         tokenType = intent.getStringExtra("token_type")
         token = intent?.getStringExtra("token")
