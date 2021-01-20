@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:neomorph_background_color="@color/light"
+        app:neomorph_corner_radius="14dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_layer_type="software"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_menu_carousel">
+
+            <ImageView
+                android:id="@+id/iv_illustration_content"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="10dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/todo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_date_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_illustration_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorGreen"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_illustration_content" />
+
+            <TextView
+                android:id="@+id/tv_title_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_date_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorGreen"
+                android:textSize="38sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date_content" />
+
+            <TextView
+                android:id="@+id/tv_total_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorGreen"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_total_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/card_total"
+                android:textColor="@color/colorGreen"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_total_content" />
+
+<!--            <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout-->
+<!--                android:id="@+id/layout_btn_more"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:background="@color/transparant"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:neomorph_background_color="@color/light"-->
+<!--                app:neomorph_corner_radius="25dp"-->
+<!--                app:neomorph_elevation="6dp"-->
+<!--                app:neomorph_highlight_color="@color/neomorph_highlight_color"-->
+<!--                app:neomorph_layer_type="software"-->
+<!--                app:neomorph_shadow_color="@color/neomorph_shadow_color"-->
+<!--                app:neomorph_shadow_type="outer"-->
+<!--                app:neomorph_view_type="circular">-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/btn_more"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:background="@drawable/bg_button_circle_white"-->
+<!--                    android:src="@drawable/ic_more_horiz" />-->
+
+<!--            </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

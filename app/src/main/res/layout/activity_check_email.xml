@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light"
+    android:gravity="center_horizontal"
+    tools:context=".Activity.CheckEmailActivity">
+
+    <ImageView
+        android:layout_width="236dp"
+        android:layout_height="236dp"
+        android:src="@drawable/icon_ilustration_check"
+        android:contentDescription="@string/todo"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/title_check_your_email"
+        android:textSize="24sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/colorGreen"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/we_have_sent_a_password_recovery_instruction_to_your_email"
+        android:textSize="17sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/colorGray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:id="@+id/layout_btn_oke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:neomorph_view_type="rectangular"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_elevation="6dp"
+            app:neomorph_corner_radius="25dp"
+            app:neomorph_highlight_color="@color/neomorph_highlight_color"
+            app:neomorph_background_color="@color/light"
+            app:neomorph_shadow_color="@color/neomorph_shadow_color">
+
+            <Button
+                android:id="@+id/btn_oke"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@drawable/bg_button_circle_green"
+                android:text="@string/btn_oke"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:focusable="true" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

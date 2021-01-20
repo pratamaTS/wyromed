@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/container_border"
+    android:baselineAligned="false">
+
+    <TextView
+        android:id="@+id/list_rental_item"
+        android:layout_width="fill_parent"
+        android:layout_height="42.5dp"
+        android:paddingLeft="10dp"
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/colorGreySolid"
+        android:paddingTop="10dp"/>
+</RelativeLayout>

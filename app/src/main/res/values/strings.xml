@@ -1,0 +1,276 @@
+<resources>
+    <string name="app_name">Wyromed</string>
+    <string name="todo">todo</string>
+
+    <!-- on boarding screen -->
+    <string name="btn_signup_on_boarding">Sign Up</string>
+    <string name="btn_signin_on_boarding">Sign In</string>
+
+
+    <!-- home screen -->
+    <string name="hello_first_fragment">Hello World!!</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="action_settings">Setting</string>
+    <string name="first_fragment_label">Fragment 1</string>
+    <string name="second_fragment_label">Fragment 2</string>
+
+    <!-- sign in screen -->
+    <string name="title_sign_in">Sign In</string>
+    <string name="hint_username_login">Username</string>
+    <string name="hint_identity_login">Email</string>
+    <string name="hint_password_login">Password</string>
+    <string name="btn_forget_password">Forget Password ?</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="no_account_yet">No account yet ?</string>
+    <string name="to_sign_up">Sign Up</string>
+
+    <!-- sign up screen -->
+    <string name="title_sign_up">Sign Up</string>
+    <string name="hint_username_register">Username</string>
+    <string name="hint_fullname_register">Fullname</string>
+    <string name="hint_email_register">Email</string>
+    <string name="hint_no_handphone_register">No. Handphone</string>
+    <string name="hint_password_register">Password</string>
+    <string name="hint_cpassword_register">Confirm Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="to_sign_in">Sign In</string>
+
+    <!-- forgot password screen -->
+    <string name="title_forgot_password">Forgot Password ?</string>
+    <string name="enter_your_registered_email_below_to_receive_password_reset_instruction">Enter your registered email below to receive password reset instruction</string>
+    <string name="email_forgot_password">Email</string>
+    <string name="btn_send">Send</string>
+
+    <!-- check email screen -->
+    <string name="title_check_your_email">Check your email</string>
+    <string name="we_have_sent_a_password_recovery_instruction_to_your_email">We have sent a password recovery instruction to your email</string>
+    <string name="btn_oke">Oke</string>
+
+    <!-- new password screen -->
+    <string name="title_create_new_password">Create new password</string>
+    <string name="your_new_password_must_be_different_from_previously_used_passwords">Your new password must be different from previously used passwords</string>
+    <string name="new_password_forgot">New Password</string>
+    <string name="repeat_password_forgot">Repeat Password</string>
+    <string name="btn_create_new_password">Create</string>
+
+    <!-- password success screen -->
+    <string name="title_success">Success !!!</string>
+    <string name="your_password_has_been_changed">Your password has been changed</string>
+    <string name="btn_login_to_my_account">Login to My Account</string>
+
+    <!-- home screen -->
+    <string name="discover_your">Discover your</string>
+    <string name="medical_device">medical device</string>
+    <string name="home">Home</string>
+
+    <!-- inbox screen -->
+    <string name="inbox">Inbox</string>
+
+    <!-- profile screen -->
+    <string name="profile">Profile</string>
+    <string name="history_menu">History Transactions</string>
+    <string name="setting_menu">Settings</string>
+    <string name="help_menu">Help and Support</string>
+    <string name="privacy_policy_menu">Privacy Policy</string>
+    <string name="sign_out_menu">Sign Out</string>
+    <string name="username_set_profile">Username</string>
+    <string name="email_set_profile">Email</string>
+
+    <!-- edit profile screen -->
+    <string name="upload_foto_profile">Upload</string>
+    <string name="hint_fullname_edit">Fullname</string>
+    <string name="hint_email_edit">Email</string>
+    <string name="hint_no_handphone_edit">No. Handphone</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+
+    <!-- message screen -->
+    <string name="title_message">Message</string>
+    <string name="delete">Delete</string>
+
+    <!-- detail message pesanan barang screen -->
+    <string name="tb_field_nama_barang">Nama Barang</string>
+    <string name="tb_field_jumlah">Jumlah</string>
+    <string name="btn_cancel_message">Cancel</string>
+    <string name="btn_confirm_message">Confirm</string>
+    <string name="title_tanggal_pesanan">Tanggal Pesanan :</string>
+    <string name="title_nomor_pesanan">Nomor Pesanan :</string>
+    <string name="title_status_pesanan">Status Pesanan :</string>
+    <string name="tv_tanggal_pesanan">12 Desember 2020</string>
+    <string name="tv_nomor_pesanan">BK-001</string>
+    <string name="tv_status_pesanan">Ready</string>
+    <string name="tv_kategori_message">Barang</string>
+    <string name="tv_judul_keterangan_message_1">Pesanan RS Omni Pulomas</string>
+    <string name="tv_waktu_message_1">12 Desember 2020, 17:45</string>
+    <string name="tb_field_status">Status</string>
+
+    <!-- detail message stock barang screen -->
+    <string name="tb_field_stok_awal">Stok Awal</string>
+    <string name="tb_field_stok_akhir">Stok Akhir</string>
+    <string name="tv_judul_keterangan_message_2">Pengurangan Stok</string>
+    <string name="tv_waktu_message_2">24 July 2020, 14:37</string>
+    <string name="tv_title_tgl_pengajuan">Tanggal Pengajuan :</string>
+    <string name="tv_tgl_pengajuan">23 July 2020</string>
+    <string name="tv_title_nomor_pengajuan">Nomor Pengajuan :</string>
+    <string name="tv_no_pengajuan">A-0119</string>
+    <string name="tv_title_disetujui_oleh">Disetujui Oleh :</string>
+    <string name="tv_disetujui_oleh">Danang Iswanto</string>
+    <string name="tv_nama_kategori_stok_barang">Stok Barang</string>
+
+    <!-- booking screen -->
+    <string name="title_booking">Booking</string>
+    <string name="form_detail">Form Detail</string>
+    <string name="rental_item">Rental Item</string>
+    <string name="purchased_item">BMHP Item</string>
+    <string name="status">Status</string>
+    <string name="finish">Finish</string>
+    <string name="title_form_detail1">Your Medical Devices</string>
+    <string name="title_form_detail2">Booking Form</string>
+    <string name="hospital">Hospital</string>
+    <string name="patient">Patient</string>
+    <string name="list_patient">List Patient</string>
+    <string name="medical">Medical Record</string>
+    <string name="payment">Payment Status</string>
+    <string name="step1">Form Detail</string>
+    <string name="step2">Rental Item</string>
+    <string name="step3">BMHP Item</string>
+    <string name="step4">Status</string>
+    <string name="step5">Finish</string>
+    <string name="operation">Operation</string>
+    <string name="item">Item</string>
+    <string name="date">Date</string>
+    <string name="startdate">Start Date</string>
+    <string name="enddate">End Date</string>
+    <string name="time">Time</string>
+    <string name="starttime">Start Time</string>
+    <string name="endtime">End Time</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="back">Back</string>
+    <string name="skip">Skip</string>
+    <string name="qty">Qty</string>
+    <string name="pcs">pcs</string>
+    <string name="wib">WIB</string>
+
+    <!--  Patient  -->
+    <string name="medrec">Medical Record</string>
+    <string name="search_patient">Search Patient</string>
+    <string name="patient_name">Patient Name</string>
+    <string name="date_birth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="address">Addresss</string>
+    <string name="country">Country</string>
+    <string name="state">Province</string>
+    <string name="city">City</string>
+    <string name="age">Age</string>
+    <string name="payment_status">Patient Status</string>
+    <string name="no_bpjs">No. BPJS</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="save">Save</string>
+
+    <!--  Item  -->
+    <string name="item_name">Item Name</string>
+    <string name="add_item">Add Item</string>
+    <string name="clear">Clear</string>
+    <string name="amount">Amount</string>
+    <string name="add">Add</string>
+    <string name="number_amount">1</string>
+
+    <!-- stock screen -->
+    <string name="app_bar_stock">Stock</string>
+    <string name="your_stock">Your Stock</string>
+    <string name="satuan_pcs">Pcs</string>
+    <string name="btn_submit">Submit</string>
+
+    <!-- list item stock screen -->
+    <string name="tv_medical_device">Medical Device</string>
+    <string name="tv_inventory_stock">Inventory Stock :</string>
+    <string name="title_qty_stock">Stock</string>
+    <string name="number_qty">0</string>
+
+    <!-- list item order rental item screen and  purchased item screen -->
+    <string name="tv_title_amount_qty">Amount</string>
+    <string name="tv_title_status_accepted">Status</string>
+    <string name="tv_title_operation">Operation</string>
+    <string name="tv_countdown">00:00</string>
+
+    <!-- stock request screen -->
+    <string name="app_bar_stock_request">Stock Request</string>
+    <string name="no_data_available">No Item</string>
+
+    <!-- dialog request success -->
+    <string name="tv_dialog_no_request">No. Request</string>
+    <string name="your_submission_for_additional_stock_has_been_submitted">Your submission for additional stock has been submitted</string>
+    <string name="dialog_btn_ok">OK</string>
+    <string name="dialog_btn_submit_again">Submit Different Request</string>
+
+    <!-- dialog booking success -->
+    <string name="tv_dialog_booked">Booked</string>
+    <string name="your_booking_submitted">Congrats Your Booking has been submitted</string>
+
+    <!-- in use screen -->
+    <string name="app_bar_in_use">In Use</string>
+    <string name="btn_finish">Finish</string>
+
+    <!-- finishing screen -->
+    <string name="app_bar_finishing">Finishing</string>
+    <string name="btn_submit_sales">Submit</string>
+
+    <!-- receipt screen -->
+    <string name="app_bar_receipt">Receipt</string>
+    <string name="btn_create">Create</string>
+
+    <!-- sales screen -->
+    <string name="app_bar_sales">Sales</string>
+    <string name="no_order_sales">No. Order</string>
+
+    <!-- handover screen -->
+    <string name="app_bar_handover">Handover</string>
+    <string name="order_status_rental">Order Status</string>
+    <string name="title_order_rental_item">Rental Item</string>
+    <string name="order_status_purchased">Order Status</string>
+    <string name="title_order_purchased_item">BMHP Item</string>
+    <string name="btn_accept_order">Accept</string>
+    <string name="btn_start_operation">Start</string>
+
+    <!-- ordered screen -->
+    <string name="ordered">Ordered</string>
+    <string name="day">Monday</string>
+    <string name="date_number">30</string>
+    <string name="month">December</string>
+    <string name="no_order">No. Order</string>
+    <string name="no_booked">BO/211220/0013</string>
+    <string name="order">CONFIRMED</string>
+
+    <!-- History Stock Request -->
+    <string name="history_sr">History Stock Request</string>
+
+    <!-- setting screen -->
+    <string name="title_settings">Settings</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_notification">Notification</string>
+    <string name="menu_change_password">Change Password</string>
+    <string name="menu_privacy_policy">Privacy Policy</string>
+    <string name="menu_terms_and_conditions">Terms and Conditions</string>
+
+    <!-- card menu carousel -->
+    <string name="card_total">Total</string>
+
+    <!-- notification screen -->
+    <string name="app_bar_notification">Notification</string>
+    <string name="push_notification_notif">Push Notification</string>
+    <string name="email_notif">Email</string>
+    <string name="set_how_you_receive_notifications_on_wyromed">Set how you receive notifications on Wyromed.</string>
+
+    <!-- change password screen -->
+    <string name="app_bar_change_password">Change Password</string>
+    <string name="hint_new_password_change">New Password</string>
+    <string name="hint_repeat_password_change">Repeat Password</string>
+    <string name="btn_save_password">Save</string>
+    <string name="title_new_password">New Password</string>
+    <string name="create_a_new_password_for_the_account_with_email">Create a new password for the account with email</string>
+
+    <!-- list item history stock item screen -->
+    <string name="no_request_stock">No. Request</string>
+</resources>

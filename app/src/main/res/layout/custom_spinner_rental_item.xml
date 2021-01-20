@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:radius="35dp"
+    android:background="@drawable/bg_spinner_dialog">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="42.5dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/container_border"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_dialog_rental_item"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/item_name"
+                android:textSize="20sp"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/colorGreySolid"
+                android:paddingTop="6dp"
+                android:paddingLeft="10dp"/>
+        </RelativeLayout>
+</RelativeLayout>
+

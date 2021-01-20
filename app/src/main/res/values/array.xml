@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Label ordering must match values -->
+    <array name="steps">
+        <item>@string/step1</item>
+        <item>@string/step2</item>
+        <item>@string/step3</item>
+        <item>@string/step4</item>
+        <item>@string/step5</item>
+    </array>
+</resources>

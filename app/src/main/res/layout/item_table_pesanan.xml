@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3"
+    android:background="@drawable/container_border_table">
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv_nama_barang_field_pesanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_column="1"
+            android:gravity="start"
+            android:text="text"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            android:background="@color/white"
+            android:layout_marginBottom="1dp"
+            android:layout_marginHorizontal="1dp"/>
+
+        <TextView
+            android:id="@+id/tv_jumlah_barang_field_pesanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="end"
+            android:text="100"
+            android:layout_column="2"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            android:background="@color/white"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"/>
+
+
+
+    </TableRow>
+
+</TableLayout>

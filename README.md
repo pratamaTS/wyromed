@@ -1,2 +1,0 @@
-# wyromed
-Aplikasi Alkes
