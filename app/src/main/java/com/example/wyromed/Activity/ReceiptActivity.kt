@@ -48,8 +48,6 @@ class ReceiptActivity: BaseActivity() {
         rvReceiptPurchased = findViewById(R.id.rv_order_purchased_receipt)
         btnCreateSO = findViewById(R.id.btn_create_so)
 
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
         minutesOperation = intent.getLongExtra("minutes_ops",0)
         secondsOperation = intent.getLongExtra("seconds_ops",0)

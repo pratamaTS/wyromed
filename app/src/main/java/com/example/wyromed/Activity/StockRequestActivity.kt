@@ -41,16 +41,11 @@ class StockRequestActivity: BaseActivity() {
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Penambahan"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Pengurangan"))
 
-        user!!.token_type = intent.getStringExtra("token_type")
-        user!!.token = intent.getStringExtra("token")
         stockRequestItem = intent.getParcelableArrayListExtra<StockRequestDetails>("plus")
         stockRequestItemMin = intent.getParcelableArrayListExtra<StockRequestDetails>("minus")
 
-        Log.d("token type sr", user!!.token_type.toString())
-        Log.d("token sr", user!!.token.toString())
-
         val pageAdapterStockRequest = PageAdapterStockRequest(
-            user!!.token_type.toString(), user!!.token.toString(), stockRequestItem, stockRequestItemMin, this,
+           stockRequestItem, stockRequestItemMin, this,
             supportFragmentManager, tabLayout!!.tabCount
         )
 

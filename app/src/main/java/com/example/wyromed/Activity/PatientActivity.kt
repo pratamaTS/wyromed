@@ -87,10 +87,6 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
         //Calendar
         initCalendarMethod()
 
-        //Token
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
-
         //List Gender
         listGender!!.add("Select Gender")
         listGender!!.add("Male")
@@ -110,7 +106,7 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
                 }
             }
 
-            CityPresenter(this@PatientActivity).getCity(tokenType, token, stateID.toString())
+            CityPresenter(this@PatientActivity).getCity(this@PatientActivity, stateID.toString())
         }
 
         initSpinner()
@@ -121,16 +117,8 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
     }
 
     fun getHospital() {
-        tokenType = user?.token_type
-        token = user?.token
-
-        if(tokenType==null || token==null){
-            this.toast("Gagal mengambil data")?.show()
-            this.finish()
-        } else {
-            HospitalPresenter(this).getAllHospital(tokenType, token)
-            ProvincePresenter(this).getProvince(tokenType, token)
-        }
+        HospitalPresenter(this).getAllHospital(this)
+        ProvincePresenter(this).getProvince(this)
     }
 
     override fun onSuccessGetHospital(dataHospital: ArrayList<DataHospital?>?) {
@@ -283,8 +271,7 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
                 edtCity!!.text.isNotEmpty() &&
                 edtPostalCode!!.text.isNotEmpty()) {
                 StorePatientPresenter(this@PatientActivity).storePatient(
-                    tokenType,
-                    token,
+                    this@PatientActivity,
                     patient!!
                 )
             } else {
@@ -317,9 +304,8 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
         }
     }
 
-    override fun onSuccessStorePatient(tokenType: String?, token: String?, message: String?) {
-        startActivity<BookingActivity>(BookingActivity.TAGS.TOKENTYPE to tokenType,
-            BookingActivity.TAGS.TOKEN to token, BookingActivity.TAGS.MESSAGE to message)
+    override fun onSuccessStorePatient(message: String?) {
+        startActivity<BookingActivity>(BookingActivity.TAGS.MESSAGE to message)
     }
 
     override fun onErrorStorePatient(msg: String?) {

@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import com.example.wyromed.Activity.Interface.DetailMessageBookingInterface
 import com.example.wyromed.Activity.Interface.HandoverDetailBookingInterface
 import com.example.wyromed.Api.NetworkConfig
@@ -14,22 +15,13 @@ import kotlin.collections.HashMap
 
 class DetailHeaderBookingPresenter(val handoverDetailBookingInterface: HandoverDetailBookingInterface) {
     fun getDetailHandoverBooking(
-        tokenType: String?,
-        token: String?,
+        context: Context,
         id: Int
     ){
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
-        val url: String = "bookingorder/details/" + id
+       val url: String = "bookingorder/details/" + id
 
-        // Header
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-        map["Accept-Encoding"] = "gzip, deflate, br"
-
-
-        NetworkConfig.service()
-            .getDetailHandoverBooking(url, map)
+        NetworkConfig.service(context)
+            .getDetailHandoverBooking(url)
             .enqueue(object : Callback<ResponseHandoverDetail> {
 
                 override fun onFailure(call: Call<ResponseHandoverDetail>, t: Throwable) {

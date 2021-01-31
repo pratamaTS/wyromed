@@ -29,8 +29,6 @@ class OrderedActivity: BaseActivity(), OrderedInterface {
     var toolbar: Toolbar? = null
     var tvStock: TextView? = null
     var adapter: StockAdapter? = null
-    var tokenType: String? = null
-    var token: String? = null
     var message: String?  = null
     var bookedItem: ArrayList<DataOrder> = ArrayList()
     var bookedAdapter: ListOrderedItemAdapter? = null
@@ -66,15 +64,7 @@ class OrderedActivity: BaseActivity(), OrderedInterface {
     }
 
     private fun getBookingOrdered() {
-        tokenType = intent.getStringExtra("token_type")
-        token = intent?.getStringExtra("token")
-
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            finish()
-        } else {
-            OrderedPresenter(this).getAllBookingOrdered(tokenType, token)
-        }
+        OrderedPresenter(this).getAllBookingOrdered(this)
     }
 
     override fun onSuccessOrdered(dataOrdered: ArrayList<DataOrder?>?) {

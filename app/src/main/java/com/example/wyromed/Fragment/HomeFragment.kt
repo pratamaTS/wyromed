@@ -37,8 +37,6 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
     var totalBookingOrder: String = "0"
     var totalSslesOrder: String = "0"
     var totalStock: String = "0"
-    var tokenType: String? = null
-    var token: String? = null
     var formatted: String? = null
     var count: Int = 0
 
@@ -52,9 +50,6 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
         view.context
         //INIT VIEW
         viewPager = view.findViewById(R.id.view_pager_carousel)
-
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
 
         val current = LocalDateTime.now()
 
@@ -96,9 +91,9 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
     }
 
     fun getTotal(){
-        TotalBookingPresenter(this).getTotalBookingOrder(tokenType, token)
-        TotalSalesOrderPresenter(this).getTotalSalesOrder(tokenType, token)
-        TotalStockItemPresenter(this).getTotalStockItem(tokenType, token)
+        TotalBookingPresenter(this).getTotalBookingOrder(requireContext())
+        TotalSalesOrderPresenter(this).getTotalSalesOrder(requireContext())
+        TotalStockItemPresenter(this).getTotalStockItem(requireContext())
     }
 
     override fun onSuccessGetTotalBookingOrder(dataTotalBookingOrder: Int?) {
@@ -140,7 +135,7 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
     }
 
     private fun bindAdapter(){
-        adapter = CarouselAdapter(tokenType.toString(), token.toString(), models, activity as Context?)
+        adapter = CarouselAdapter(models, activity as Context?)
 
         viewPager!!.adapter = adapter
         viewPager!!.setClipToPadding(false)

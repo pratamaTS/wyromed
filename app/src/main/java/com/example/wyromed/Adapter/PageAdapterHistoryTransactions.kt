@@ -12,24 +12,19 @@ import com.example.wyromed.Fragment.HistoryStockFragment
 class PageAdapterHistoryTransactions(
     historyTransactionsActivity: HistoryTransactionsActivity?,
     fm: FragmentManager?,
-    var counttab: Int,
-    val tokenType: String,
-    val token: String
+    var counttab: Int
 ) :
     FragmentStatePagerAdapter(fm!!) {
     override fun getItem(position: Int): Fragment {
-        var bundle: Bundle = Bundle()
         var historyBookingFragment: HistoryBookingFragment = HistoryBookingFragment()
         var historySalesFragment: HistorySalesFragment = HistorySalesFragment()
         var historyStockFragment: HistoryStockFragment = HistoryStockFragment()
-        bundle.putString("token_type", tokenType)
-        bundle.putString("token", token)
 
         return when (position) {
-            0 -> historyBookingFragment.apply { historyBookingFragment.arguments = bundle }
-            1 -> historySalesFragment.apply { historySalesFragment.arguments = bundle }
-            2 -> historyStockFragment.apply { historyStockFragment.arguments = bundle }
-            else -> historyBookingFragment.apply { historyBookingFragment.arguments = bundle }
+            0 -> historyBookingFragment
+            1 -> historySalesFragment
+            2 -> historyStockFragment
+            else -> historyBookingFragment
         }
     }
 

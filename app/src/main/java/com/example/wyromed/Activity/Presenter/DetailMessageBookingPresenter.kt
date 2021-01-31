@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import com.example.wyromed.Activity.Interface.DetailMessageBookingInterface
 import com.example.wyromed.Api.NetworkConfig
 import com.example.wyromed.Response.DetailMessageBooking.ResponseDetailMessageBooking
@@ -12,22 +13,13 @@ import kotlin.collections.HashMap
 
 class DetailMessageBookingPresenter(val detailMessageBookingInterface: DetailMessageBookingInterface) {
     fun getDetailMessageBooking(
-        tokenType: String?,
-        token: String?,
+        context: Context,
         id: Int
     ){
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
         val url: String = "bookingorder/details/" + id
 
-        // Header
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-        map["Accept-Encoding"] = "gzip, deflate, br"
-
-
-        NetworkConfig.service()
-            .getDetailMessageBooking(url, map)
+        NetworkConfig.service(context)
+            .getDetailMessageBooking(url)
             .enqueue(object : Callback<ResponseDetailMessageBooking> {
 
                 override fun onFailure(call: Call<ResponseDetailMessageBooking>, t: Throwable) {

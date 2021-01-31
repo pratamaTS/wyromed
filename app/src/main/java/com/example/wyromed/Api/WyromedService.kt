@@ -1,5 +1,6 @@
 package com.example.wyromed.Api
 
+import com.example.wyromed.Api.Url.Constants
 import com.example.wyromed.Model.Body.*
 import com.example.wyromed.Response.Booking.ResponseBooking
 import com.example.wyromed.Response.Booking.ResponseTotalBookingOrder
@@ -29,98 +30,98 @@ import retrofit2.http.*
 
 interface WyromedService {
     //Sign In
-    @POST("login")
-    fun signin(@HeaderMap map: MutableMap<String, String>?, @Body signingBody: SignInBody): Call<DataLogin>
+    @POST(Constants.LOGIN_URL)
+    fun signin(@Body signingBody: SignInBody): Call<DataLogin>
 
     //Sing Up
-    @POST("users")
-    fun signup(@HeaderMap map: MutableMap<String, String>?, @Body signupBody: RegisterBody): Call<DataLogin>
+    @POST(Constants.SIGNUP_URL)
+    fun signup(@Body signupBody: RegisterBody): Call<DataLogin>
 
     //Get User
-    @GET("login")
-    fun getUser(@HeaderMap map: MutableMap<String, String>?): Call<ResponseLogin>
+    @GET(Constants.USER_URL)
+    fun getUser(): Call<ResponseLogin>
 
     //Get All Hospital
-    @GET("master_hospital")
-    fun getAllHospital(@HeaderMap map: MutableMap<String, String>?): Call<ResponseHospital>
+    @GET(Constants.HOSPITAL_URL)
+    fun getAllHospital(): Call<ResponseHospital>
 
     //Get All Patient
-    @GET("master_patients")
-    fun getAllPatient(@HeaderMap map: MutableMap<String, String>?): Call<ResponsePatient>
+    @GET(Constants.PATIENT_URL)
+    fun getAllPatient(): Call<ResponsePatient>
 
     //Post Patient
-    @POST("patients")
-    fun storePatient(@HeaderMap map: MutableMap<String, String>?, @Body patientBody: PatientBody): Call<ResponseStorePatient>
+    @POST(Constants.POST_PATIENT_URL)
+    fun storePatient(@Body patientBody: PatientBody): Call<ResponseStorePatient>
 
     //Get Rental Stock
-    @GET("stock/bo")
-    fun getAllRentalItem(@QueryMap queryMap: MutableMap<String, String>?, @HeaderMap map: MutableMap<String, String>?): Call<ResponseRentalItem>
+    @GET(Constants.RENTAL_STOCK_URL)
+    fun getAllRentalItem(@QueryMap queryMap: MutableMap<String, String>?): Call<ResponseRentalItem>
 
     //Get Purchased Stock
-    @GET("stock")
-    fun getAllPurchasedItem(@QueryMap queryMap: MutableMap<String, String>?, @HeaderMap map: MutableMap<String, String>?): Call<ResponsePurchasedItem>
+    @GET(Constants.BMHP_STOCK_URL)
+    fun getAllPurchasedItem(@QueryMap queryMap: MutableMap<String, String>?): Call<ResponsePurchasedItem>
 
     //Get All Stock
-    @GET("stock")
-    fun getAllStockItem(@QueryMap queryMap: MutableMap<String, String>?, @HeaderMap map: MutableMap<String, String>?): Call<ResponseStock>
+    @GET(Constants.ALL_STOCK_URL)
+    fun getAllStockItem(@QueryMap queryMap: MutableMap<String, String>?): Call<ResponseStock>
 
     //Get Total Stock Available
-    @GET("stock/totalavailable")
-    fun getTotalStockItem(@QueryMap queryMap: MutableMap<String, String>?, @HeaderMap map: MutableMap<String, String>?): Call<ResponseTotalQtyStock>
+    @GET(Constants.TOTAL_STOCK_AVAILABLE_URL)
+    fun getTotalStockItem(@QueryMap queryMap: MutableMap<String, String>?): Call<ResponseTotalQtyStock>
 
-    @GET("soandroid/total/order")
-    fun getTotalSalesOrder(@HeaderMap map: MutableMap<String, String>?): Call<ResponseTotalSalesOrder>
+    @GET(Constants.TOTAL_SO_URL)
+    fun getTotalSalesOrder(): Call<ResponseTotalSalesOrder>
 
-    @GET("bookingorder/total/order")
-    fun getTotalBookingOrder(@HeaderMap map: MutableMap<String, String>?): Call<ResponseTotalBookingOrder>
+    @GET(Constants.TOTAL_BO_URL)
+    fun getTotalBookingOrder(): Call<ResponseTotalBookingOrder>
 
     //Store Booking
     @Multipart
-    @POST("bookingorder")
-    fun storeBooking(@HeaderMap map: MutableMap<String, String>?, @PartMap bodyMap: HashMap<String, Any>?) : Call<ResponseBooking>
+    @POST(Constants.STORE_BO_URL)
+    fun storeBooking(@PartMap bodyMap: HashMap<String, Any>?) : Call<ResponseBooking>
 
     //Stock Request
     @Multipart
-    @POST("stockrequest")
-    fun storeStockRequest(@HeaderMap map: MutableMap<String, String>?, @PartMap bodyMap: HashMap<String, Any>?) : Call<ResponseStockRequest>
+    @POST(Constants.STORE_SR_URL)
+    fun storeStockRequest(@PartMap bodyMap: HashMap<String, Any>?) : Call<ResponseStockRequest>
 
     //Get Stock Requested
-    @GET("stockrequest")
-    fun getAllStockRequest(@HeaderMap map: MutableMap<String, String>?): Call<ResponseGetStockRequest>
+    @GET(Constants.GET_SR_URL)
+    fun getAllStockRequest(): Call<ResponseGetStockRequest>
 
     //Get Booking Ordered
-    @GET("bookingorder")
-    fun getBookingOrdered(@HeaderMap map: MutableMap<String, String>?): Call<ResponseOrder>
+    @GET(Constants.GET_BO_URL)
+    fun getBookingOrdered(): Call<ResponseOrder>
 
     //Get All Province
-    @GET("states/102")
-    fun getProvince(@HeaderMap map: MutableMap<String, String>?): Call<ResponseProvince>
+    @GET(Constants.GET_PROVINCE_URL)
+    fun getProvince(): Call<ResponseProvince>
 
     //Get All City
     @GET
-    fun getCity(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseCity>
+    fun getCity(@Url url: String): Call<ResponseCity>
 
     //Get All Inbox
-    @GET("inbox")
-    fun getAllInbox(@HeaderMap map: MutableMap<String, String>?): Call<ResponseInbox>
+    @GET(Constants.GET_INBOX_URL)
+    fun getAllInbox(): Call<ResponseInbox>
 
     //Get Header Message Booking
     @GET
-    fun getHeaderMessageBooking(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseHeaderMessageBooking>
+    fun getHeaderMessageBooking(@Url url: String): Call<ResponseHeaderMessageBooking>
 
     //Get Detail Message Booking
     @GET
-    fun getDetailMessageBooking(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseDetailMessageBooking>
+    fun getDetailMessageBooking(@Url url: String): Call<ResponseDetailMessageBooking>
 
     //Get Header Handover Booking
     @GET
-    fun getHeaderHandoverBooking(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseHandoverHeader>
+    fun getHeaderHandoverBooking(@Url url: String): Call<ResponseHandoverHeader>
 
     //Get Detail Handover Booking
     @GET
-    fun getDetailHandoverBooking(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseHandoverDetail>
+    fun getDetailHandoverBooking(@Url url: String): Call<ResponseHandoverDetail>
 
     //Update Status Booking
     @POST
-    fun updateBookingStatus(@Url url: String, @QueryMap queryMap: MutableMap<String, String>?, @HeaderMap map: MutableMap<String, String>?): Call<ResponseUpdateStatusBooking>
+    fun updateBookingStatus(@Url url: String, @QueryMap queryMap: MutableMap<String, String>?): Call<ResponseUpdateStatusBooking>
 }

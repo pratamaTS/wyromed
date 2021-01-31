@@ -19,8 +19,6 @@ class HistorySalesFragment : Fragment() {
     var historySalesSearchList: MutableList<HistorySales>? = null
     var rvHistorySales: RecyclerView? = null
     var adapter: HistorySalesAdapter? = null
-    var tokenType: String? = null
-    var token: String? = null
     var searchHistorySales: androidx.appcompat.widget.SearchView? = null
 
     override fun onCreateView(
@@ -40,56 +38,48 @@ class HistorySalesFragment : Fragment() {
     }
 
     private fun getHistorySales(){
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
+        //List History
+        historySalesList = ArrayList<HistorySales>()
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
 
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            //List History
-            historySalesList = ArrayList<HistorySales>()
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
-            historySalesList!!.add(HistorySales("A-112", "Mon, 29 July 2020"))
+        historySalesSearchList?.addAll(historySalesList!!)
 
-            historySalesSearchList?.addAll(historySalesList!!)
+        adapter = historySalesSearchList?.let { HistorySalesAdapter(this, it) }
+        rvHistorySales!!.setLayoutManager(LinearLayoutManager(context))
+        rvHistorySales!!.setAdapter(adapter)
+        rvHistorySales!!.setHasFixedSize(false)
 
-            adapter = historySalesSearchList?.let { HistorySalesAdapter(this, it) }
-            rvHistorySales!!.setLayoutManager(LinearLayoutManager(context))
-            rvHistorySales!!.setAdapter(adapter)
-            rvHistorySales!!.setHasFixedSize(false)
+        searchHistorySales?.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
 
-            searchHistorySales?.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if(newText!!.isNotEmpty()){
-                        historySalesSearchList!!.clear()
-                        val search = newText.toLowerCase(Locale.getDefault())
-                        historySalesList!!.forEach {
-                            if(it.noSales!!.toLowerCase(Locale.getDefault()).contains(search)){
-                                historySalesSearchList!!.add(it)
-                            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(newText!!.isNotEmpty()){
+                    historySalesSearchList!!.clear()
+                    val search = newText.toLowerCase(Locale.getDefault())
+                    historySalesList!!.forEach {
+                        if(it.noSales!!.toLowerCase(Locale.getDefault()).contains(search)){
+                            historySalesSearchList!!.add(it)
                         }
-
-                        rvHistorySales?.adapter!!.notifyDataSetChanged()
-                    }else{
-                        historySalesSearchList!!.clear()
-                        historySalesSearchList!!.addAll(historySalesList!!)
-                        rvHistorySales?.adapter!!.notifyDataSetChanged()
                     }
-                    return true
-                }
 
-            })
-        }
+                    rvHistorySales?.adapter!!.notifyDataSetChanged()
+                }else{
+                    historySalesSearchList!!.clear()
+                    historySalesSearchList!!.addAll(historySalesList!!)
+                    rvHistorySales?.adapter!!.notifyDataSetChanged()
+                }
+                return true
+            }
+
+        })
     }
 }

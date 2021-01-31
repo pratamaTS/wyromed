@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import com.example.wyromed.Activity.Interface.HeaderMessageBookingInterface
 import com.example.wyromed.Api.NetworkConfig
 import com.example.wyromed.Response.HeaderMessageBooking.ResponseHeaderMessageBooking
@@ -12,22 +13,13 @@ import kotlin.collections.HashMap
 
 class HeaderMessageBookingPresenter(val headerMessageBookingInterface: HeaderMessageBookingInterface) {
     fun getHeaderMessageBooking(
-        tokenType: String?,
-        token: String?,
+        context: Context,
         id: Int
     ){
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
         val url: String = "bookingorder/" + id
 
-        // Header
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-        map["Accept-Encoding"] = "gzip, deflate, br"
-
-
-        NetworkConfig.service()
-            .getHeaderMessageBooking(url, map)
+        NetworkConfig.service(context)
+            .getHeaderMessageBooking(url)
             .enqueue(object : Callback<ResponseHeaderMessageBooking> {
 
                 override fun onFailure(call: Call<ResponseHeaderMessageBooking>, t: Throwable) {

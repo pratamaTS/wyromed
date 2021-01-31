@@ -36,10 +36,6 @@ class SettingActivity: BaseActivity() {
         menuPrivacyPolicy = findViewById(R.id.menu_privacy_policy_settings)
         menuTermsConditions = findViewById(R.id.menu_terms_conditions_settings)
 
-        //Insert Token to fragment
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
-
         if(message != null){
             toast(message.toString()).show()
         }
@@ -55,22 +51,16 @@ class SettingActivity: BaseActivity() {
         }
         menuProfile!!.onClick {
             startActivity<EditProfileActivity>(
-                EditProfileActivity.TAGS.TOKENTYPE to user?.token_type,
-                EditProfileActivity.TAGS.TOKEN to user?.token,
                 EditProfileActivity.TAGS.MESSAGE to message
             )
         }
         menuNotification!!.onClick {
             startActivity<NotificationActivity>(
-                NotificationActivity.TAGS.TOKENTYPE to user?.token_type,
-                NotificationActivity.TAGS.TOKEN to user?.token,
                 NotificationActivity.TAGS.MESSAGE to message
             )
         }
         menuNotification!!.onClick {
             startActivity<NotificationActivity>(
-                NotificationActivity.TAGS.TOKENTYPE to user?.token_type,
-                NotificationActivity.TAGS.TOKEN to user?.token,
                 NotificationActivity.TAGS.MESSAGE to message
             )
         }

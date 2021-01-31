@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity(), SignUpInterface {
             registerBody!!.phone = et_nohp_register.text.toString()
             registerBody!!.repassword = et_cpassword_register.text.toString()
 
-            SignUpPresenter(this@SignUpActivity).signup(registerBody!!)
+            SignUpPresenter(this@SignUpActivity).signup(this@SignUpActivity, registerBody!!)
         }
         btn_back_to_layout.onClick {
             startActivity<OnBoardingActivity>()

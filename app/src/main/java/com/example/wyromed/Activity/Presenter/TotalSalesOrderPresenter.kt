@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.util.Log
 import com.example.wyromed.Activity.Interface.TotalSalesOrderInterface
 import com.example.wyromed.Api.NetworkConfig
@@ -7,23 +8,21 @@ import com.example.wyromed.Response.SalesOrder.ResponseTotalSalesOrder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 class TotalSalesOrderPresenter(val totalSalesOrderInterface: TotalSalesOrderInterface) {
-    fun getTotalSalesOrder(tokenType: String?, token: String?){
-        //Declare Dynamic Headers
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
+    fun getTotalSalesOrder(context: Context){
 
-        // Header Map
-        val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-
-        NetworkConfig.service()
-            .getTotalSalesOrder(map)
+        NetworkConfig.service(context)
+            .getTotalSalesOrder()
             .enqueue(object : Callback<ResponseTotalSalesOrder> {
 
                 override fun onFailure(call: Call<ResponseTotalSalesOrder>, t: Throwable) {
-                    totalSalesOrderInterface.onErrorGetTotalSalesOrder(t.localizedMessage)
+                    try {
+                        getTotalSalesOrder(context)
+                    } catch (e: SocketTimeoutException) {
+                        totalSalesOrderInterface.onErrorGetTotalSalesOrder(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(call: Call<ResponseTotalSalesOrder>, response: Response<ResponseTotalSalesOrder>) {
@@ -32,7 +31,11 @@ class TotalSalesOrderPresenter(val totalSalesOrderInterface: TotalSalesOrderInte
                         totalSalesOrderInterface.onSuccessGetTotalSalesOrder(totalQty)
                     } else {
                         val message = response.body()?.meta?.message
-                        totalSalesOrderInterface.onErrorGetTotalSalesOrder(message)
+                        try {
+                            getTotalSalesOrder(context)
+                        } catch (e: SocketTimeoutException) {
+                            totalSalesOrderInterface.onErrorGetTotalSalesOrder(message)
+                        }
                     }
                 }
             })

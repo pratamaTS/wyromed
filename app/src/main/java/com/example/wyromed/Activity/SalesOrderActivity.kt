@@ -69,8 +69,6 @@ class SalesOrderActivity : BaseActivity(), View.OnClickListener {
         tvSelectedDueDate = findViewById(R.id.tv_sales_order_due_date)
         btnDueDate = findViewById(R.id.btn_open_calendar_due_date)
 
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
         minutesOperation = intent.getLongExtra("minutes_ops",0)
         secondsOperation = intent.getLongExtra("seconds_ops",0)

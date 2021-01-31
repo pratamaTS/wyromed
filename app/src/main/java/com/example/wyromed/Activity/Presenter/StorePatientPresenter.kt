@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.util.Log
 import com.example.wyromed.Activity.Interface.PatientInterface
 import com.example.wyromed.Activity.Interface.StorePatientInterface
@@ -14,16 +15,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class StorePatientPresenter(val storePatientInterface: StorePatientInterface) {
-    fun storePatient(tokenType: String?, token: String?, patient: PatientBody){
-        //Declare Dynamic Headers
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
+    fun storePatient(context: Context, patient: PatientBody){
 
-
-        NetworkConfig.service()
-            .storePatient(map, patient)
+        NetworkConfig.service(context)
+            .storePatient(patient)
             .enqueue(object : Callback<ResponseStorePatient> {
 
                 override fun onFailure(call: Call<ResponseStorePatient>, t: Throwable) {
@@ -35,7 +30,7 @@ class StorePatientPresenter(val storePatientInterface: StorePatientInterface) {
 
                     if (response.isSuccessful) {
                         val message: String = body?.meta?.message.toString()
-                        storePatientInterface.onSuccessStorePatient(tokenType, token, message)
+                        storePatientInterface.onSuccessStorePatient(message)
 
                         Log.d("Data Body", message)
                     } else {

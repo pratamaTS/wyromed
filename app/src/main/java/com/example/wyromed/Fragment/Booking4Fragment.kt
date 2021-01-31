@@ -37,8 +37,6 @@ class Booking4Fragment : Fragment() {
     var rvListPurchasedItem: RecyclerView? = null
     var adapterR: ListBookingRItemAdapter? = null
     var adapterP: ListBookingPItemAdapter? = null
-    var tokenType: String? = null
-    var token: String? = null
     val bundle: Bundle = Bundle()
     var dateStart: String? = null
     var startTime: String? = null
@@ -63,8 +61,6 @@ class Booking4Fragment : Fragment() {
         rvListRentalItem = view.findViewById(R.id.rv_rental_item4)
         rvListPurchasedItem = view.findViewById(R.id.rv_purchased_item4)
 
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
         totalQuantity = arguments?.getInt("total_quantity")
         hospitalName = arguments?.getString("hospital_name")
         patientName = arguments?.getString("patient_name")
@@ -84,8 +80,6 @@ class Booking4Fragment : Fragment() {
         bookingOrderHeader = arguments?.getParcelable("booking_order_header")!!
         bookingOrderDetails = arguments?.getParcelableArrayList("booking_order_details")!!
 
-        bundle.putString("token_type", tokenType)
-        bundle.putString("token", token)
         bundle.putInt("total_quantity", totalQuantity!!)
         bundle.putString("hospital_name", hospitalName)
         bundle.putString("patient_name", patientName)

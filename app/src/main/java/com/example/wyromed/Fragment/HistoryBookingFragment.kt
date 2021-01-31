@@ -21,8 +21,6 @@ class HistoryBookingFragment : Fragment(), HistoryBookingInterface {
     var historyBookingSearchList: ArrayList<DataOrder> = ArrayList()
     var rvHistoryBooking: RecyclerView? = null
     var adapter: HistoryBookingAdapter? = null
-    var tokenType: String? = null
-    var token: String? = null
     var searchHistoryBooking: androidx.appcompat.widget.SearchView? = null
 
     override fun onCreateView(
@@ -42,15 +40,7 @@ class HistoryBookingFragment : Fragment(), HistoryBookingInterface {
     }
 
     private fun getHistoryBooking(){
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            HistoryBookingPresenter(this).getAllHistoryBooking(tokenType, token)
-        }
+        HistoryBookingPresenter(this).getAllHistoryBooking(requireContext())
     }
 
     override fun onSuccessHistoryBooking(dataOrdered: ArrayList<DataOrder?>?) {

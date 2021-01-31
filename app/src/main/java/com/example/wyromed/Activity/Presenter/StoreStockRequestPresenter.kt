@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import com.example.wyromed.Activity.Interface.StoreStockRequestInterface
 import com.example.wyromed.Api.NetworkConfig
 import com.example.wyromed.Model.Body.BookingOrderDetails
@@ -16,23 +17,16 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class StoreStockRequestPresenter(val storeStockRequestInterface: StoreStockRequestInterface) {
-    fun storeStockRequest(tokenType: String?, token: String?, stockRequestHeader: StockRequestHeader, stockRequestDetails: ArrayList<StockRequestDetails?>){
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
-        val bodyMap = HashMap<String, Any>()
+    fun storeStockRequest(context: Context, stockRequestHeader: StockRequestHeader, stockRequestDetails: ArrayList<StockRequestDetails?>){
 
-        // Header
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-        map["Content-Length"] = "<calculated when request is sent>"
-        map["Accept-Encoding"] = "gzip, deflate, br"
+        val bodyMap = HashMap<String, Any>()
 
         // Body
         bodyMap.put("stock_request_header", stockRequestHeader)
         bodyMap.put("stock_request_details", stockRequestDetails)
 
-        NetworkConfig.service()
-            .storeStockRequest(map, bodyMap)
+        NetworkConfig.service(context)
+            .storeStockRequest(bodyMap)
             .enqueue(object : Callback<ResponseStockRequest> {
 
                 override fun onFailure(call: Call<ResponseStockRequest>, t: Throwable) {

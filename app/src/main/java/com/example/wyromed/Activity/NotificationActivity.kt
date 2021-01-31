@@ -35,10 +35,6 @@ class NotificationActivity: BaseActivity() {
         switchPushNotif = findViewById(R.id.toogle_switch_push_notification)
         switchPushEmail = findViewById(R.id.toogle_switch_push_email)
 
-        //Insert Token to fragment
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
-
         if(message != null){
             toast(message.toString()).show()
         }

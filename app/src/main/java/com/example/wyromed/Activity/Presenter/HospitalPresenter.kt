@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.util.Log
 import com.example.wyromed.Activity.Interface.HospitalInterface
 import com.example.wyromed.Api.NetworkConfig
@@ -8,22 +9,21 @@ import com.example.wyromed.Response.Patient.ResponsePatient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 class HospitalPresenter(val hospitalInterface: HospitalInterface) {
-    fun getAllHospital(tokenType: String?, token: String?){
-        //Declare Dynamic Headers
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
+    fun getAllHospital(context: Context){
 
-
-        NetworkConfig.service()
-            .getAllHospital(map)
+        NetworkConfig.service(context)
+            .getAllHospital()
             .enqueue(object : Callback<ResponseHospital> {
 
                 override fun onFailure(call: Call<ResponseHospital>, t: Throwable) {
-                    hospitalInterface.onErrorGetHospital(t.localizedMessage)
+                    try {
+                        getAllHospital(context)
+                    } catch (e: SocketTimeoutException) {
+                        hospitalInterface.onErrorGetHospital(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(call: Call<ResponseHospital>, response: Response<ResponseHospital>) {
@@ -33,8 +33,12 @@ class HospitalPresenter(val hospitalInterface: HospitalInterface) {
 
                         Log.d("Data Body", data.toString())
                     } else {
-                        val message = response.body()?.meta?.message
-                        hospitalInterface.onErrorGetHospital(message)
+                        val message = response.errorBody().toString()
+                        try {
+                            getAllHospital(context)
+                        } catch (e: SocketTimeoutException) {
+                            hospitalInterface.onErrorGetHospital(message)
+                        }
                     }
                 }
             })

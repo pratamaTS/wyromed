@@ -69,8 +69,6 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
     var hour: Int? = null
     var minute: Int? = null
     var second: Int? = null
-    var tokenType: String? = null
-    var token: String? = null
     var dateStartValue: String? = null
     var timeStartValue: String? = null
     var dateEndValue: String? = null
@@ -157,24 +155,13 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
     }
 
     fun getAllRentalItem() {
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
         startDateTime = dateStartValue + " " + timeStartValue
         endDateTime = dateEndValue + " " + timeEndValue
 
         Log.d("Start Date Time", startDateTime.toString())
         Log.d("End Date Time", endDateTime.toString())
 
-        bundle.putString("token_type", tokenType)
-        bundle.putString("token", token)
-
-        if(tokenType==null || token==null){
-            activity?.toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            RentalItemPresenter(this@Booking2Fragment).getAllRentalItem(tokenType, token, startDateTime, endDateTime)
-        }
+        RentalItemPresenter(this@Booking2Fragment).getAllRentalItem(requireContext(), startDateTime, endDateTime)
     }
 
     private fun initCalendar() {

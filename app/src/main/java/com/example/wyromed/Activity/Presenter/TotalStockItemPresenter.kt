@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.util.Log
 import com.example.wyromed.Activity.Interface.PurchasedItemInterface
 import com.example.wyromed.Activity.Interface.StockInterface
@@ -11,28 +12,25 @@ import com.example.wyromed.Response.Stock.ResponseStock
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 class TotalStockItemPresenter(val totalStockItemInterface: TotalStockInterface) {
-    fun getTotalStockItem(tokenType: String?, token: String?){
-        //Declare Dynamic Headers
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
+    fun getTotalStockItem(context: Context){
 
         // Query Param Map
         val queryMap: MutableMap<String, String> = HashMap()
         queryMap["type"] = "mobile"
 
-        // Header Map
-        val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-
-
-        NetworkConfig.service()
-            .getTotalStockItem(queryMap, map)
+        NetworkConfig.service(context)
+            .getTotalStockItem(queryMap)
             .enqueue(object : Callback<ResponseTotalQtyStock> {
 
                 override fun onFailure(call: Call<ResponseTotalQtyStock>, t: Throwable) {
-                    totalStockItemInterface.onErrorGetTotalStockItem(t.localizedMessage)
+                    try {
+                        getTotalStockItem(context)
+                    } catch (e: SocketTimeoutException) {
+                        totalStockItemInterface.onErrorGetTotalStockItem(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(call: Call<ResponseTotalQtyStock>, response: Response<ResponseTotalQtyStock>) {
@@ -43,7 +41,11 @@ class TotalStockItemPresenter(val totalStockItemInterface: TotalStockInterface) 
                         Log.d("Total Stock", totalQty.toString())
                     } else {
                         val message = response.body()?.meta?.message
-                        totalStockItemInterface.onErrorGetTotalStockItem(message)
+                        try {
+                            getTotalStockItem(context)
+                        } catch (e: SocketTimeoutException) {
+                            totalStockItemInterface.onErrorGetTotalStockItem(message)
+                        }
                     }
                 }
             })

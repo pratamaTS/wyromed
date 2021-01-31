@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.util.Log
 import com.example.wyromed.Activity.Interface.InboxInterface
 import com.example.wyromed.Activity.Interface.PurchasedItemInterface
@@ -11,28 +12,24 @@ import com.example.wyromed.Response.Stock.ResponseStock
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 class InboxPresenter(val inboxInterface: InboxInterface) {
-    fun getAllInbox(tokenType: String?, token: String?){
-        //Declare Dynamic Headers
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-
+    fun getAllInbox(context: Context){
         // Query Param Map
 //        val queryMap: MutableMap<String, String> = HashMap()
 //        queryMap["search"] = ""
 
-        // Header Map
-        val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-
-
-        NetworkConfig.service()
-            .getAllInbox(map)
+        NetworkConfig.service(context)
+            .getAllInbox()
             .enqueue(object : Callback<ResponseInbox> {
 
                 override fun onFailure(call: Call<ResponseInbox>, t: Throwable) {
-                    inboxInterface.onErrorGetInbox(t.localizedMessage)
+                    try {
+                        getAllInbox(context)
+                    } catch (e: SocketTimeoutException) {
+                        inboxInterface.onErrorGetInbox(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(call: Call<ResponseInbox>, response: Response<ResponseInbox>) {
@@ -43,7 +40,11 @@ class InboxPresenter(val inboxInterface: InboxInterface) {
                         Log.d("Data Body", data.toString())
                     } else {
                         val message = response.body()?.meta?.message
-                        inboxInterface.onErrorGetInbox(message)
+                        try {
+                            getAllInbox(context)
+                        } catch (e: SocketTimeoutException) {
+                            inboxInterface.onErrorGetInbox(message)
+                        }
                     }
                 }
             })

@@ -6,6 +6,9 @@
     <string name="btn_signup_on_boarding">Sign Up</string>
     <string name="btn_signin_on_boarding">Sign In</string>
 
+    <!--  Authentication  -->
+    <string name="com_auth0_client_id">YOUR_CLIENT_ID</string>
+    <string name="com_auth0_domain">YOUR_DOMAIN</string>
 
     <!-- home screen -->
     <string name="hello_first_fragment">Hello World!!</string>
@@ -279,6 +282,14 @@
     <string name="menu_change_password">Change Password</string>
     <string name="menu_privacy_policy">Privacy Policy</string>
     <string name="menu_terms_and_conditions">Terms and Conditions</string>
+
+    <!-- help support screen -->
+    <string name="title_help_support">Help and Support</string>
+    <string name="my_account">My Account</string>
+    <string name="my_stock">My Stock</string>
+    <string name="confirm_booking">Booking Confirmation</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="this_app">About this Application</string>
 
     <!-- card menu carousel -->
     <string name="card_total">Total</string>

@@ -29,8 +29,6 @@ class HistoryReqStockActivity: BaseActivity(), StockRequestInterface {
     var back: ImageButton? = null
     var toolbar: Toolbar? = null
     var adapter: StockAdapter? = null
-    var tokenType: String? = null
-    var token: String? = null
     var message: String?  = null
     var reqStockItem: ArrayList<DataGetStockRequest> = ArrayList()
     var reqStockAdapter: ListStockRequestItemAdapter? = null
@@ -51,7 +49,7 @@ class HistoryReqStockActivity: BaseActivity(), StockRequestInterface {
         }
 
         swipeRefresh!!.setOnRefreshListener(OnRefreshListener {
-            StockRequestPresenter(this).getAllStockRequest(tokenType, token)
+            StockRequestPresenter(this).getAllStockRequest(this)
             swipeRefresh!!.setRefreshing(false)
         })
 
@@ -69,15 +67,7 @@ class HistoryReqStockActivity: BaseActivity(), StockRequestInterface {
     }
 
     private fun getRequestStock() {
-        tokenType = intent.getStringExtra("token_type")
-        token = intent?.getStringExtra("token")
-
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            finish()
-        } else {
-            StockRequestPresenter(this).getAllStockRequest(tokenType, token)
-        }
+        StockRequestPresenter(this).getAllStockRequest(this)
     }
 
     override fun onSuccessGetStockRequest(

@@ -33,8 +33,6 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
     var rvStockRequest: RecyclerView? = null
     var adapter: PenguranganRequestAdapter? = null
     var btnSubmit: Button? = null
-    var tokenType: String? = null
-    var token: String? = null
     var tvNoItem: TextView? = null
     var stockRequestHeader: StockRequestHeader = StockRequestHeader()
     var stockRequestItem: ArrayList<StockRequestDetails?> = ArrayList()
@@ -55,8 +53,6 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
         tvNoItem = view.findViewById(R.id.empty_view_pengurangan)
 
         //List Request
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
         checkDifReq = arguments?.getBoolean("check_tambah")
         stockRequestItem = arguments?.getParcelableArrayList("stock_request_min")!!
 
@@ -87,7 +83,7 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
             stockRequestHeader!!.type = "SUBTRACTION"
             stockRequestHeader!!.note = "Pengajuan Pengurangan Stock sukses!"
 
-            StoreStockRequestPresenter(this@PenguranganStockFragment).storeStockRequest(tokenType, token, stockRequestHeader, stockRequestItem)
+            StoreStockRequestPresenter(this@PenguranganStockFragment).storeStockRequest(requireContext(), stockRequestHeader, stockRequestItem)
         }
     }
 
@@ -123,8 +119,6 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
         btnOk.onClick {
             openDialog.dismiss()
             startActivity<HistoryReqStockActivity>(
-                HistoryReqStockActivity.TAGS.TOKENTYPE to tokenType,
-                HistoryReqStockActivity.TAGS.TOKEN to token,
                 HistoryReqStockActivity.TAGS.MESSAGE to message) }
 
         openDialog.show()

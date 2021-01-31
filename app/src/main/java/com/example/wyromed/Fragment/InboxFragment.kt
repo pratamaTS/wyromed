@@ -39,8 +39,6 @@ class InboxFragment : Fragment(), RecyclerItemTouchHelperListener, InboxInterfac
     var adapter: ListMessageAdapter? = null
     var searchView: androidx.appcompat.widget.SearchView? = null
     private var rootLayout: ConstraintLayout? = null
-    var tokenType: String? = null
-    var token: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,15 +59,7 @@ class InboxFragment : Fragment(), RecyclerItemTouchHelperListener, InboxInterfac
     }
 
     private fun getMessage(){
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            InboxPresenter(this).getAllInbox(tokenType, token)
-        }
+        InboxPresenter(this).getAllInbox(requireContext())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -160,22 +150,16 @@ class InboxFragment : Fragment(), RecyclerItemTouchHelperListener, InboxInterfac
         var message = ""
         when(choose){
             1 -> startActivity<DetailMessageActivity>(
-                DetailMessageActivity.TAGS.TOKENTYPE to tokenType,
-                DetailMessageActivity.TAGS.TOKEN to token,
                 DetailMessageActivity.TAGS.MESSAGE to message,
                 DetailMessageActivity.TAGS.ID to id,
                 DetailMessageActivity.TAGS.CHOOSE to choose,
                 DetailMessageActivity.TAGS.TITLE to title)
             2 -> startActivity<DetailMessageActivity>(
-                DetailMessageActivity.TAGS.TOKENTYPE to tokenType,
-                DetailMessageActivity.TAGS.TOKEN to token,
                 DetailMessageActivity.TAGS.MESSAGE to message,
                 DetailMessageActivity.TAGS.ID to id,
                 DetailMessageActivity.TAGS.CHOOSE to choose,
                 DetailMessageActivity.TAGS.TITLE to title)
             3 -> startActivity<DetailMessageActivity>(
-                DetailMessageActivity.TAGS.TOKENTYPE to tokenType,
-                DetailMessageActivity.TAGS.TOKEN to token,
                 DetailMessageActivity.TAGS.MESSAGE to message,
                 DetailMessageActivity.TAGS.ID to id,
                 DetailMessageActivity.TAGS.CHOOSE to choose,

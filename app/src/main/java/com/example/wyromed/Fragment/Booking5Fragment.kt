@@ -60,8 +60,6 @@ class Booking5Fragment : Fragment(), BookingInterface {
     val bundle: Bundle = Bundle()
     var dateStart: String? = null
     var startTime: String? = null
-    var tokenType: String? = null
-    var token: String? = null
     var hospitalName: String? = null
     var patientName: String? = null
     var medrecPatient: String? = null
@@ -92,8 +90,6 @@ class Booking5Fragment : Fragment(), BookingInterface {
         patientName = arguments?.getString("patient_name")
         medrecPatient = arguments?.getString("medrec_patient")
         paymentPatient = arguments?.getBoolean("payment_patient")
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
         dateStart = arguments?.getString("start_date_only")
         val dateEnd = arguments?.getString("end_date_only")
         startTime = arguments?.getString("start_time_only")
@@ -112,8 +108,6 @@ class Booking5Fragment : Fragment(), BookingInterface {
         tvMedrec!!.text = medrecPatient.toString()
         tvTotalItem!!.text = totalQuantity.toString()
 
-        Log.d("Token Type 5", tokenType.toString())
-        Log.d("Token 5", token.toString())
         Log.d("Start Date5", dateStart.toString())
         Log.d("End Date5", dateEnd.toString())
         Log.d("Start Time5", startTime.toString())
@@ -165,7 +159,7 @@ class Booking5Fragment : Fragment(), BookingInterface {
         btnBooking!!.onClick {
             btnBooking!!.isEnabled = false
             btnBooking!!.setBackgroundResource(R.drawable.bg_button_gray)
-            BookingPresenter(this@Booking5Fragment).booking(tokenType, token, bookingOrderHeader, bookingOrderDetails)
+            BookingPresenter(this@Booking5Fragment).booking(requireContext(), bookingOrderHeader, bookingOrderDetails)
         }
     }
 
@@ -186,8 +180,6 @@ class Booking5Fragment : Fragment(), BookingInterface {
         btnOk.onClick {
             openDialog.dismiss()
             startActivity<OrderedActivity>(
-            OrderedActivity.TAGS.TOKENTYPE to tokenType,
-            OrderedActivity.TAGS.TOKEN to token,
             OrderedActivity.TAGS.MESSAGE to message)
 
             activity?.finish()

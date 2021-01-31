@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.wyromed"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -19,7 +19,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro',
+                    '-keepattributes InnerClasses',
+                    '-keep class io.jsonwebtoken.** { *; }',
+                    '-keepnames class io.jsonwebtoken.* { *; }',
+                    '-keepnames interface io.jsonwebtoken.* { *; }'
+
         }
         debug {
             buildConfigField "String","SERVER_URL","\"http://absdigital.id:8080/\""
@@ -92,4 +98,15 @@ dependencies {
     implementation 'com.github.Deishelon:RoundedBottomSheet:1.0.1'
     implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
     implementation 'com.github.gcacace:signature-pad:1.3.1'
+
+    //Caching
+    implementation 'com.github.crypticminds.ColdStorage:coldstoragecache:2.0.1'
+
+    //Authentication
+    implementation 'io.jsonwebtoken:jjwt-gson:0.11.2'
+    api 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.11.2') {
+        exclude group: 'org.json', module: 'json' //provided by Android natively
+    }
 }

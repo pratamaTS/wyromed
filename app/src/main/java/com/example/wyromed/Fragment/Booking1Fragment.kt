@@ -37,8 +37,6 @@ class Booking1Fragment : Fragment(), PatientInterface {
     var btnNext1: Button? = null
     var spinnerPatientAdapter: SpinnerDialogAdapter? = null
     var patient: ArrayList<DataPatient> = ArrayList()
-    var tokenType: String? = null
-    var token: String? = null
     var patientId: String? = null
     var patientPosition: Int? = null
     @RequiresApi(Build.VERSION_CODES.O)
@@ -100,15 +98,7 @@ class Booking1Fragment : Fragment(), PatientInterface {
     }
 
     fun getAllMaster() {
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
-        if(tokenType==null || token==null){
-            activity?.toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            PatientPresenter(this@Booking1Fragment).getAllPatient(tokenType, token)
-        }
+        PatientPresenter(this@Booking1Fragment).getAllPatient(requireContext())
     }
 
     override fun onSuccessGetPatient(dataPatient: ArrayList<DataPatient?>?) {
@@ -118,8 +108,6 @@ class Booking1Fragment : Fragment(), PatientInterface {
         //Spinner Patient
 
         spinnerPatientAdapter = SpinnerDialogAdapter(
-            tokenType.toString(),
-            token.toString(),
             requireContext(),
             patient
         )
@@ -164,8 +152,6 @@ class Booking1Fragment : Fragment(), PatientInterface {
                     bundle.putString("hospital_name", hospital)
                     bundle.putString("patient_name", patientName)
                     bundle.putString("medrec_patient", medrecPatient)
-                    bundle.putString("token_type", tokenType)
-                    bundle.putString("token", token)
                 }
             }
 

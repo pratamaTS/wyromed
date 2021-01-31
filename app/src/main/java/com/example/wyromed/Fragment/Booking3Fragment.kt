@@ -47,7 +47,6 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
     var btnNext3: Button? = null
     var rvListPurchasedItem: RecyclerView? = null
     var purchasedAdapter: ListPurchasedItemAdapter? = null
-    var pItemName: String? = null
     var mBottomSheetDialog: RoundedBottomSheetDialog? = null
     var spinnerPurchasedItemAdapter: SpinnerDialogItemAdapter? = null
     var tokenType: String? = null
@@ -144,18 +143,7 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
     }
 
     fun getAllPurchasedItem() {
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
-        bundle.putString("token_type", tokenType)
-        bundle.putString("token", token)
-
-        if(tokenType==null || token==null){
-            activity?.toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            PurchasedItemPresenter(this@Booking3Fragment).getAllPurchasedItem(tokenType, token)
-        }
+        PurchasedItemPresenter(this@Booking3Fragment).getAllPurchasedItem(requireContext())
     }
 
     private fun initActionButton() {

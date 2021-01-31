@@ -33,10 +33,6 @@ class HistoryTransactionsActivity: BaseActivity() {
         tabLayout = findViewById(R.id.tab_history_transactions)
         viewPager = findViewById(R.id.view_pager_history_transactions)
 
-        //Insert Token to fragment
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
-
         //Set Tab Layout
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Booking"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Sales"))
@@ -44,8 +40,7 @@ class HistoryTransactionsActivity: BaseActivity() {
 
         val pageAdapterHistoryTransactions = PageAdapterHistoryTransactions(
             this,
-            supportFragmentManager, tabLayout!!.tabCount, user?.token_type.toString(),
-            user?.token.toString()
+            supportFragmentManager, tabLayout!!.tabCount
         )
         viewPager!!.setAdapter(pageAdapterHistoryTransactions)
         viewPager!!.addOnPageChangeListener(TabLayoutOnPageChangeListener(tabLayout))

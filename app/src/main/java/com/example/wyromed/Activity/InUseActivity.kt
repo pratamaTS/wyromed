@@ -53,8 +53,6 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
         rvOrderPurchased = findViewById(R.id.rv_order_purchased_operation)
         btnFinish = findViewById(R.id.btn_finish_operation)
 
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
         inUseItemRental = intent.getParcelableArrayListExtra<HandoverRentalItem>("rental") as ArrayList<HandoverRentalItem>
         inUseItemPurchased = intent.getParcelableArrayListExtra<HandoverPurchasedItem>("bmhp") as ArrayList<HandoverPurchasedItem>
@@ -115,8 +113,6 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
             Log.d("secondsOps1", secondsOperation.toString())
 
             startActivity<FinishOperationActivity>(
-                FinishOperationActivity.TAGS.TOKENTYPE to user?.token_type,
-                FinishOperationActivity.TAGS.TOKEN to user?.token,
                 FinishOperationActivity.TAGS.MESSAGE to message,
                 FinishOperationActivity.TAGS.ID to id,
                 FinishOperationActivity.TAGS.MINUTESOPS to minutesOperation,

@@ -40,10 +40,6 @@ class EditProfileActivity: BaseActivity() {
         noHp = findViewById(R.id.et_nohp_edit)
         btnEdit = findViewById(R.id.btn_edit_profile)
 
-        //Insert Token to fragment
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
-
         if(message != null){
             toast(message.toString()).show()
         }

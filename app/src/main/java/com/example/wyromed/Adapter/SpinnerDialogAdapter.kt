@@ -18,7 +18,7 @@ import com.example.wyromed.ViewHolder.ItemHolder
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import java.util.ArrayList
 
-class SpinnerDialogAdapter(var tokenType: String, var token: String, var context: Context, var dataSource: ArrayList<DataPatient>): BaseAdapter() {
+class SpinnerDialogAdapter(var context: Context, var dataSource: ArrayList<DataPatient>): BaseAdapter() {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     var choose: Boolean = false
 
@@ -45,8 +45,6 @@ class SpinnerDialogAdapter(var tokenType: String, var token: String, var context
                 hh.headItem.text = dataSource[position].name
 
                 val intent = Intent(context, PatientActivity::class.java)
-                intent.putExtra("token_type", tokenType)
-                intent.putExtra("token", token)
 
                 hh.addButon.onClick { context.startActivity(intent) }
             }else {

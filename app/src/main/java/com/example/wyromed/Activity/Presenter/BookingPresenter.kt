@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.widget.Toast
 import com.example.wyromed.Activity.Interface.BookingInterface
 import com.example.wyromed.Api.NetworkConfig
@@ -16,27 +17,19 @@ import kotlin.collections.HashMap
 
 class BookingPresenter(val bookingInterface: BookingInterface) {
     fun booking(
-        tokenType: String?,
-        token: String?,
+        context: Context,
         bookingHeaderBody: BookingOrderHeader,
         bookingDetailsBody: ArrayList<BookingOrderDetails>
     ){
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
-        val bodyMap = HashMap<String, Any>()
 
-        // Header
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-        map["Content-Length"] = "<calculated when request is sent>"
-        map["Accept-Encoding"] = "gzip, deflate, br"
+        val bodyMap = HashMap<String, Any>()
 
         // Body
         bodyMap.put("booking_order_header", bookingHeaderBody)
         bodyMap.put("booking_order_details", bookingDetailsBody)
 
-        NetworkConfig.service()
-            .storeBooking(map, bodyMap)
+        NetworkConfig.service(context)
+            .storeBooking(bodyMap)
             .enqueue(object : Callback<ResponseBooking> {
 
                 override fun onFailure(call: Call<ResponseBooking>, t: Throwable) {

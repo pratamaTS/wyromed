@@ -22,8 +22,6 @@ import java.util.*
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class CarouselAdapter(
-    var tokenType: String,
-    var token: String,
     models: ArrayList<Carousel>?,
     context: Context?,
 ) :
@@ -59,16 +57,8 @@ class CarouselAdapter(
         total.setText(models[position].total)
 
         val bookingPage = Intent(context, BookingActivity::class.java)
-        bookingPage.putExtra("token_type", tokenType)
-        bookingPage.putExtra("token", token)
-
         val salesPage = Intent(context, SalesActivity::class.java)
-        salesPage.putExtra("token_type", tokenType)
-        salesPage.putExtra("token", token)
-
         val stockPage = Intent(context, StockActivity::class.java)
-        stockPage.putExtra("token_type", tokenType)
-        stockPage.putExtra("token", token)
 
         view.setOnClickListener {
             if (position == 0) {

@@ -1,30 +1,28 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import com.example.wyromed.Activity.Interface.StockRequestInterface
 import com.example.wyromed.Api.NetworkConfig
 import com.example.wyromed.Response.StockRequest.ResponseGetStockRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 import kotlin.collections.HashMap
 
 class StockRequestPresenter(val stockRequestInterface: StockRequestInterface) {
-    fun getAllStockRequest(tokenType: String?, token: String?){
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
+    fun getAllStockRequest(context: Context){
 
-        // Header
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
-        map["Content-Type"] = "application/json"
-        map["Accept-Encoding"] = "gzip, deflate, br"
-
-        NetworkConfig.service()
-            .getAllStockRequest(map)
+        NetworkConfig.service(context)
+            .getAllStockRequest()
             .enqueue(object : Callback<ResponseGetStockRequest> {
 
                 override fun onFailure(call: Call<ResponseGetStockRequest>, t: Throwable) {
-                    stockRequestInterface.onErrorGetStockRequest(t.localizedMessage)
+                    try {
+                        getAllStockRequest(context)
+                    } catch (e: SocketTimeoutException) {
+                        stockRequestInterface.onErrorGetStockRequest(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(call: Call<ResponseGetStockRequest>, response: Response<ResponseGetStockRequest>) {
@@ -36,7 +34,11 @@ class StockRequestPresenter(val stockRequestInterface: StockRequestInterface) {
                         stockRequestInterface.onSuccessGetStockRequest(message, data)
 
                     } else {
-                        stockRequestInterface.onErrorGetStockRequest(message)
+                        try {
+                            getAllStockRequest(context)
+                        } catch (e: SocketTimeoutException) {
+                            stockRequestInterface.onErrorGetStockRequest(message)
+                        }
                     }
                 }
             })

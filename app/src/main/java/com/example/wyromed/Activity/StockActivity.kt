@@ -64,16 +64,8 @@ class StockActivity: BaseActivity(), StockInterface, TotalStockInterface, StockA
     }
 
     fun getAllStockItem() {
-        tokenType = intent.getStringExtra("token_type")
-        token = intent.getStringExtra("token")
-
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            finish()
-        } else {
-            TotalStockItemPresenter(this).getTotalStockItem(tokenType, token)
-            StockItemPresenter(this).getAllStockItem(tokenType, token)
-        }
+        TotalStockItemPresenter(this).getTotalStockItem(this)
+        StockItemPresenter(this).getAllStockItem(this)
     }
 
     private fun initActionButton() {
@@ -83,16 +75,12 @@ class StockActivity: BaseActivity(), StockInterface, TotalStockInterface, StockA
 
         stockRequest!!.onClick {
             startActivity<HistoryReqStockActivity>(
-                HistoryReqStockActivity.TAGS.TOKENTYPE to tokenType,
-                HistoryReqStockActivity.TAGS.TOKEN to token,
                 HistoryReqStockActivity.TAGS.MESSAGE to message,
             )
         }
 
         btnSubmit!!.onClick {
             startActivity<StockRequestActivity>(
-                StockRequestActivity.TAGS.TOKENTYPE to tokenType,
-                StockRequestActivity.TAGS.TOKEN to token,
                 StockRequestActivity.TAGS.MESSAGE to message,
                 StockRequestActivity.TAGS.PLUS to stockRequestItem,
                 StockRequestActivity.TAGS.MINUS to stockRequestItemMin

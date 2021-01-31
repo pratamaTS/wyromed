@@ -56,8 +56,6 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
         layoutBtnAccept = findViewById(R.id.layout_btn_accept)
         layoutBtnStart = findViewById(R.id.layout_btn_start)
 
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
         confirm = intent.getBooleanExtra("confirm", false)
 
@@ -78,8 +76,7 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
 
     private fun getHandover(){
         DetailHeaderBookingPresenter(this).getDetailHandoverBooking(
-            user?.token_type,
-            user?.token,
+            this,
             id
         )
     }
@@ -94,8 +91,6 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
         back!!.onClick { this }
         btnAccept!!.onClick {
             startActivity<ConfirmSignatureActivity>(
-                ConfirmSignatureActivity.TAGS.TOKENTYPE to user?.token_type,
-                ConfirmSignatureActivity.TAGS.TOKEN to user?.token,
                 ConfirmSignatureActivity.TAGS.ID to id,
                 ConfirmSignatureActivity.TAGS.CONFIRM to confirm,
             )
@@ -105,8 +100,6 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
 
         btnStart!!.onClick{
             startActivity<InUseActivity>(
-                InUseActivity.TAGS.TOKENTYPE to user?.token_type,
-                InUseActivity.TAGS.TOKEN to user?.token,
                 InUseActivity.TAGS.MESSAGE to message,
                 InUseActivity.TAGS.ID to id,
                 InUseActivity.TAGS.RENTAL to orderRentalItemList,

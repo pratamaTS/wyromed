@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.wyromed.Activity.*
 import com.example.wyromed.Activity.Interface.UserInterface
 import com.example.wyromed.Activity.Presenter.UserPresenter
+import com.example.wyromed.Api.SessionManager
 import com.example.wyromed.R
 import com.example.wyromed.Response.Login.DataLogin
 import org.jetbrains.anko.find
@@ -28,11 +29,11 @@ class ProfileFragment : Fragment(), UserInterface {
     var fullNameTextView: TextView? = null
     var emailTextView: TextView? = null
     var user: DataLogin? = DataLogin()
-    var tokenType: String? = null
-    var token: String? = null
     var message: String? = null
     var menuSetting: ConstraintLayout? = null
     var menuHistory: ConstraintLayout? = null
+    var menuHelpSupport: ConstraintLayout? = null
+    var menuSignOut: ConstraintLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +50,8 @@ class ProfileFragment : Fragment(), UserInterface {
         emailTextView = p.findViewById(R.id.tv_set_email)
         menuSetting = p.findViewById(R.id.menu_settings)
         menuHistory = p.findViewById(R.id.menu_history_transactions)
+        menuHelpSupport = p.findViewById(R.id.menu_help_support)
+        menuSignOut = p.findViewById(R.id.menu_sign_out)
 
         initActionButton()
 
@@ -57,28 +60,23 @@ class ProfileFragment : Fragment(), UserInterface {
 
     private fun initActionButton() {
         menuSetting!!.onClick { startActivity<SettingActivity>(
-            SettingActivity.TAGS.TOKENTYPE to tokenType,
-            SettingActivity.TAGS.TOKEN to token,
             SettingActivity.TAGS.MESSAGE to message)
        }
 
         menuHistory!!.onClick { startActivity<HistoryTransactionsActivity>(
-            HistoryTransactionsActivity.TAGS.TOKENTYPE to tokenType,
-            HistoryTransactionsActivity.TAGS.TOKEN to token,
             HistoryTransactionsActivity.TAGS.MESSAGE to message)
+        }
+        menuSignOut!!.onClick {
+            val sessionManager = SessionManager(requireContext())
+            sessionManager.deleteAuthToken()
+            startActivity<OnBoardingActivity>(
+                OnBoardingActivity.TAGS.MESSAGE to message)
+            activity?.finish()
         }
     }
 
     fun getUser() {
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
-        if(tokenType==null || token==null){
-            activity?.toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            UserPresenter(this@ProfileFragment).getUser(tokenType, token)
-        }
+        UserPresenter(this@ProfileFragment).getUser(requireContext())
     }
 
     override fun onSuccessUser(dataLogin: DataLogin?) {

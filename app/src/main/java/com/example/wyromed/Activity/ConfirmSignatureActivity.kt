@@ -60,8 +60,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
         btnSave = findViewById(R.id.btn_save_signature)
         btnClear = findViewById(R.id.btn_clear_signature)
         back = findViewById(R.id.ic_back)
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
+
         id = intent.getIntExtra("id", 0)
         confirm = intent.getBooleanExtra("confirm", false)
 
@@ -106,8 +105,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     private fun updateStatusBooking(){
         val status: String = "2"
         UpdateStatusBookingPresenter(this).updateStatusBooking(
-            user?.token_type,
-            user?.token,
+            this,
             id.toString(),
             status
         )

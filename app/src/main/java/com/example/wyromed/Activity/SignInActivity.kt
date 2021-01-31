@@ -27,6 +27,7 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
 
         //INIT VIEW
         etPassword = findViewById(R.id.et_password_login)
+        btn_sign_in.isEnabled = true
 
         val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
         val email: String? = prefs.getString("email", "")
@@ -73,9 +74,10 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
                 editor.putString("password", userAuth!!.password)
                 editor.commit()
 
-                SignInPresenter(this@SignInActivity).signin(userAuth!!)
+                SignInPresenter(this@SignInActivity).signin(this@SignInActivity, userAuth!!)
             }else{
                 toast("Mohon isi Email & Password terlebih dahulu!")
+                btn_sign_in.isEnabled = true
             }
         }
         btn_forgot_password.onClick {
@@ -94,8 +96,6 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
 
     override fun onSuccessLogin(tokenType: String?, token: String?, message: String?) {
         startActivity<MainActivity>(
-            BaseActivity.TAGS.TOKENTYPE to tokenType,
-            BaseActivity.TAGS.TOKEN to token,
             BaseActivity.TAGS.MESSAGE to message
         )
         finish()
@@ -107,6 +107,6 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
         btn_signup_to_layout.isEnabled = true
         btn_forgot_password.isEnabled = true
         btn_signup_to_layout.isEnabled = true
-        toast("1) Your data identification(email/username) doesn't exist or didn't match. OR 2) Your account is NOT VALID yet! Please contact your admin to validate your account").show()
+        toast(msg.toString()).show()
     }
 }

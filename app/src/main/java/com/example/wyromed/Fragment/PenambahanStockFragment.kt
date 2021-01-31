@@ -31,8 +31,6 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
     var rvStockRequest: RecyclerView? = null
     var adapter: PenambahanRequestAdapter? = null
     var btnSubmit: Button? = null
-    var tokenType: String? = null
-    var token: String? = null
     var tvNoItem: TextView? = null
     var stockRequestHeader: StockRequestHeader = StockRequestHeader()
     var stockRequestItem: ArrayList<StockRequestDetails?> = ArrayList()
@@ -52,8 +50,6 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
         btnSubmit = view.findViewById(R.id.btn_submit_penambahan)
 
         //List Request
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
         checkDifReq = arguments?.getBoolean("check_minus")
         stockRequestItem = arguments?.getParcelableArrayList("stock_request_add")!!
         val layoutBtnSubmit = view.findViewById<NeomorphFrameLayout>(R.id.layout_btn_submit_penambahan)
@@ -87,7 +83,7 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
             stockRequestHeader!!.type = "ADDITION"
             stockRequestHeader!!.note = "Pengajuan Penambahan Stock Sukses!"
 
-            StoreStockRequestPresenter(this@PenambahanStockFragment).storeStockRequest(tokenType, token, stockRequestHeader, stockRequestItem)
+            StoreStockRequestPresenter(this@PenambahanStockFragment).storeStockRequest(requireContext(), stockRequestHeader, stockRequestItem)
         }
     }
 
@@ -123,8 +119,6 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
         btnOk.onClick {
             openDialog.dismiss()
             startActivity<HistoryReqStockActivity>(
-                HistoryReqStockActivity.TAGS.TOKENTYPE to tokenType,
-                HistoryReqStockActivity.TAGS.TOKEN to token,
                 HistoryReqStockActivity.TAGS.MESSAGE to message) }
 
         openDialog.show()

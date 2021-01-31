@@ -1,5 +1,6 @@
 package com.example.wyromed.Activity.Presenter
 
+import android.content.Context
 import android.util.Log
 import com.example.wyromed.Activity.Interface.PatientInterface
 import com.example.wyromed.Activity.Interface.StorePatientInterface
@@ -11,22 +12,21 @@ import com.example.wyromed.Response.Patient.ResponsePatient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 class PatientPresenter(val patientInterface: PatientInterface) {
-    fun getAllPatient(tokenType: String?, token: String?){
-        //Declare Dynamic Headers
-        val tokenHeader: String = tokenType.toString() +" "+ token.toString()
-        val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
-        map["Host"] = "absdigital.id"
+    fun getAllPatient(context: Context){
 
-
-        NetworkConfig.service()
-            .getAllPatient(map)
+        NetworkConfig.service(context)
+            .getAllPatient()
             .enqueue(object : Callback<ResponsePatient> {
 
                 override fun onFailure(call: Call<ResponsePatient>, t: Throwable) {
-                    patientInterface.onErrorGetPatient(t.localizedMessage)
+                    try {
+                        getAllPatient(context)
+                    } catch (e: SocketTimeoutException) {
+                        patientInterface.onErrorGetPatient(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(call: Call<ResponsePatient>, response: Response<ResponsePatient>) {
@@ -37,7 +37,11 @@ class PatientPresenter(val patientInterface: PatientInterface) {
                         Log.d("Data Body", data.toString())
                     } else {
                         val message = response.body()?.meta?.message
-                        patientInterface.onErrorGetPatient(message)
+                        try {
+                            getAllPatient(context)
+                        } catch (e: SocketTimeoutException) {
+                            patientInterface.onErrorGetPatient(message)
+                        }
                     }
                 }
             })

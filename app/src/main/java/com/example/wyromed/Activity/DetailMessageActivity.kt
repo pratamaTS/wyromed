@@ -75,8 +75,6 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface, Deta
         layoutBtnConfirmPesanan = findViewById(R.id.layout_btn_confirm_pesanan)
         layoutBtnCheckPesanan = findViewById(R.id.layout_btn_check_pesanan)
 
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
         choose = intent.getIntExtra("choose", 0)
         id = intent.getIntExtra("id", 0)
         title = intent.getStringExtra("title")
@@ -95,8 +93,8 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface, Deta
     private fun getPesanan(){
 
         if(choose == 1){
-            HeaderMessageBookingPresenter(this).getHeaderMessageBooking(user?.token_type, user?.token, id)
-            DetailMessageBookingPresenter(this).getDetailMessageBooking(user?.token_type, user?.token, id)
+            HeaderMessageBookingPresenter(this).getHeaderMessageBooking(this, id)
+            DetailMessageBookingPresenter(this).getDetailMessageBooking(this, id)
         }else {
             toast("error, something wrong")
         }
@@ -114,15 +112,11 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface, Deta
     private fun initActionButton(){
         btnConfirmPesanan!!.onClick {
             startActivity<HandoverActivity>(
-                HandoverActivity.TAGS.TOKENTYPE to user?.token_type,
-                HandoverActivity.TAGS.TOKEN to user?.token,
                 HandoverActivity.TAGS.MESSAGE to message,
                 HandoverActivity.TAGS.ID to id)
         }
         btnCheckPesanan!!.onClick {
             startActivity<InUseActivity>(
-                InUseActivity.TAGS.TOKENTYPE to user?.token_type,
-                InUseActivity.TAGS.TOKEN to user?.token,
                 InUseActivity.TAGS.MESSAGE to message,
                 InUseActivity.TAGS.ID to id
             )

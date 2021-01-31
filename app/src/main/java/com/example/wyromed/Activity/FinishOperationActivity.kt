@@ -53,8 +53,6 @@ class FinishOperationActivity: BaseActivity() {
         rvOrderPurchased = findViewById(R.id.rv_order_purchased_finish)
         btnSubmit = findViewById(R.id.btn_submit_sales)
 
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
         id = intent.getIntExtra("id", 0)
         minutesOperation = intent.getLongExtra("minutes_ops",0)
         secondsOperation = intent.getLongExtra("seconds_ops",0)
@@ -79,8 +77,6 @@ class FinishOperationActivity: BaseActivity() {
         back!!.onClick { finish() }
         btnSubmit!!.onClick {
             startActivity<ReceiptActivity>(
-                ReceiptActivity.TAGS.TOKENTYPE to user?.token_type,
-                ReceiptActivity.TAGS.TOKEN to user?.token,
                 ReceiptActivity.TAGS.MESSAGE to message,
                 ReceiptActivity.TAGS.ID to id,
                 ReceiptActivity.TAGS.RENTAL to finishRentalItemList,

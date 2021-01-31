@@ -22,8 +22,6 @@ class HistoryStockFragment : Fragment(), HistoryStockRequestInterface {
     var historyStockSearchList: ArrayList<DataGetStockRequest> = ArrayList()
     var rvHistoryStock: RecyclerView? = null
     var adapter: HistoryStockAdapter? = null
-    var tokenType: String? = null
-    var token: String? = null
     var searchHistoryStock: androidx.appcompat.widget.SearchView? = null
 
     override fun onCreateView(
@@ -43,15 +41,7 @@ class HistoryStockFragment : Fragment(), HistoryStockRequestInterface {
     }
 
     private fun getHistoryStockReq(){
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
-        if(tokenType==null || token==null){
-            toast("Gagal mengambil data")?.show()
-            activity?.finish()
-        } else {
-            HistoryStockRequestPresenter(this).getAllHistoryStockRequest(tokenType, token)
-        }
+        HistoryStockRequestPresenter(this).getAllHistoryStockRequest(requireContext())
     }
 
     override fun onSuccessGetHistoryStockRequest(

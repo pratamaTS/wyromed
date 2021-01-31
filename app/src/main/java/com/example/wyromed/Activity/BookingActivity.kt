@@ -58,13 +58,6 @@ class BookingActivity: BaseActivity() {
 
         stepView!!.setSteps(listStep)
 
-        //Insert Token to fragment
-        user?.token_type = intent.getStringExtra("token_type")
-        user?.token = intent.getStringExtra("token")
-        bundle.putString("token_type", user?.token_type)
-        bundle.putString("token", user?.token)
-        formDetailFragment.arguments = bundle
-
         //Fragment
         fragmentManager = supportFragmentManager
         fragmentManager?.beginTransaction()?.replace(
