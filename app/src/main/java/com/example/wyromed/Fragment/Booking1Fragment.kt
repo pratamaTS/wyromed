@@ -8,26 +8,28 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.wyromed.Activity.BookingActivity
 import com.example.wyromed.Activity.Interface.PatientInterface
+import com.example.wyromed.Activity.PatientActivity
 import com.example.wyromed.Activity.Presenter.PatientPresenter
 import com.example.wyromed.Adapter.SpinnerDialogAdapter
 import com.example.wyromed.R
 import com.example.wyromed.Response.Patient.DataPatient
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Booking1Fragment : Fragment(), PatientInterface {
     val rentalFragment: Booking2Fragment = Booking2Fragment()
     val bundle: Bundle = Bundle()
-    private var spinnerPatient: Spinner? = null
+    private var spinnerPatient: SmartMaterialSpinner<String>? = null
     var txtHospital: TextView? = null
     var txtMedicalRecord: TextView? = null
     var txtPaymentStat: TextView? = null
@@ -35,7 +37,7 @@ class Booking1Fragment : Fragment(), PatientInterface {
     var txtFormDetailTime: TextView? = null
     var tvListPatient: TextView? = null
     var btnNext1: Button? = null
-    var spinnerPatientAdapter: SpinnerDialogAdapter? = null
+    var btnAddPatient: Button? = null
     var patient: ArrayList<DataPatient> = ArrayList()
     var patientId: String? = null
     var patientPosition: Int? = null
@@ -57,6 +59,7 @@ class Booking1Fragment : Fragment(), PatientInterface {
         txtFormDetailDate = view.findViewById(R.id.form_detail_date)
         txtFormDetailTime = view.findViewById(R.id.form_detail_time)
         btnNext1 = view.findViewById(R.id.btn_next_book1)
+        btnAddPatient = view.findViewById(R.id.btn_add_patient)
         txtHospital = view.findViewById(R.id.tv_hospital)
         spinnerPatient = view.findViewById(R.id.patient_id)
         tvListPatient = view.findViewById(R.id.list_patient)
@@ -82,6 +85,7 @@ class Booking1Fragment : Fragment(), PatientInterface {
     }
 
     private fun initActionButton() {
+        btnAddPatient!!.onClick { startActivity<PatientActivity>() }
         btnNext1!!.onClick {
             if(patientId.isNullOrEmpty() || patientPosition == 0){
                 toast("There is no patient data")
@@ -105,57 +109,52 @@ class Booking1Fragment : Fragment(), PatientInterface {
         //Set Value
         patient = dataPatient as ArrayList<DataPatient>
 
+        val patientName: ArrayList<String> = ArrayList()
+        for( p in patient ){
+            patientName.add(p.name.toString())
+        }
+
         //Spinner Patient
-
-        spinnerPatientAdapter = SpinnerDialogAdapter(
-            requireContext(),
-            patient
-        )
-
-        spinnerPatient?.adapter = spinnerPatientAdapter
-        spinnerPatient?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                toast("Select Patient")
-            }
-
+        spinnerPatient?.setItem(patientName)
+        spinnerPatient?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
+                adapterView: AdapterView<*>?,
+                view: View,
                 position: Int,
                 id: Long
             ) {
-                val adapter = parent?.adapter
-                if(adapter is SpinnerDialogAdapter){
-                    val item = adapter.getItem(position)
-                    patientId = item.id
-                    patientPosition = position
-                    val patientName = item.name
-                    val hospitalID = item.hospitalId
-                    val hospital = item.hospitalName
-                    val medrecPatient = item.medicNumber
-                    val paymentPatient = item.isBpjs
+                val item = patient[position]
+                patientId = item.id
+                patientPosition = position
+                val patientName = item.name
+                val hospitalID = item.hospitalId
+                val hospital = item.hospitalName
+                val medrecPatient = item.medicNumber
+                val paymentPatient = item.isBpjs
 
-                    if(position != 0) {
-                        txtHospital!!.text = hospital
-                        txtMedicalRecord!!.text = medrecPatient
-                        if (paymentPatient == "1") {
-                            txtPaymentStat!!.text = "BPJS"
-                            bundle.putBoolean("payment_patient", true)
-                        } else {
-                            txtPaymentStat!!.text = "Non BPJS"
-                            bundle.putBoolean("payment_patient", false)
-                        }
+                if (position != 0) {
+                    txtHospital!!.text = hospital
+                    txtMedicalRecord!!.text = medrecPatient
+                    if (paymentPatient == "1") {
+                        txtPaymentStat!!.text = "BPJS"
+                        bundle.putBoolean("payment_patient", true)
+                    } else {
+                        txtPaymentStat!!.text = "Non BPJS"
+                        bundle.putBoolean("payment_patient", false)
                     }
-
-                    bundle.putString("patient_id", patientId)
-                    bundle.putString("hospital_id", hospitalID)
-                    bundle.putString("hospital_name", hospital)
-                    bundle.putString("patient_name", patientName)
-                    bundle.putString("medrec_patient", medrecPatient)
                 }
+
+                bundle.putString("patient_id", patientId)
+                bundle.putString("hospital_id", hospitalID)
+                bundle.putString("hospital_name", hospital)
+                bundle.putString("patient_name", patientName)
+                bundle.putString("medrec_patient", medrecPatient)
             }
 
-        }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                toast("There is no patient")
+            }
+        })
 
     }
 

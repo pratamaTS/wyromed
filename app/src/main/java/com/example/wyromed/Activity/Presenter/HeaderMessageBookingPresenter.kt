@@ -7,6 +7,7 @@ import com.example.wyromed.Response.HeaderMessageBooking.ResponseHeaderMessageBo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -23,7 +24,11 @@ class HeaderMessageBookingPresenter(val headerMessageBookingInterface: HeaderMes
             .enqueue(object : Callback<ResponseHeaderMessageBooking> {
 
                 override fun onFailure(call: Call<ResponseHeaderMessageBooking>, t: Throwable) {
-                    headerMessageBookingInterface.onErrorHeaderMessageBooking(t.localizedMessage)
+                    try {
+                        getHeaderMessageBooking(context, id)
+                    } catch (e: SocketTimeoutException) {
+                        headerMessageBookingInterface.onErrorHeaderMessageBooking(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(
@@ -39,7 +44,11 @@ class HeaderMessageBookingPresenter(val headerMessageBookingInterface: HeaderMes
                     if (response.isSuccessful) {
                         headerMessageBookingInterface.onSuccessHeaderMessageBooking(message, data)
                     } else {
-                        headerMessageBookingInterface.onErrorHeaderMessageBooking(error)
+                        try {
+                            getHeaderMessageBooking(context, id)
+                        } catch (e: SocketTimeoutException) {
+                            headerMessageBookingInterface.onErrorHeaderMessageBooking(error)
+                        }
                     }
                 }
             })

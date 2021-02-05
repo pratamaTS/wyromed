@@ -148,12 +148,6 @@ class Booking4Fragment : Fragment() {
         rvListPurchasedItem?.setLayoutManager(LinearLayoutManager(context))
         rvListPurchasedItem?.setAdapter(adapterP)
         rvListPurchasedItem?.setItemAnimator(DefaultItemAnimator())
-        rvListPurchasedItem?.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
-            )
-        )
     }
 
     private fun initActionButton() {

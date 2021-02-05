@@ -82,12 +82,6 @@ class HistoryReqStockActivity: BaseActivity(), StockRequestInterface {
         rvReqStock?.setLayoutManager(LinearLayoutManager(this))
         rvReqStock?.setAdapter(reqStockAdapter)
         rvReqStock?.setItemAnimator(DefaultItemAnimator())
-        rvReqStock?.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
-            )
-        )
     }
 
     override fun onErrorGetStockRequest(msg: String?) {

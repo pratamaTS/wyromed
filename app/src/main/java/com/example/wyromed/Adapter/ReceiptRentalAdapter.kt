@@ -12,6 +12,7 @@ import com.example.wyromed.ViewHolder.ReceiptRentalViewHolder
 class ReceiptRentalAdapter(
     private val context: Context,
     receiptRentalItemList: ArrayList<HandoverRentalItem>,
+    var hoursOperation: Long,
     var minutesOperation: Long,
     var secondsOperation: Long
 ) :
@@ -26,7 +27,7 @@ class ReceiptRentalAdapter(
     override fun onBindViewHolder(holder: ReceiptRentalViewHolder, position: Int) {
         holder.tvNamaBarangRental.setText(receiptRentalItemList[position].product_name)
         holder.tvStatusOperation.setText("FINISHED")
-        holder.tvTotalTimer.text =minutesOperation.toString() + "minutes; " + secondsOperation.toString() + "seconds"
+        holder.tvTotalTimer.text = hoursOperation.toString() + " hours; " + minutesOperation.toString() + " minutes; " + secondsOperation.toString() + " seconds"
     }
 
     override fun getItemCount(): Int {

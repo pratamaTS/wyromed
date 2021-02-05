@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog
 import com.example.wyromed.Activity.BookingActivity
 import com.example.wyromed.Activity.Interface.RentalItemInterface
@@ -44,7 +45,7 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
     var showEndCalendar: ImageView? = null
     var showStartTime: ImageView? = null
     var showEndTime: ImageView? = null
-    var spnRitem: Spinner? = null
+    var spnRitem: SmartMaterialSpinner<String>?? = null
     var rentalItem: ArrayList<DataRentalItem> = ArrayList()
     var btnAdd: Button? = null
     var btnAddRItem: Button? = null
@@ -55,7 +56,6 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
     var bookingOrderDetails: ArrayList<BookingOrderDetails> = ArrayList()
     var rentalAdapter: ListRentalItemAdapter? = null
     var mBottomSheetDialog: RoundedBottomSheetDialog? = null
-    var spinnerRentalItemAdapter: SpinnerDialogRentalItemAdapter? = null
     var productId: Int? = null
     var itemName: String? = null
     var productUnit: String? = null
@@ -422,12 +422,6 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
                 rvListRentalItem?.setLayoutManager(LinearLayoutManager(context))
                 rvListRentalItem?.setAdapter(rentalAdapter)
                 rvListRentalItem?.setItemAnimator(DefaultItemAnimator())
-                rvListRentalItem?.addItemDecoration(
-                    DividerItemDecoration(
-                        activity,
-                        DividerItemDecoration.VERTICAL
-                    )
-                )
 
                 mBottomSheetDialog!!.dismiss()
                 edtAmount!!.text.clear()
@@ -439,32 +433,31 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
         //Set Value
         rentalItem = dataRentalItem as ArrayList<DataRentalItem>
 
+        val itemList: ArrayList<String> = ArrayList()
+        for( i in rentalItem ){
+            itemList.add(i.name.toString())
+        }
+
         // Spinner Rental Item
-        spinnerRentalItemAdapter = SpinnerDialogRentalItemAdapter(requireContext(), rentalItem)
-        spnRitem?.adapter = spinnerRentalItemAdapter
-
-        spnRitem?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                println("erreur")
-            }
-
+        spnRitem?.setItem(itemList)
+        spnRitem?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
+                adapterView: AdapterView<*>?,
+                view: View,
                 position: Int,
                 id: Long
             ) {
-                val adapter = parent?.adapter
-                if(adapter is SpinnerDialogRentalItemAdapter) {
-                    val item = adapter.getItem(position)
-                    productId = item!!.productId
-                    itemName = item.name
-                    productUnit = item.unitName
-                    productEntity = item.entity
-                }
+                val item = rentalItem[position]
+                productId = item!!.productId
+                itemName = item.name
+                productUnit = item.unitName
+                productEntity = item.entity
             }
 
-        }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                toast("There is no item")
+            }
+        })
     }
 
     override fun onErrorGetRentalItem(msg: String?) {

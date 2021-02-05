@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.wyromed.Activity.Interface.OrderedInterface
 import com.example.wyromed.Activity.Presenter.OrderedPresenter
+import com.example.wyromed.Activity.Presenter.StockRequestPresenter
 import com.example.wyromed.Adapter.StockAdapter
 import com.example.wyromed.R
 import com.example.wyromed.Response.Order.DataOrder
@@ -32,6 +34,7 @@ class OrderedActivity: BaseActivity(), OrderedInterface {
     var message: String?  = null
     var bookedItem: ArrayList<DataOrder> = ArrayList()
     var bookedAdapter: ListOrderedItemAdapter? = null
+    var swipeRefresh: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +43,17 @@ class OrderedActivity: BaseActivity(), OrderedInterface {
         //INIT VIEW
         rvBookingOrdered = findViewById(R.id.rv_ordered_booking)
         back = findViewById(R.id.ic_back)
+        swipeRefresh = findViewById(R.id.refresh)
         message = intent.getStringExtra("message")
 
         if(message != null){
             toast(message.toString()).show()
         }
+
+        swipeRefresh!!.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            OrderedPresenter(this).getAllBookingOrdered(this)
+            swipeRefresh!!.setRefreshing(false)
+        })
 
         // init Button
         initActionButton()
@@ -76,12 +85,6 @@ class OrderedActivity: BaseActivity(), OrderedInterface {
         rvBookingOrdered?.setLayoutManager(LinearLayoutManager(this))
         rvBookingOrdered?.setAdapter(bookedAdapter)
         rvBookingOrdered?.setItemAnimator(DefaultItemAnimator())
-        rvBookingOrdered?.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
-            )
-        )
     }
 
     override fun onErrorOrdered(msg: String?) {

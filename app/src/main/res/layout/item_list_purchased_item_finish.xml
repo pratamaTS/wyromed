@@ -92,6 +92,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_btn_amount_finish">
 
+                    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                        android:id="@+id/neomorph_btn_minus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:neomorph_background_color="@color/light"
+                        app:neomorph_corner_radius="25dp"
+                        app:neomorph_elevation="4dp"
+                        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+                        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+                        app:neomorph_shadow_type="outer"
+                        app:neomorph_view_type="rectangular">
+
+                        <ImageButton
+                            android:id="@+id/btn_minus_finish"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:clickable="true"
+                            android:background="@drawable/ic_minus"
+                            android:contentDescription="@string/todo" />
+
+                    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
                     <TextView
                         android:id="@+id/tv_jumlah_barang_finish"
                         android:layout_width="38dp"
@@ -101,6 +123,28 @@
                         android:textColor="@color/colorGreen"
                         android:textSize="16sp"
                         tools:text="0" />
+
+                    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                        android:id="@+id/neomorph_btn_plus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:neomorph_background_color="@color/light"
+                        app:neomorph_corner_radius="25dp"
+                        app:neomorph_elevation="4dp"
+                        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+                        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+                        app:neomorph_shadow_type="outer"
+                        app:neomorph_view_type="rectangular">
+
+                        <ImageButton
+                            android:id="@+id/btn_plus_finish"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:clickable="true"
+                            android:background="@drawable/ic_plus"
+                            android:contentDescription="@string/todo" />
+
+                    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
                 </LinearLayout>
 

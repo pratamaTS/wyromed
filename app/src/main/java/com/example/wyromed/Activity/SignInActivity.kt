@@ -3,6 +3,7 @@ package com.example.wyromed.Activity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,8 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
         val email: String? = prefs.getString("email", "")
         val pwd: String? = prefs.getString("password", "")
 
+        Log.d("Email", email.toString())
+        Log.d("Pwd", pwd.toString())
         if(email!!.isNotEmpty() && pwd!!.isNotEmpty()){
             et_identity_login.setText(email)
             etPassword!!.setText(pwd)

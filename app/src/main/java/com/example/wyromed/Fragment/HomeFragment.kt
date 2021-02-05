@@ -48,6 +48,7 @@ class HomeFragment : Fragment(), TotalBookingOrderInterface, TotalSalesOrderInte
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
         view.context
+
         //INIT VIEW
         viewPager = view.findViewById(R.id.view_pager_carousel)
 

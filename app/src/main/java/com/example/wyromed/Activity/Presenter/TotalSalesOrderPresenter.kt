@@ -12,30 +12,32 @@ import java.net.SocketTimeoutException
 
 class TotalSalesOrderPresenter(val totalSalesOrderInterface: TotalSalesOrderInterface) {
     fun getTotalSalesOrder(context: Context){
-
+        var connection = false
         NetworkConfig.service(context)
             .getTotalSalesOrder()
             .enqueue(object : Callback<ResponseTotalSalesOrder> {
 
                 override fun onFailure(call: Call<ResponseTotalSalesOrder>, t: Throwable) {
-                    try {
+                    for (retries in 0..2){
                         getTotalSalesOrder(context)
-                    } catch (e: SocketTimeoutException) {
-                        totalSalesOrderInterface.onErrorGetTotalSalesOrder(t.localizedMessage)
+                        if (connection == false){
+                            continue
+                        }
+                        break
                     }
+
+                    totalSalesOrderInterface.onErrorGetTotalSalesOrder(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseTotalSalesOrder>, response: Response<ResponseTotalSalesOrder>) {
+                    connection = true
+
                     if (response.isSuccessful) {
                         val totalQty = response.body()?.data
                         totalSalesOrderInterface.onSuccessGetTotalSalesOrder(totalQty)
                     } else {
                         val message = response.body()?.meta?.message
-                        try {
-                            getTotalSalesOrder(context)
-                        } catch (e: SocketTimeoutException) {
-                            totalSalesOrderInterface.onErrorGetTotalSalesOrder(message)
-                        }
+                        totalSalesOrderInterface.onErrorGetTotalSalesOrder(message)
                     }
                 }
             })

@@ -50,56 +50,52 @@ class StockAdapter(internal val callbackStockInterface: CallbackStockInterface, 
         }
 
         holder.plus.onClick {
-            if(holder.kuantitas < stockList[position]!!.stockAvailable!!) {
-                holder.kuantitas = holder.kuantitas + 1
-                if(holder.kuantitas == 0){
-                    qtyRealMin = 0
-                }
-                if (qtyMinus != 0) {
-                    qtyMinus = qtyMinus - 1
-                }
-                holder.tvKuantitas.text = holder.kuantitas.toString()
-
-                if (stockRequestList!!.isNotEmpty() && indexPlus == position && holder.kuantitas > 1) {
-                    stockRequestList!!.find {
-                        it!!.productId == stockList[position].productId!!.toInt()
-                    }?.quantity = holder.kuantitas
-                } else if (stockRequestListMin!!.isNotEmpty() && indexMin == position && qtyMinus > 0) {
-                    stockRequestListMin!!.find {
-                        it!!.productId == stockList[position].productId!!.toInt()
-                    }?.quantity = qtyMinus
-                } else if (stockRequestListMin!!.isNotEmpty() && indexMin == position && qtyMinus == 0) {
-                    indexStockMin =
-                        stockRequestListMin!!.indexOfFirst { it!!.productId == stockList[position].productId!!.toInt() }
-
-                    stockRequestListMin?.removeAt(indexStockMin)
-                    indexMin = 0
-                } else {
-                    stockRequestList?.add(
-                        StockRequestDetails(
-                            stockList[position].productId!!.toInt(),
-                            holder.kuantitas,
-                            stockList[position].name,
-                            stockList[position].unitName,
-                            stockList[position].entity
-                        )
-                    )
-
-                    indexStockAdd =
-                        stockRequestList!!.indexOfFirst { it!!.productId == stockList[position].productId!!.toInt() }
-
-                    indexPlus = position
-                }
-
-                callbackStockInterface.passDataCallback(stockRequestList, stockRequestListMin)
-
-                Log.d("kuantitas tambah adap", holder.tvKuantitas.text.toString())
-                Log.d("qty kurang", qtyMinus.toString())
-                Log.d("stock request listadap+", stockRequestList.toString())
-                Log.d("stock request listadap-", stockRequestListMin.toString())
-            }else{
-                Toast.makeText(context, "This is the max quantity", Toast.LENGTH_SHORT).show()
+            holder.kuantitas = holder.kuantitas + 1
+            if(holder.kuantitas == 0){
+                qtyRealMin = 0
             }
+            if (qtyMinus != 0) {
+                qtyMinus = qtyMinus - 1
+            }
+            holder.tvKuantitas.text = holder.kuantitas.toString()
+
+            if (stockRequestList!!.isNotEmpty() && indexPlus == position && holder.kuantitas > 1) {
+                stockRequestList!!.find {
+                    it!!.productId == stockList[position].productId!!.toInt()
+                }?.quantity = holder.kuantitas
+            } else if (stockRequestListMin!!.isNotEmpty() && indexMin == position && qtyMinus > 0) {
+                stockRequestListMin!!.find {
+                    it!!.productId == stockList[position].productId!!.toInt()
+                }?.quantity = qtyMinus
+            } else if (stockRequestListMin!!.isNotEmpty() && indexMin == position && qtyMinus == 0) {
+                indexStockMin =
+                    stockRequestListMin!!.indexOfFirst { it!!.productId == stockList[position].productId!!.toInt() }
+
+                stockRequestListMin?.removeAt(indexStockMin)
+                indexMin = 0
+            } else {
+                stockRequestList?.add(
+                    StockRequestDetails(
+                        stockList[position].productId!!.toInt(),
+                        holder.kuantitas,
+                        stockList[position].name,
+                        stockList[position].unitName,
+                        stockList[position].entity
+                    )
+                )
+
+                indexStockAdd =
+                    stockRequestList!!.indexOfFirst { it!!.productId == stockList[position].productId!!.toInt() }
+
+                indexPlus = position
+            }
+
+            callbackStockInterface.passDataCallback(stockRequestList, stockRequestListMin)
+
+            Log.d("kuantitas tambah adap", holder.tvKuantitas.text.toString())
+            Log.d("qty kurang", qtyMinus.toString())
+            Log.d("stock request listadap+", stockRequestList.toString())
+            Log.d("stock request listadap-", stockRequestListMin.toString())
         }
 
 

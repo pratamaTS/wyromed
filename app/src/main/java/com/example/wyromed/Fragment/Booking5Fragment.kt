@@ -1,7 +1,6 @@
 package com.example.wyromed.Fragment
 
 import android.app.Dialog
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,37 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wyromed.Activity.BaseActivity
-import com.example.wyromed.Activity.BookingActivity
 import com.example.wyromed.Activity.Interface.BookingInterface
-import com.example.wyromed.Activity.MainActivity
 import com.example.wyromed.Activity.OrderedActivity
 import com.example.wyromed.Activity.Presenter.BookingPresenter
-import com.example.wyromed.Activity.Presenter.PurchasedItemPresenter
 import com.example.wyromed.Adapter.ListDetailBookingPurchasedItemAdapter
 import com.example.wyromed.Adapter.ListDetailBookingRentalItemAdapter
-import com.example.wyromed.Model.Body.BookingBody
 import com.example.wyromed.Model.Body.BookingOrderDetails
 import com.example.wyromed.Model.Body.BookingOrderHeader
 import com.example.wyromed.Model.PurchasedItem
 import com.example.wyromed.Model.RentalItem
 import com.example.wyromed.R
 import com.example.wyromed.Response.Booking.DataBooking
-import com.example.wyromed.Response.PurchasedItem.DataPurchasedItem
-import com.example.wyromedapp.Adapter.ListBookingPItemAdapter
-import com.example.wyromedapp.Adapter.ListBookingRItemAdapter
-import org.jetbrains.anko.colorAttr
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Booking5Fragment : Fragment(), BookingInterface {
     var purchasedItem: ArrayList<PurchasedItem> = ArrayList()
@@ -101,7 +92,14 @@ class Booking5Fragment : Fragment(), BookingInterface {
         bookingOrderHeader = arguments?.getParcelable("booking_order_header")!!
         bookingOrderDetails = arguments?.getParcelableArrayList("booking_order_details")!!
 
-        date!!.text = dateStart.toString()
+        val pattern = "dd-MMM-yyyy"
+        val simpleDateFormat = SimpleDateFormat(pattern)
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+
+        val dateFormat: Date = inputFormat.parse(dateStart)
+        val dateAfterFormat: String = simpleDateFormat.format(dateFormat)
+
+        date!!.text = dateAfterFormat
         time!!.text = startTime.toString()
         tvHospital!!.text = hospitalName.toString()
         tvPatientName!!.text = patientName.toString()
@@ -134,12 +132,6 @@ class Booking5Fragment : Fragment(), BookingInterface {
         rvListRentalItem?.setLayoutManager(LinearLayoutManager(context))
         rvListRentalItem?.setAdapter(adapterR)
         rvListRentalItem?.setItemAnimator(DefaultItemAnimator())
-        rvListRentalItem?.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
-            )
-        )
     }
 
     private fun initRvPurchasedItem(){
@@ -147,19 +139,17 @@ class Booking5Fragment : Fragment(), BookingInterface {
         rvListPurchasedItem?.setLayoutManager(LinearLayoutManager(context))
         rvListPurchasedItem?.setAdapter(adapterP)
         rvListPurchasedItem?.setItemAnimator(DefaultItemAnimator())
-        rvListPurchasedItem?.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
-            )
-        )
     }
 
     private fun initActionButton() {
         btnBooking!!.onClick {
             btnBooking!!.isEnabled = false
             btnBooking!!.setBackgroundResource(R.drawable.bg_button_gray)
-            BookingPresenter(this@Booking5Fragment).booking(requireContext(), bookingOrderHeader, bookingOrderDetails)
+            BookingPresenter(this@Booking5Fragment).booking(
+                requireContext(),
+                bookingOrderHeader,
+                bookingOrderDetails
+            )
         }
     }
 
@@ -180,7 +170,8 @@ class Booking5Fragment : Fragment(), BookingInterface {
         btnOk.onClick {
             openDialog.dismiss()
             startActivity<OrderedActivity>(
-            OrderedActivity.TAGS.MESSAGE to message)
+                OrderedActivity.TAGS.MESSAGE to message
+            )
 
             activity?.finish()
         }

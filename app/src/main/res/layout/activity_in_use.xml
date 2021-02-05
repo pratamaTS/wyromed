@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/neomorph_background_color"
     tools:context=".Activity.InUseActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -31,20 +33,20 @@
                         android:id="@+id/ic_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_back_white"
-                        android:background="#00000000"
+                        android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
+                        android:background="#00000000"
                         android:contentDescription="@string/todo"
-                        android:layout_alignParentStart="true"/>
+                        android:src="@drawable/ic_back_white" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:fontFamily="@font/montserrat_regular"
                         android:text="@string/app_bar_in_use"
                         android:textColor="@color/white"
                         android:textSize="20sp"
-                        android:fontFamily="@font/montserrat_regular"
                         tools:ignore="RelativeOverlap" />
 
                 </RelativeLayout>
@@ -74,22 +76,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/order_status_rental"
-                        android:textSize="20sp"
-                        android:textColor="@color/colorGrey"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="30dp"
-                        android:fontFamily="@font/montserrat_bold"/>
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/order_status_rental"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_order_rental_item"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorGrey"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="3dp"
-                        android:fontFamily="@font/montserrat_regular"/>
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/title_order_rental_item"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="14sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_order_rental_operation"
@@ -131,7 +133,7 @@
                         android:id="@+id/rv_order_purchased_operation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="20dp" />
 
                 </LinearLayout>
 

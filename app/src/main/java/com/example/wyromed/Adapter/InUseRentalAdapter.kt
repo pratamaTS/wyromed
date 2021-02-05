@@ -11,16 +11,18 @@ import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.R
 import com.example.wyromed.ViewHolder.InUseRentalViewHolder
 
-class InUseRentalAdapter(private val context: Context, private val chronoTickListener: RentalChronoTickListener, inUseItemList: ArrayList<HandoverRentalItem>) :
+class InUseRentalAdapter(private val context: Context, private val chronoTickListener: RentalChronoTickListener, inUseItemList: ArrayList<HandoverRentalItem>, alreadyStart: Boolean) :
     RecyclerView.Adapter<InUseRentalViewHolder>() {
     private val inUseItemList: ArrayList<HandoverRentalItem>
+    var alreadyStart: Boolean = false
     var resume: Boolean = false
     var elapsedTime: Long = 0
+    var hours: Long = 0
     var minutes: Long = 0
     var seconds: Long = 0
 
     interface RentalChronoTickListener {
-        fun onRentalChronoTickListener(chronoRental: Chronometer, minutes: Long, second: Long)
+        fun onRentalChronoTickListener(chronoRental: Chronometer, hours: Long, minutes: Long, second: Long, elapsedTime: Long)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InUseRentalViewHolder {
@@ -30,26 +32,33 @@ class InUseRentalAdapter(private val context: Context, private val chronoTickLis
     }
 
     override fun onBindViewHolder(holder: InUseRentalViewHolder, position: Int) {
+        elapsedTime = SystemClock.elapsedRealtime()
         holder.tvNamaBarangRental.setText(inUseItemList[position].product_name)
         holder.tvTitleOperation.setVisibility(View.VISIBLE)
         holder.tvCountTimer.setVisibility(View.VISIBLE)
 
         holder.tvCountTimer.setOnChronometerTickListener(Chronometer.OnChronometerTickListener {
             if (!resume) {
+                hours = (SystemClock.elapsedRealtime() / 3600000)
                 minutes =
                     (SystemClock.elapsedRealtime() - holder.tvCountTimer.getBase()) / 1000 / 60
                 seconds =
                     (SystemClock.elapsedRealtime() - holder.tvCountTimer.getBase()) / 1000 % 60
-                elapsedTime = SystemClock.elapsedRealtime()
+                elapsedTime = elapsedTime
             } else {
+                hours = (elapsedTime / 3600000)
                 minutes = (elapsedTime - holder.tvCountTimer.getBase()) / 1000 / 60
                 seconds = (elapsedTime - holder.tvCountTimer.getBase()) / 1000 % 60
                 elapsedTime = elapsedTime + 1000
             }
         })
 
-        holder.tvCountTimer.start()
-        chronoTickListener.onRentalChronoTickListener(holder.tvCountTimer, minutes, seconds)
+
+        when(alreadyStart) {
+            false -> holder.tvCountTimer.start()
+        }
+
+        chronoTickListener.onRentalChronoTickListener(holder.tvCountTimer, hours, minutes, seconds, elapsedTime)
     }
 
     override fun getItemCount(): Int {

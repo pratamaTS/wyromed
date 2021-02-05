@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wyromed.Adapter.ReceiptPurchasedAdapter
 import com.example.wyromed.Adapter.ReceiptRentalAdapter
+import com.example.wyromed.Model.Body.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
 import com.example.wyromed.R
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -22,6 +25,10 @@ class ReceiptActivity: BaseActivity() {
         val TOKENTYPE = "token_type"
         val MESSAGE = "message"
         val ID = "id"
+        val HOURSOPS = "hours_ops"
+        val MINUTESOPS = "minutes_ops"
+        val SECONDSOPS = "seconds_ops"
+        val SALESORDERHEADER = "sales_order_header"
         val RENTAL = "rental"
         val BMHP = "bmhp"
     }
@@ -35,8 +42,11 @@ class ReceiptActivity: BaseActivity() {
     var receiptRentalItemList: ArrayList<HandoverRentalItem> = ArrayList()
     var receiptPurchasedList: ArrayList<HandoverPurchasedItem> = ArrayList()
     var id: Int = 0
+    var hoursOperation: Long = 0
     var minutesOperation: Long = 0
     var secondsOperation: Long = 0
+    var message: String? = null
+    var salesOrderHeader: SalesOrderHeader = SalesOrderHeader()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,13 +59,17 @@ class ReceiptActivity: BaseActivity() {
         btnCreateSO = findViewById(R.id.btn_create_so)
 
         id = intent.getIntExtra("id", 0)
+        hoursOperation = intent.getLongExtra("hours_ops",0)
         minutesOperation = intent.getLongExtra("minutes_ops",0)
         secondsOperation = intent.getLongExtra("seconds_ops",0)
+        if(intent.hasExtra("sales_order_header")) {
+            salesOrderHeader = intent.getParcelableExtra<SalesOrderHeader>("sales_order_header")!!
+        }
         receiptRentalItemList = intent.getParcelableArrayListExtra<HandoverRentalItem>("rental") as ArrayList<HandoverRentalItem>
         receiptPurchasedList = intent.getParcelableArrayListExtra<HandoverPurchasedItem>("bmhp") as ArrayList<HandoverPurchasedItem>
 
         //Setup adapter rental
-        receiptRentalAdapter = ReceiptRentalAdapter(this, receiptRentalItemList, minutesOperation, secondsOperation)
+        receiptRentalAdapter = ReceiptRentalAdapter(this, receiptRentalItemList, hoursOperation, minutesOperation, secondsOperation)
         rvReceiptRental?.setLayoutManager(LinearLayoutManager(this))
         rvReceiptRental?.setAdapter(receiptRentalAdapter)
         rvReceiptRental?.setHasFixedSize(false)
@@ -65,5 +79,22 @@ class ReceiptActivity: BaseActivity() {
         rvReceiptPurchased?.setLayoutManager(LinearLayoutManager(this))
         rvReceiptPurchased?.setAdapter(receiptPurchasedAdapter)
         rvReceiptPurchased?.setHasFixedSize(false)
+
+        initActionButton()
+    }
+
+    private fun initActionButton(){
+        btnCreateSO!!.onClick {
+            startActivity<SalesOrderActivity>(
+                SalesOrderActivity.TAGS.MESSAGE to message,
+                SalesOrderActivity.TAGS.ID to id,
+                SalesOrderActivity.TAGS.HOURSOPS to hoursOperation,
+                SalesOrderActivity.TAGS.MINUTESOPS to minutesOperation,
+                SalesOrderActivity.TAGS.SECONDSOPS to secondsOperation,
+                SalesOrderActivity.TAGS.RENTAL to receiptRentalItemList,
+                SalesOrderActivity.TAGS.BMHP to receiptPurchasedList
+            )
+            finish()
+        }
     }
 }

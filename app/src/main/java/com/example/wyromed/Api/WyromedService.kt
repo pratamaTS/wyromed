@@ -23,6 +23,10 @@ import com.example.wyromed.Response.QuantityAvailableStock.ResponseTotalQtyStock
 import com.example.wyromed.Response.RentalItem.ResponseRentalItem
 import com.example.wyromed.Response.SalesOrder.ResponseTotalSalesOrder
 import com.example.wyromed.Response.Stock.ResponseStock
+import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.ResponseDetailMessageSalesOrder
+import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.ResponseDetailMessageStockReq
+import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Header.ResponseHeaderMessageSalesOrder
+import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Header.ResponseHeaderMessageStockReq
 import com.example.wyromed.Response.StockRequest.ResponseGetStockRequest
 import com.example.wyromed.Response.StockRequest.ResponseStockRequest
 import retrofit2.Call
@@ -35,7 +39,7 @@ interface WyromedService {
 
     //Sing Up
     @POST(Constants.SIGNUP_URL)
-    fun signup(@Body signupBody: RegisterBody): Call<DataLogin>
+    fun signup(@QueryMap queryMap: MutableMap<String, String>?, @Body signupBody: RegisterBody): Call<DataLogin>
 
     //Get User
     @GET(Constants.USER_URL)
@@ -112,6 +116,22 @@ interface WyromedService {
     //Get Detail Message Booking
     @GET
     fun getDetailMessageBooking(@Url url: String): Call<ResponseDetailMessageBooking>
+
+    //Get Header Message Stock request
+    @GET
+    fun getHeaderMessageSR(@Url url: String): Call<ResponseHeaderMessageStockReq>
+
+    //Get Detail Message Stock Request
+    @GET
+    fun getDetailMessageSR(@Url url: String): Call<ResponseDetailMessageStockReq>
+
+    //Get Header Message Sales order
+    @GET
+    fun getHeaderMessageSO(@Url url: String): Call<ResponseHeaderMessageSalesOrder>
+
+    //Get Detail Message Sales order
+    @GET
+    fun getDetailMessageSO(@Url url: String): Call<ResponseDetailMessageSalesOrder>
 
     //Get Header Handover Booking
     @GET

@@ -5,392 +5,313 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
+    android:background="@color/neomorph_background_color"
     tools:context=".Fragment.Booking2Fragment">
 
     <TextView
         android:id="@+id/tv_operation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginStart="30dp"
-        android:fontFamily="@font/lato_black"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/operation"
-        android:textColor="@color/colorGrey"
+        android:textColor="@color/colorDarkGrey"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/tv_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/start"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_operation">
+        app:layout_constraintTop_toBottomOf="@+id/tv_operation" />
 
-        <TextView
-            android:id="@+id/tv_start_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="150dp"
-            android:fontFamily="@font/lato_black"
-            android:text="@string/start"
-            android:textColor="@color/colorGrey"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_end_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_end_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lato_black"
-            android:text="@string/end"
-            android:textColor="@color/colorGrey"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_start_date"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
+    <TextView
+        android:id="@+id/tv_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/end"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_start_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_operation" />
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/neomorphStartDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/neomorphEndDate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/tv_start_date"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
 
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/neomorphStartDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/neomorphEndDate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="25dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
+        <EditText
+            android:id="@+id/edt_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@drawable/container_edit_text"
+            android:hint="@string/startdate"
+            android:inputType="date"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/edt_start_date"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:background="@drawable/container_edit_text"
-                android:hint="@string/startdate"
-                android:inputType="date"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:textColor="@color/colorGrey"
-                android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/show_start_calendar_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/todo"
+            android:onClick="ShowCalendar"
+            android:padding="5dp"
+            android:src="@drawable/ic_calendar"
+            tools:ignore="OnClick" />
 
-            <ImageView
-                android:id="@+id/show_start_calendar_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/todo"
-                android:onClick="ShowCalendar"
-                android:padding="5dp"
-                android:src="@drawable/ic_calendar"
-                tools:ignore="OnClick" />
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/neomorphEndDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/neomorphStartDate"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="25dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
-
-            <EditText
-                android:id="@+id/edt_end_date"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:background="@drawable/container_edit_text"
-                android:hint="@string/enddate"
-                android:inputType="date"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:textColor="@color/colorGrey"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/show_end_calendar_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/todo"
-                android:onClick="ShowCalendar"
-                android:padding="5dp"
-                android:src="@drawable/ic_calendar"
-                tools:ignore="OnClick" />
-
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/neomorphEndDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/neomorphStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/tv_end_date"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <EditText
+            android:id="@+id/edt_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@drawable/container_edit_text"
+            android:hint="@string/enddate"
+            android:inputType="date"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/show_end_calendar_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/todo"
+            android:onClick="ShowCalendar"
+            android:padding="5dp"
+            android:src="@drawable/ic_calendar"
+            tools:ignore="OnClick" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/neomorphStartTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/neomorphEndTime"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/neomorphStartDate"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
 
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/neomorphStartTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/neomorphEndTime"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="25dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
+        <EditText
+            android:id="@+id/edt_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@drawable/container_edit_text"
+            android:hint="@string/starttime"
+            android:inputType="date"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/edt_start_time"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:background="@drawable/container_edit_text"
-                android:hint="@string/starttime"
-                android:inputType="date"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:textColor="@color/colorGrey"
-                android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/show_start_time_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/todo"
+            android:onClick="ShowTime"
+            android:padding="5dp"
+            android:src="@drawable/ic_timer"
+            tools:ignore="OnClick" />
 
-            <ImageView
-                android:id="@+id/show_start_time_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/todo"
-                android:onClick="ShowTime"
-                android:padding="5dp"
-                android:src="@drawable/ic_timer"
-                tools:ignore="OnClick" />
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/neomorphEndTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/neomorphStartTime"
+        app:layout_constraintTop_toBottomOf="@+id/neomorphEndDate"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
 
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/neomorphEndTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/neomorphStartTime"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="25dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
+        <EditText
+            android:id="@+id/edt_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@drawable/container_edit_text"
+            android:hint="@string/endtime"
+            android:inputType="date"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/edt_end_time"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:background="@drawable/container_edit_text"
-                android:hint="@string/endtime"
-                android:inputType="date"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:textColor="@color/colorGrey"
-                android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/show_end_time_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/todo"
+            android:onClick="ShowTime"
+            android:padding="5dp"
+            android:src="@drawable/ic_timer"
+            tools:ignore="OnClick" />
 
-            <ImageView
-                android:id="@+id/show_end_time_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/todo"
-                android:onClick="ShowTime"
-                android:padding="5dp"
-                android:src="@drawable/ic_timer"
-                tools:ignore="OnClick" />
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/item"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neomorphStartTime" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/neomorphFrameLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.999"
+        app:layout_constraintStart_toEndOf="@+id/tv_item"
+        app:layout_constraintTop_toBottomOf="@+id/neomorphEndTime"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="15dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <Button
+            android:id="@+id/btn_add_item"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/container_edit_text"
+            android:fontFamily="@font/montserrat_regular"
+            android:inputType="textPersonName"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:text="@string/add_item"
+            android:textColor="@color/colorGreen"
+            android:textSize="14sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_rental_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_marginTop="30dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/tv_item" />
 
-        <TextView
-            android:id="@+id/tv_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/lato_black"
-            android:text="@string/item"
-            android:textColor="@color/colorGrey"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/neomorphFrameLayout3"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
-            app:layout_constraintStart_toEndOf="@+id/tv_item"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="5dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
-
-            <Button
-                android:id="@+id/btn_add_item"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:background="@drawable/container_edit_text"
-                android:inputType="textPersonName"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:text="@string/add_item"
-                android:textColor="@color/colorGreen"
-                android:textSize="14sp" />
-
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="23dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-        tools:layout_editor_absoluteX="50dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_rental_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="20dp"
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_signup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@color/neomorph_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:neomorph_background_color="@color/light"
+        app:neomorph_corner_radius="16dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_layer_type="software"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
 
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/layout_btn_signup"
+        <Button
+            android:id="@+id/btn_next_book2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/transparant"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="16dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_layer_type="software"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/btn_next_book2"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_button_green"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_regular"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/next"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

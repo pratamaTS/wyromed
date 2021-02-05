@@ -50,6 +50,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     var confirm: Boolean = false
     var uri: Uri? = null
     var stringUrl: String? = null
+    var sign: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +64,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
 
         id = intent.getIntExtra("id", 0)
         confirm = intent.getBooleanExtra("confirm", false)
-
+        sign = intent.getIntExtra("sign", 0)
         signaturePad?.setOnSignedListener(object : SignaturePad.OnSignedListener {
             override fun onStartSigning() {
                 Toast.makeText(this@ConfirmSignatureActivity, "OnStartSigning", Toast.LENGTH_SHORT)
@@ -89,9 +90,14 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
         back?.onClick { finish() }
         btnSave?.onClick {
             val signatureBitmap = signaturePad!!.signatureBitmap
+            btnSave?.isEnabled = false
             if (addJpgSignatureToGallery(signatureBitmap)) {
-                updateStatusBooking()
+                when(sign) {
+                    1-> startActivity<AcceptSignatureActivity>()
+                    else -> updateStatusBooking()
+                }
             } else {
+                btnSave?.isEnabled = true
                 Toast.makeText(
                     this@ConfirmSignatureActivity,
                     "Unable to store the signature",
@@ -103,6 +109,8 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     }
 
     private fun updateStatusBooking(){
+        btnSave?.isEnabled = true
+
         val status: String = "2"
         UpdateStatusBookingPresenter(this).updateStatusBooking(
             this,
@@ -143,106 +151,103 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     fun addJpgSignatureToGallery(signature: Bitmap): Boolean {
         var result = false
         try {
-            if (Platform.isAndroid()) {
-                val permission = ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
+            val permission = ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
 
-                if (permission != PackageManager.PERMISSION_GRANTED) {
-                    toast("Try again to request the permission")
-                }else {
-                    val resolver = this.contentResolver
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                toast("Try again to request the permission")
+            }else {
+                val resolver = this.contentResolver
 
-                    val contentValues = ContentValues().apply {
-                        put(
-                            Images.Media.TITLE, String.format(
-                                "Nurse_Confirm_Signature_%d",
-                                System.currentTimeMillis()
-                            )
+                val contentValues = ContentValues().apply {
+                    put(
+                        Images.Media.TITLE, String.format(
+                            "Nurse_Confirm_Signature_%d",
+                            System.currentTimeMillis()
                         )
-                        put(
-                            Images.Media.DISPLAY_NAME, String.format(
-                                "Nurse_Confirm_Signature_%d",
-                                System.currentTimeMillis()
-                            )
+                    )
+                    put(
+                        Images.Media.DISPLAY_NAME, String.format(
+                            "Nurse_Confirm_Signature_%d",
+                            System.currentTimeMillis()
                         )
-                        put(Images.Media.DESCRIPTION, "Nurse Confirmation Signature")
-                        put(Images.Media.MIME_TYPE, "image/jpeg")
-                        // Add the date meta data to ensure the image is added at the front of the gallery
-                        // Add the date meta data to ensure the image is added at the front of the gallery
-                        put(Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
-                        put(Images.Media.DATE_TAKEN, System.currentTimeMillis())
-                        put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/Wyromed/Signature")
-                    }
+                    )
+                    put(Images.Media.DESCRIPTION, "Nurse Confirmation Signature")
+                    put(Images.Media.MIME_TYPE, "image/jpeg")
+                    // Add the date meta data to ensure the image is added at the front of the gallery
+                    // Add the date meta data to ensure the image is added at the front of the gallery
+                    put(Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+                    put(Images.Media.DATE_TAKEN, System.currentTimeMillis())
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/Wyromed/Signature")
+                }
 
-                    try {
-                         uri = resolver.insert(
-                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                             contentValues
-                         )
-                        if (signature != null) {
-                            val imageOut: OutputStream = resolver.openOutputStream(uri!!)!!
-                            try {
-                                signature.compress(Bitmap.CompressFormat.JPEG, 80, imageOut)
-                                if(Build.VERSION.SDK_INT == 30){
-                                   MediaStore.Images.Media.insertImage(
-                                       contentResolver,
-                                        signature,
-                                        String.format(
-                                          "Nurse_Confirm_Signature_%d",
-                                            System.currentTimeMillis()
-                                        ),
-                                        "Nurse Confirmation Signature"
+                try {
+                     uri = resolver.insert(
+                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                         contentValues
+                     )
+                    if (signature != null) {
+                        val imageOut: OutputStream = resolver.openOutputStream(uri!!)!!
+                        try {
+                            signature.compress(Bitmap.CompressFormat.JPEG, 80, imageOut)
+                            if(Build.VERSION.SDK_INT == 30){
+                               MediaStore.Images.Media.insertImage(
+                                   contentResolver,
+                                    signature,
+                                    String.format(
+                                      "Nurse_Confirm_Signature_%d",
+                                        System.currentTimeMillis()
+                                    ),
+                                    "Nurse Confirmation Signature"
+                                )
+                            }else {
+                                val photo: File = File(
+                                    getAlbumStorageDir("Wyromed/Signature"),
+                                    String.format(
+                                        "Nurse_Confirm_Signature_%d.jpg",
+                                        System.currentTimeMillis()
                                     )
-                                }else {
-                                    val photo: File = File(
-                                        getAlbumStorageDir("Wyromed/Signature"),
-                                        String.format(
-                                            "Nurse_Confirm_Signature_%d.jpg",
-                                            System.currentTimeMillis()
-                                        )
-                                    )
-                                    saveBitmapToJPG(signature, photo)
-                                    scanMediaFile(photo)
-                                }
-                            } finally {
-                                imageOut.close()
-                                result = true
+                                )
+                                saveBitmapToJPG(signature, photo)
+                                scanMediaFile(photo)
                             }
-                            val id = ContentUris.parseId(uri!!)
-                            // Wait until MINI_KIND thumbnail is generated.
-                            val miniThumb = Images.Thumbnails.getThumbnail(
-                                resolver,
-                                id,
-                                Images.Thumbnails.MINI_KIND,
-                                null
-                            )
-                            // This is for backward compatibility.
-                            storeThumbnail(
-                                resolver,
-                                miniThumb,
-                                id,
-                                50f,
-                                50f,
-                                Images.Thumbnails.MICRO_KIND
-                            )
-                        } else {
-                            resolver.delete(uri!!, null, null)
-                            uri = null
+                        } finally {
+                            imageOut.close()
+                            result = true
                         }
-                    } catch (e: Exception) {
-                        if (uri != null) {
-                            resolver.delete(uri!!, null, null)
-                            uri = null
-                        }
+                        val id = ContentUris.parseId(uri!!)
+                        // Wait until MINI_KIND thumbnail is generated.
+                        val miniThumb = Images.Thumbnails.getThumbnail(
+                            resolver,
+                            id,
+                            Images.Thumbnails.MINI_KIND,
+                            null
+                        )
+                        // This is for backward compatibility.
+                        storeThumbnail(
+                            resolver,
+                            miniThumb,
+                            id,
+                            50f,
+                            50f,
+                            Images.Thumbnails.MICRO_KIND
+                        )
+                    } else {
+                        resolver.delete(uri!!, null, null)
+                        uri = null
                     }
-
+                } catch (e: Exception) {
                     if (uri != null) {
-                        stringUrl = uri.toString()
+                        resolver.delete(uri!!, null, null)
+                        uri = null
                     }
                 }
 
+                if (uri != null) {
+                    stringUrl = uri.toString()
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()

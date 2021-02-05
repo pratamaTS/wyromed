@@ -1,12 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.chivorns:smartmaterialspinner:1.2.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ee63c059b771ce46ea0bb8ece12d72f/jetified-smartmaterialspinner-1.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ee63c059b771ce46ea0bb8ece12d72f/jetified-smartmaterialspinner-1.2.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ee63c059b771ce46ea0bb8ece12d72f/jetified-smartmaterialspinner-1.2.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ddb415cecc019d92653e13596e0cc2a/jetified-smartmaterialspinner-1.2.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ddb415cecc019d92653e13596e0cc2a/jetified-smartmaterialspinner-1.2.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ddb415cecc019d92653e13596e0cc2a/jetified-smartmaterialspinner-1.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ddb415cecc019d92653e13596e0cc2a/jetified-smartmaterialspinner-1.2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ddb415cecc019d92653e13596e0cc2a/jetified-smartmaterialspinner-1.2.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.chivorns/smartmaterialspinner/1.2.1/9c115282fd1f3c100c65f77975ea6fb997863d7f/smartmaterialspinner-1.2.1-javadoc.jar!/" />

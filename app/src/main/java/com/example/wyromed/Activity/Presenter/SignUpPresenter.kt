@@ -13,8 +13,12 @@ import retrofit2.Response
 class SignUpPresenter(val signUpInterface: SignUpInterface){
     fun signup(context: Context, registerBody: RegisterBody){
 
+        // Query Param Map
+        val queryMap: MutableMap<String, String> = HashMap()
+        queryMap["tipe"] = "perawat"
+
         NetworkConfig.service(context)
-            .signup(registerBody)
+            .signup(queryMap, registerBody)
             .enqueue(object : Callback<DataLogin> {
 
                 override fun onFailure(call: Call<DataLogin>, t: Throwable){

@@ -36,7 +36,7 @@ class SalesActivity: BaseActivity() {
         salesList!!.add(Sales("A-1110", "Mon, 31 Desember 2020", "Finish"))
         salesList!!.add(Sales("A-1111", "Mon, 01 Januari 2021", "Finish"))
         salesList!!.add(Sales("A-1112", "Mon, 01 Januari 2021", "Finish"))
-        salesList!!.add(Sales("A-1113", "Mon, 08 Januari 2021", "Finish"))
+        salesList!!.add(Sales("A-1113", "Mon, 01 Februari 2021", "Finish"))
 
         //Set up Adapter
         salesAdapter = SalesAdapter(this, salesList!!)

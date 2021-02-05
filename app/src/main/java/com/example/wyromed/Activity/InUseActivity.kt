@@ -1,10 +1,8 @@
 package com.example.wyromed.Activity
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.Chronometer
 import android.widget.ImageButton
@@ -12,13 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wyromed.Adapter.InUsePurchasedAdapter
 import com.example.wyromed.Adapter.InUseRentalAdapter
+import com.example.wyromed.Model.Body.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
 import com.example.wyromed.R
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
-import java.util.*
-import kotlin.collections.ArrayList
+
 
 class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListener {
     object TAGS{
@@ -40,8 +38,11 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
     var id: Int = 0
     var message: String = ""
     var btnStopChronoRental: Chronometer? = null
+    var hourOperation: Long = 0
     var minutesOperation: Long = 0
     var secondsOperation: Long = 0
+    var elapsedTimeOperation: Long = 0
+    var alreadyStart: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,7 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
         inUseItemPurchased = intent.getParcelableArrayListExtra<HandoverPurchasedItem>("bmhp") as ArrayList<HandoverPurchasedItem>
 
         //Setup adapter rental
-        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental)
+        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental, alreadyStart)
         rvOrderRental?.setLayoutManager(LinearLayoutManager(this))
         rvOrderRental?.setAdapter(inUseRentalAdapter)
         rvOrderRental?.setHasFixedSize(false)
@@ -75,8 +76,10 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
     override fun onResume() {
         super.onResume()
 
+        alreadyStart = true
+
         //Setup adapter rental
-        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental)
+        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental, alreadyStart)
         rvOrderRental?.setLayoutManager(LinearLayoutManager(this))
         rvOrderRental?.setAdapter(inUseRentalAdapter)
         rvOrderRental?.setHasFixedSize(false)
@@ -90,8 +93,11 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
 
     override fun onPause() {
         super.onPause()
+
+        alreadyStart = true
+
         //Setup adapter rental
-        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental)
+        inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental, alreadyStart)
         rvOrderRental?.setLayoutManager(LinearLayoutManager(this))
         rvOrderRental?.setAdapter(inUseRentalAdapter)
         rvOrderRental?.setHasFixedSize(false)
@@ -106,34 +112,42 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
     private fun initActionButton(){
         back?.onClick { finish() }
         btnFinish?.onClick {
-
             btnStopChronoRental?.stop()
+            hourOperation = (SystemClock.elapsedRealtime() - btnStopChronoRental!!.base) / 3600000
+            minutesOperation =
+                (SystemClock.elapsedRealtime() - btnStopChronoRental!!.base) / 1000 / 60
+            secondsOperation =
+                (SystemClock.elapsedRealtime() - btnStopChronoRental!!.base) / 1000 % 60
+            elapsedTimeOperation = SystemClock.elapsedRealtime()
 
-            Log.d("minutesOps1", minutesOperation.toString())
-            Log.d("secondsOps1", secondsOperation.toString())
+            Log.d("hoursChrono", hourOperation.toString())
+            Log.d("minuteChrono", minutesOperation.toString())
+            Log.d("secondChrono", secondsOperation.toString())
+            Log.d("elapsedMillis", elapsedTimeOperation.toString())
 
             startActivity<FinishOperationActivity>(
                 FinishOperationActivity.TAGS.MESSAGE to message,
                 FinishOperationActivity.TAGS.ID to id,
+                FinishOperationActivity.TAGS.HOURSOPS to hourOperation,
                 FinishOperationActivity.TAGS.MINUTESOPS to minutesOperation,
                 FinishOperationActivity.TAGS.SECONDSOPS to secondsOperation,
                 FinishOperationActivity.TAGS.RENTAL to inUseItemRental,
-                FinishOperationActivity.TAGS.BMHP to inUseItemPurchased)
+                FinishOperationActivity.TAGS.BMHP to inUseItemPurchased
+            )
 
             finish()
         }
     }
 
-    override fun onRentalChronoTickListener(chronoRental: Chronometer, minutes: Long, second: Long) {
-        var chronometerInstance: Chronometer? = null
+    override fun onRentalChronoTickListener(chronoRental: Chronometer, hours: Long, minutes: Long, second: Long, elapsedTime: Long) {
+//        minutesOperation = minutes
+//        secondsOperation = second
+//        elapsedTimeOperation = elapsedTime
         btnStopChronoRental = chronoRental
-        minutesOperation = minutes
-        secondsOperation = second
-
-        Log.d("minutes", minutes.toString())
-        Log.d("seconds", second.toString())
-        Log.d("minutesOps", minutesOperation.toString())
-        Log.d("secondsOps", secondsOperation.toString())
+        hourOperation = (SystemClock.elapsedRealtime() / 3600000)
+        minutesOperation = (elapsedTime - chronoRental.getBase()) / 1000 / 60
+        secondsOperation = (elapsedTime - chronoRental.getBase()) / 1000 % 60
+        elapsedTimeOperation = elapsedTime + 1000
     }
 
 }

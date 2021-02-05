@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object NetworkConfig {
     //untuk melakukan logging untuk melihat logcat
@@ -15,6 +16,9 @@ object NetworkConfig {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return  OkHttpClient().newBuilder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(AuthInterceptor(context))
             .addInterceptor(interceptor)
             .build()

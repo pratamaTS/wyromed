@@ -16,7 +16,7 @@ import java.net.SocketTimeoutException
 
 class TotalStockItemPresenter(val totalStockItemInterface: TotalStockInterface) {
     fun getTotalStockItem(context: Context){
-
+        var connection = false
         // Query Param Map
         val queryMap: MutableMap<String, String> = HashMap()
         queryMap["type"] = "mobile"
@@ -26,11 +26,15 @@ class TotalStockItemPresenter(val totalStockItemInterface: TotalStockInterface) 
             .enqueue(object : Callback<ResponseTotalQtyStock> {
 
                 override fun onFailure(call: Call<ResponseTotalQtyStock>, t: Throwable) {
-                    try {
+                    for (retries in 0..2){
                         getTotalStockItem(context)
-                    } catch (e: SocketTimeoutException) {
-                        totalStockItemInterface.onErrorGetTotalStockItem(t.localizedMessage)
+                        if (connection == false){
+                            continue
+                        }
+                        break
                     }
+
+                    totalStockItemInterface.onErrorGetTotalStockItem(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseTotalQtyStock>, response: Response<ResponseTotalQtyStock>) {
@@ -41,11 +45,7 @@ class TotalStockItemPresenter(val totalStockItemInterface: TotalStockInterface) 
                         Log.d("Total Stock", totalQty.toString())
                     } else {
                         val message = response.body()?.meta?.message
-                        try {
-                            getTotalStockItem(context)
-                        } catch (e: SocketTimeoutException) {
-                            totalStockItemInterface.onErrorGetTotalStockItem(message)
-                        }
+                        totalStockItemInterface.onErrorGetTotalStockItem(message)
                     }
                 }
             })

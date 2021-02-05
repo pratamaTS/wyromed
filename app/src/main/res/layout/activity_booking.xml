@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorBackground"
     tools:context=".Activity.BookingActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -77,12 +75,13 @@
         android:padding="12dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
+        android:background="@color/neomorph_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar"
         app:sv_animationType="All"
         app:sv_doneCircleColor="@color/colorGreen"
-        app:sv_doneCircleRadius="26dp"
+        app:sv_doneCircleRadius="16dp"
         app:sv_doneStepLineColor="@color/colorGreen"
         app:sv_doneStepMarkColor="@color/white"
         app:sv_doneTextColor="@color/colorGray"
@@ -91,20 +90,18 @@
         app:sv_nextStepLineColor="@color/colorGreySolid"
         app:sv_nextTextColor="@color/colorGreySolid"
         app:sv_selectedCircleColor="@color/colorGreen"
-        app:sv_selectedCircleRadius="26dp"
+        app:sv_selectedCircleRadius="16dp"
         app:sv_selectedStepNumberColor="@color/colorWhite"
         app:sv_selectedTextColor="@color/colorGreen"
         app:sv_stepLineWidth="1dp"
-        app:sv_stepNumberTextSize="16sp"
-        app:sv_stepPadding="8dp"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_stepPadding="5dp"
         app:sv_stepViewStyle="@style/StepView" />
 
     <FrameLayout
         android:id="@+id/fragment_booking_container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

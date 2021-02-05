@@ -9,6 +9,7 @@ import com.example.wyromed.Response.Handover.ResponseHandoverDetail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -25,7 +26,11 @@ class DetailHeaderBookingPresenter(val handoverDetailBookingInterface: HandoverD
             .enqueue(object : Callback<ResponseHandoverDetail> {
 
                 override fun onFailure(call: Call<ResponseHandoverDetail>, t: Throwable) {
-                    handoverDetailBookingInterface.onErrorHandoverDetailBooking(t.localizedMessage)
+                    try {
+                        getDetailHandoverBooking(context, id)
+                    } catch (e: SocketTimeoutException) {
+                        handoverDetailBookingInterface.onErrorHandoverDetailBooking(t.localizedMessage)
+                    }
                 }
 
                 override fun onResponse(
@@ -41,7 +46,11 @@ class DetailHeaderBookingPresenter(val handoverDetailBookingInterface: HandoverD
                     if (response.isSuccessful) {
                         handoverDetailBookingInterface.onSuccessHandoverDetailBooking(message, data)
                     } else {
-                        handoverDetailBookingInterface.onErrorHandoverDetailBooking(error)
+                        try {
+                            getDetailHandoverBooking(context, id)
+                        } catch (e: SocketTimeoutException) {
+                            handoverDetailBookingInterface.onErrorHandoverDetailBooking(error)
+                        }
                     }
                 }
             })

@@ -66,6 +66,8 @@
         <activity android:name=".Activity.InUseActivity" />
         <activity android:name=".Activity.FinishOperationActivity" />
         <activity android:name=".Activity.ReceiptActivity" />
+        <activity android:name=".Activity.SalesOrderActivity" />
+        <activity android:name=".Activity.AcceptSignatureActivity" />
 
     </application>
 

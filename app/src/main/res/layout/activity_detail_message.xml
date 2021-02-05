@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/neomorph_background_color"
     android:orientation="vertical"
     tools:context="Activity.DetailMessageActivity">
 
@@ -73,12 +73,14 @@
                     android:id="@+id/tv_judul_keterangan_pesanan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="28dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:padding="16dp"
                     android:text=""
                     android:textColor="@color/colorBlack"
-                    android:textSize="26sp"
-                    android:fontFamily="@font/lato_regular"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints" />
@@ -268,8 +270,8 @@
 
                     <Button
                         android:id="@+id/btn_cancel_pesanan"
-                        android:layout_width="150dp"
-                        android:layout_height="55dp"
+                        android:layout_width="126dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:background="@drawable/bg_button_rounded_white"
                         android:fontFamily="@font/montserrat_bold"
@@ -301,16 +303,16 @@
 
                     <Button
                         android:id="@+id/btn_confirm_pesanan"
-                        android:layout_width="150dp"
-                        android:layout_height="55dp"
+                        android:layout_width="126dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/bg_button_rounded_white"
+                        android:background="@drawable/bg_button_rounded_green"
                         android:text="@string/btn_confirm_message"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorGreen"
+                        android:textColor="@color/colorWhite"
                         android:textSize="14sp"
                         android:fontFamily="@font/montserrat_bold"
-                        app:backgroundTint="@color/neomorph_background_color" />
+                        app:backgroundTint="@color/colorGreen" />
 
                 </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
@@ -334,8 +336,8 @@
 
                     <Button
                         android:id="@+id/btn_check_pesanan"
-                        android:layout_width="150dp"
-                        android:layout_height="55dp"
+                        android:layout_width="126dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:background="@drawable/bg_button_rounded_white"
                         android:text="@string/btn_check_message"
@@ -564,8 +566,8 @@
 
                     <Button
                         android:id="@+id/btn_confirm_request_stock"
-                        android:layout_width="150dp"
-                        android:layout_height="55dp"
+                        android:layout_width="146dp"
+                        android:layout_height="52dp"
                         android:layout_gravity="center"
                         android:background="@drawable/bg_button_rounded_white"
                         android:text="@string/btn_confirm_message"
@@ -590,7 +592,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/neomorph_background_color"
         android:src="@drawable/ic_message"
         app:borderWidth="0dp"
         app:elevation="6dp"

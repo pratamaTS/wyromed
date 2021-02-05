@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/neomorph_background_color"
     tools:context=".Activity.SalesOrderActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -90,7 +91,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="A-112"
+                    android:text=""
                     android:textColor="@color/colorGrey"
                     android:textSize="16sp" />
 
@@ -126,7 +127,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="29 July 2020"
+                    android:text=""
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -162,7 +163,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="RS. Omni Pulomas"
+                    android:text=""
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -198,7 +199,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Farhan Hidayat"
+                    android:text=""
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -234,7 +235,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="MR-111-1111"
+                    android:text=""
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -270,7 +271,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="BPJS"
+                    android:text=""
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -500,7 +501,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Rp. 5.830.000,00"
+                    android:text="Rp 0"
                     android:textColor="@color/colorGrey"
                     android:textSize="20sp" />
 

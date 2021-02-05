@@ -12,30 +12,33 @@ import java.net.SocketTimeoutException
 
 class TotalBookingPresenter(val totalBookingOrderInterface: TotalBookingOrderInterface) {
     fun getTotalBookingOrder(context: Context){
+        var connection = false
 
         NetworkConfig.service(context)
             .getTotalBookingOrder()
             .enqueue(object : Callback<ResponseTotalBookingOrder> {
 
                 override fun onFailure(call: Call<ResponseTotalBookingOrder>, t: Throwable) {
-                    try {
+                    for (retries in 0..2){
                         getTotalBookingOrder(context)
-                    } catch (e: SocketTimeoutException) {
-                        totalBookingOrderInterface.onErrorGetTotalBookingOrder(t.localizedMessage)
+                        if (connection == false){
+                            continue
+                        }
+                        break
                     }
+
+                    totalBookingOrderInterface.onErrorGetTotalBookingOrder(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseTotalBookingOrder>, response: Response<ResponseTotalBookingOrder>) {
+                    connection = true
+
                     if (response.isSuccessful) {
                         val totalQty = response.body()?.data
                         totalBookingOrderInterface.onSuccessGetTotalBookingOrder(totalQty)
                     } else {
                         val message = response.body()?.meta?.message
-                        try {
-                            getTotalBookingOrder(context)
-                        } catch (e: SocketTimeoutException) {
-                            totalBookingOrderInterface.onErrorGetTotalBookingOrder(message)
-                        }
+                        totalBookingOrderInterface.onErrorGetTotalBookingOrder(message)
                     }
                 }
             })

@@ -126,6 +126,7 @@
     <string name="title_booking">Booking</string>
     <string name="form_detail">Form Detail</string>
     <string name="rental_item">Rental Item</string>
+    <string name="select_item">Select Item</string>
     <string name="purchased_item">BMHP Item</string>
     <string name="status">Status</string>
     <string name="finish">Finish</string>
@@ -133,6 +134,8 @@
     <string name="title_form_detail2">Booking Form</string>
     <string name="hospital">Hospital</string>
     <string name="patient">Patient</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="select_patient">Select Patient</string>
     <string name="list_patient">List Patient</string>
     <string name="medical">Medical Record</string>
     <string name="payment">Payment Status</string>
@@ -206,7 +209,7 @@
 
     <!-- stock screen -->
     <string name="app_bar_stock">Stock</string>
-    <string name="your_stock">Your Stock</string>
+    <string name="your_stock">Your Warehouse Stock</string>
     <string name="satuan_pcs">Pcs</string>
     <string name="btn_submit">Submit</string>
 
@@ -321,4 +324,15 @@
     <string name="et_hint_price">Price</string>
     <string name="btn_save_new_price">Save</string>
     <string name="title_edit_price_item">Edit Price Item</string>
+
+    <!-- accept signature screen -->
+    <string name="app_bar_accept">Accept Signature</string>
+    <string name="btn_accept_signature">Accept</string>
+    <string name="title_doctor_signature">Doctor Signature</string>
+    <string name="ask_the_doctor_to_sign_to_confirm_the_handover_of_item">Ask the doctor to sign to confirm the handover of item</string>
+    <string name="title_nurse_chief_signature">Nurse Chief Signature</string>
+    <string name="ask_the_nurse_chief_to_sign_to_confirm_the_handover_of_item">Ask the nurse chief to sign to confirm the handover of item</string>
+    <string name="title_salesman_signature">Salesman Signature</string>
+    <string name="ask_the_salesman_to_sign_to_confirm_the_handover_of_item">Ask the salesman to sign to confirm the handover of item</string>
+
 </resources>

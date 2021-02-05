@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/neomorph_background_color"
     tools:context=".Activity.DetailSalesActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -379,9 +379,7 @@
                 android:id="@+id/detail_layout_btn_booking"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail_total_booking_layout"
@@ -392,7 +390,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/transparant"
+                    android:background="@color/neomorph_background_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -409,7 +407,7 @@
                         android:id="@+id/btn_booking"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:background="@drawable/bg_button_green"
+                        android:background="@drawable/bg_button_rounded_green"
                         android:clickable="true"
                         android:focusable="true"
                         android:fontFamily="@font/montserrat_regular"

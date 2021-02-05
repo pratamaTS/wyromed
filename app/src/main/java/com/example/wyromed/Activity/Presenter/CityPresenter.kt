@@ -20,9 +20,13 @@ class CityPresenter(val cityInterface: CityInterface) {
             .enqueue(object : Callback<ResponseCity> {
 
                 override fun onFailure(call: Call<ResponseCity>, t: Throwable) {
-                    try {
-                        getCity(context, stateID)
-                    } catch (e: SocketTimeoutException) {
+                    if(stateID != null) {
+                        try {
+                            getCity(context, stateID)
+                        } catch (e: SocketTimeoutException) {
+                            cityInterface.onErrorGetCity(t.localizedMessage)
+                        }
+                    }else{
                         cityInterface.onErrorGetCity(t.localizedMessage)
                     }
                 }
@@ -35,9 +39,13 @@ class CityPresenter(val cityInterface: CityInterface) {
                         Log.d("Data Body", data.toString())
                     } else {
                         val message = response.body()?.meta?.message
-                        try {
-                            getCity(context, stateID)
-                        } catch (e: SocketTimeoutException) {
+                        if(stateID != null) {
+                            try {
+                                getCity(context, stateID)
+                            } catch (e: SocketTimeoutException) {
+                                cityInterface.onErrorGetCity(message)
+                            }
+                        }else{
                             cityInterface.onErrorGetCity(message)
                         }
                     }

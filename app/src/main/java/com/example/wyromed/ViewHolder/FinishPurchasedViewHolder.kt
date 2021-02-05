@@ -17,6 +17,8 @@ class FinishPurchasedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     init {
         tvNamaBarangPurchased = itemView.findViewById(R.id.tv_nama_barang_purchased_order_finish)
         tvJumlahBarang = itemView.findViewById(R.id.tv_jumlah_barang_finish)
+        plus = itemView.findViewById(R.id.btn_plus_finish)
+        minus = itemView.findViewById(R.id.btn_minus_finish)
         tvJumlahBarang.text = "0"
     }
 }

@@ -20,7 +20,7 @@
                 android:layout_height="fill_parent"
                 android:text="@string/item_name"
                 android:textSize="20sp"
-                android:fontFamily="@font/lato_bold"
+                android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/colorGreySolid"
                 android:paddingTop="6dp"
                 android:paddingLeft="10dp"/>

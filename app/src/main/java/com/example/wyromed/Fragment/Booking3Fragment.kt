@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog
 import com.example.wyromed.Activity.BookingActivity
 import com.example.wyromed.Activity.Interface.PurchasedItemInterface
@@ -36,7 +37,7 @@ import java.util.concurrent.TimeUnit
 class Booking3Fragment : Fragment(), PurchasedItemInterface {
     val statusFragment: Booking4Fragment = Booking4Fragment()
     var edtAmount: EditText? = null
-    var spinnerPItem: Spinner? = null
+    var spinnerPItem: SmartMaterialSpinner<String>? = null
     var listChoosePItem: ArrayList<PurchasedItem> = ArrayList()
     var listChooseRItem: ArrayList<RentalItem> = ArrayList()
     var bookingOrderHeader: BookingOrderHeader = BookingOrderHeader()
@@ -153,13 +154,9 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
             mBottomSheetDialog!!.show()
         }
         btnSkip3!!.onClick {
-            (activity as BookingActivity?)!!.nextStep()
-            statusFragment.arguments = bundle
-            fragmentManager?.beginTransaction()?.replace(
-                R.id.fragment_booking_container,
-                statusFragment
-            )
-                ?.commit()
+            bundle.putInt("total_quantity", totalQuantity!!)
+            bundle.putParcelableArrayList("booking_order_details", bookingOrderDetails)
+            Loading().execute()
         }
         btnNext3!!.onClick {
             if(listChoosePItem.isNullOrEmpty()){
@@ -242,12 +239,6 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
                 rvListPurchasedItem?.setLayoutManager(LinearLayoutManager(context))
                 rvListPurchasedItem?.setAdapter(purchasedAdapter)
                 rvListPurchasedItem?.setItemAnimator(DefaultItemAnimator())
-                rvListPurchasedItem?.addItemDecoration(
-                    DividerItemDecoration(
-                        activity,
-                        DividerItemDecoration.VERTICAL
-                    )
-                )
 
                 mBottomSheetDialog!!.dismiss()
                 edtAmount!!.text.clear()
@@ -259,33 +250,31 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
         //Set Value
         purchasedItem = dataPurchasedItem as ArrayList<DataPurchasedItem>
 
-        //Spinner Purchased Item
-        spinnerPurchasedItemAdapter = SpinnerDialogItemAdapter(requireContext(), purchasedItem)
-        spinnerPItem?.adapter = spinnerPurchasedItemAdapter
+        val itemList: ArrayList<String> = ArrayList()
+        for( i in purchasedItem ){
+            itemList.add(i.name.toString())
+        }
 
-        spinnerPItem?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                println("erreur")
-            }
-
+        // Spinner Purchased Item
+        spinnerPItem?.setItem(itemList)
+        spinnerPItem?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
+                adapterView: AdapterView<*>?,
+                view: View,
                 position: Int,
                 id: Long
             ) {
-                val adapter = parent?.adapter
-
-                if(adapter is SpinnerDialogItemAdapter){
-                    val item = adapter.getItem(position)
-                    productId = item!!.productId
-                    itemName = item.name
-                    productUnit = item.unitName
-                    productEntity = item.entity
-                }
+                val item = purchasedItem[position]
+                productId = item!!.productId
+                itemName = item.name
+                productUnit = item.unitName
+                productEntity = item.entity
             }
 
-        }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                toast("There is no item")
+            }
+        })
     }
 
     override fun onErrorGetPurchasedItem(msg: String?) {

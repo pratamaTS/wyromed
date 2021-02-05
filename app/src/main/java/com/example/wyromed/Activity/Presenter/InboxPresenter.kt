@@ -16,6 +16,7 @@ import java.net.SocketTimeoutException
 
 class InboxPresenter(val inboxInterface: InboxInterface) {
     fun getAllInbox(context: Context){
+        var connection = false
         // Query Param Map
 //        val queryMap: MutableMap<String, String> = HashMap()
 //        queryMap["search"] = ""
@@ -25,14 +26,18 @@ class InboxPresenter(val inboxInterface: InboxInterface) {
             .enqueue(object : Callback<ResponseInbox> {
 
                 override fun onFailure(call: Call<ResponseInbox>, t: Throwable) {
-                    try {
+                    for (retries in 0..2){
                         getAllInbox(context)
-                    } catch (e: SocketTimeoutException) {
-                        inboxInterface.onErrorGetInbox(t.localizedMessage)
+                        if (connection == false){
+                            continue
+                        }
+                        break
                     }
+                    inboxInterface.onErrorGetInbox(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseInbox>, response: Response<ResponseInbox>) {
+                    connection = true
                     if (response.isSuccessful) {
                         val data = response.body()?.data
                         inboxInterface.onSuccessGetInbox(data)
@@ -40,11 +45,7 @@ class InboxPresenter(val inboxInterface: InboxInterface) {
                         Log.d("Data Body", data.toString())
                     } else {
                         val message = response.body()?.meta?.message
-                        try {
-                            getAllInbox(context)
-                        } catch (e: SocketTimeoutException) {
-                            inboxInterface.onErrorGetInbox(message)
-                        }
+                        inboxInterface.onErrorGetInbox(message)
                     }
                 }
             })

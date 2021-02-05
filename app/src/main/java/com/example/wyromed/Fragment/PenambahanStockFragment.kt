@@ -119,7 +119,9 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
         btnOk.onClick {
             openDialog.dismiss()
             startActivity<HistoryReqStockActivity>(
-                HistoryReqStockActivity.TAGS.MESSAGE to message) }
+                HistoryReqStockActivity.TAGS.MESSAGE to message)
+            activity?.finish()
+        }
 
         openDialog.show()
     }

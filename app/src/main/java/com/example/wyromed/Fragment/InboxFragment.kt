@@ -149,21 +149,21 @@ class InboxFragment : Fragment(), RecyclerItemTouchHelperListener, InboxInterfac
     override fun onCellClickListener(id: Int, choose: Int, title: String) {
         var message = ""
         when(choose){
-            1 -> startActivity<DetailMessageActivity>(
+            1 -> { startActivity<DetailMessageActivity>(
                 DetailMessageActivity.TAGS.MESSAGE to message,
                 DetailMessageActivity.TAGS.ID to id,
                 DetailMessageActivity.TAGS.CHOOSE to choose,
-                DetailMessageActivity.TAGS.TITLE to title)
-            2 -> startActivity<DetailMessageActivity>(
+                DetailMessageActivity.TAGS.TITLE to title) }
+            2 -> { startActivity<DetailMessageActivity>(
                 DetailMessageActivity.TAGS.MESSAGE to message,
                 DetailMessageActivity.TAGS.ID to id,
                 DetailMessageActivity.TAGS.CHOOSE to choose,
-                DetailMessageActivity.TAGS.TITLE to title)
-            3 -> startActivity<DetailMessageActivity>(
+                DetailMessageActivity.TAGS.TITLE to title) }
+            3 -> { startActivity<DetailMessageActivity>(
                 DetailMessageActivity.TAGS.MESSAGE to message,
                 DetailMessageActivity.TAGS.ID to id,
                 DetailMessageActivity.TAGS.CHOOSE to choose,
-                DetailMessageActivity.TAGS.TITLE to title)
+                DetailMessageActivity.TAGS.TITLE to title) }
             else -> toast("error")
         }
     }
