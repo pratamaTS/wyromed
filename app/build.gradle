@@ -103,4 +103,7 @@ dependencies {
     //Caching
     implementation 'com.github.crypticminds.ColdStorage:coldstoragecache:2.0.1'
 
+    //Image
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }

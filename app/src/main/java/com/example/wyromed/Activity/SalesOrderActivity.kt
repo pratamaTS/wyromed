@@ -208,7 +208,9 @@ class SalesOrderActivity : BaseActivity(), HeaderMessageBookingInterface, View.O
                 when(selectPayMethod) {
                     true ->{
                         when(selectPayDate){
-                            true -> finish()
+                            true -> {
+                                startActivity<AcceptSignatureActivity>()
+                            }
                             else -> toast("Select Payment Date First!")
                         }
                     }

@@ -51,6 +51,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     var uri: Uri? = null
     var stringUrl: String? = null
     var sign: Int? = 0
+    var urlPhoto: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,11 +65,11 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
 
         id = intent.getIntExtra("id", 0)
         confirm = intent.getBooleanExtra("confirm", false)
-        sign = intent.getIntExtra("sign", 0)
+        if(intent.hasExtra("sign")) {
+            sign = intent.getIntExtra("sign", 0)
+        }
         signaturePad?.setOnSignedListener(object : SignaturePad.OnSignedListener {
             override fun onStartSigning() {
-                Toast.makeText(this@ConfirmSignatureActivity, "OnStartSigning", Toast.LENGTH_SHORT)
-                    .show()
             }
 
             override fun onSigned() {
@@ -93,8 +94,29 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
             btnSave?.isEnabled = false
             if (addJpgSignatureToGallery(signatureBitmap)) {
                 when(sign) {
-                    1-> startActivity<AcceptSignatureActivity>()
-                    else -> updateStatusBooking()
+                    1-> {
+                        startActivity<AcceptSignatureActivity>(
+                            AcceptSignatureActivity.TAGS.URLDOCTOR to urlPhoto
+                        )
+                        finish()
+                    }
+                    2-> {
+                        startActivity<AcceptSignatureActivity>(
+                            AcceptSignatureActivity.TAGS.URLNURSE to urlPhoto
+                        )
+                        finish()
+                    }
+                    3-> {
+                        startActivity<AcceptSignatureActivity>(
+                            AcceptSignatureActivity.TAGS.URLSALES to urlPhoto
+                        )
+                        finish()
+                    }
+                    else -> {
+                        updateStatusBooking()
+                        finish()
+                    }
+
                 }
             } else {
                 btnSave?.isEnabled = true
@@ -193,23 +215,80 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
                         try {
                             signature.compress(Bitmap.CompressFormat.JPEG, 80, imageOut)
                             if(Build.VERSION.SDK_INT == 30){
+                                var titlePic: String = ""
+                                when(sign){
+                                    1 -> {
+                                        titlePic = String.format(
+                                            "Doctor_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+
+                                    2 -> {
+                                        titlePic = String.format(
+                                            "Nurse_Chief_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+
+                                    3 -> {
+                                        titlePic = String.format(
+                                            "Sales_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+                                    else -> {
+                                        titlePic = String.format(
+                                            "Nurse_Confirm_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+                                }
+
                                MediaStore.Images.Media.insertImage(
                                    contentResolver,
                                     signature,
-                                    String.format(
-                                      "Nurse_Confirm_Signature_%d",
-                                        System.currentTimeMillis()
-                                    ),
-                                    "Nurse Confirmation Signature"
+                                    titlePic,
+                                    "Signature"
                                 )
                             }else {
+                                var titlePic: String = ""
+                                when(sign){
+                                    1 -> {
+                                        titlePic = String.format(
+                                            "Doctor_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+
+                                    2 -> {
+                                        titlePic = String.format(
+                                            "Nurse_Chief_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+
+                                    3 -> {
+                                        titlePic = String.format(
+                                            "Sales_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+                                    else -> {
+                                        titlePic = String.format(
+                                            "Nurse_Confirm_Signature_%d.jpg",
+                                            System.currentTimeMillis()
+                                        )
+                                    }
+                                }
+
                                 val photo: File = File(
                                     getAlbumStorageDir("Wyromed/Signature"),
-                                    String.format(
-                                        "Nurse_Confirm_Signature_%d.jpg",
-                                        System.currentTimeMillis()
-                                    )
+                                    titlePic
                                 )
+
+                                urlPhoto = Environment.DIRECTORY_PICTURES + "Wyromed/Signature/" + titlePic
+
                                 saveBitmapToJPG(signature, photo)
                                 scanMediaFile(photo)
                             }

@@ -17,8 +17,8 @@ object NetworkConfig {
 
         return  OkHttpClient().newBuilder()
             .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
             .addInterceptor(AuthInterceptor(context))
             .addInterceptor(interceptor)
             .build()

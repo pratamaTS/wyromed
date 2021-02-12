@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.developer-shivam:Crescento:1.2.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/228177787094a601ce8b79ce086ee030/jetified-Crescento-1.2.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/228177787094a601ce8b79ce086ee030/jetified-Crescento-1.2.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/228177787094a601ce8b79ce086ee030/jetified-Crescento-1.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/608e5017d86bf509fad28f8a5fcf9f84/jetified-Crescento-1.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/608e5017d86bf509fad28f8a5fcf9f84/jetified-Crescento-1.2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/608e5017d86bf509fad28f8a5fcf9f84/jetified-Crescento-1.2.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
