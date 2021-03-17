@@ -68,7 +68,7 @@ class Booking5Fragment : Fragment(), BookingInterface {
         //Init View
         btnBooking = view.findViewById(R.id.btn_booking)
         rvListRentalItem = view.findViewById(R.id.rv_detail_rental_item)
-        rvListPurchasedItem = view.findViewById(R.id.rv_detail_purchased_item)
+//        rvListPurchasedItem = view.findViewById(R.id.rv_detail_purchased_item)
         date = view.findViewById(R.id.tv_booking_date)
         time = view.findViewById(R.id.tv_booking_time)
         tvHospital = view.findViewById(R.id.tv_detail_hospital)
@@ -77,14 +77,14 @@ class Booking5Fragment : Fragment(), BookingInterface {
         tvTotalItem = view.findViewById(R.id.tv_total_item_booking)
 
         totalQuantity = arguments?.getInt("total_quantity")
-        hospitalName = arguments?.getString("hospital_name")
-        patientName = arguments?.getString("patient_name")
-        medrecPatient = arguments?.getString("medrec_patient")
-        paymentPatient = arguments?.getBoolean("payment_patient")
-        dateStart = arguments?.getString("start_date_only")
-        val dateEnd = arguments?.getString("end_date_only")
-        startTime = arguments?.getString("start_time_only")
-        val endTime = arguments?.getString("end_time_only")
+//        hospitalName = arguments?.getString("hospital_name")
+//        patientName = arguments?.getString("patient_name")
+//        medrecPatient = arguments?.getString("medrec_patient")
+//        paymentPatient = arguments?.getBoolean("payment_patient")
+//        dateStart = arguments?.getString("start_date_only")
+//        val dateEnd = arguments?.getString("end_date_only")
+//        startTime = arguments?.getString("start_time_only")
+//        val endTime = arguments?.getString("end_time_only")
         rentalItem = arguments?.getParcelableArrayList("rental_item")!!
         if(arguments?.getParcelableArrayList<PurchasedItem>("purchased_item") != null){
             purchasedItem = arguments?.getParcelableArrayList("purchased_item")!!
@@ -92,24 +92,24 @@ class Booking5Fragment : Fragment(), BookingInterface {
         bookingOrderHeader = arguments?.getParcelable("booking_order_header")!!
         bookingOrderDetails = arguments?.getParcelableArrayList("booking_order_details")!!
 
-        val pattern = "dd-MMM-yyyy"
-        val simpleDateFormat = SimpleDateFormat(pattern)
-        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+//        val pattern = "dd-MMM-yyyy"
+//        val simpleDateFormat = SimpleDateFormat(pattern)
+//        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+//
+//        val dateFormat: Date = inputFormat.parse(dateStart)
+//        val dateAfterFormat: String = simpleDateFormat.format(dateFormat)
 
-        val dateFormat: Date = inputFormat.parse(dateStart)
-        val dateAfterFormat: String = simpleDateFormat.format(dateFormat)
-
-        date!!.text = dateAfterFormat
-        time!!.text = startTime.toString()
-        tvHospital!!.text = hospitalName.toString()
-        tvPatientName!!.text = patientName.toString()
-        tvMedrec!!.text = medrecPatient.toString()
+//        date!!.text = dateAfterFormat
+//        time!!.text = startTime.toString()
+//        tvHospital!!.text = hospitalName.toString()
+//        tvPatientName!!.text = patientName.toString()
+//        tvMedrec!!.text = medrecPatient.toString()
         tvTotalItem!!.text = totalQuantity.toString()
 
         Log.d("Start Date5", dateStart.toString())
-        Log.d("End Date5", dateEnd.toString())
-        Log.d("Start Time5", startTime.toString())
-        Log.d("End Time5", endTime.toString())
+//        Log.d("End Date5", dateEnd.toString())
+//        Log.d("Start Time5", startTime.toString())
+//        Log.d("End Time5", endTime.toString())
         Log.d("list item5", rentalItem.toString())
         Log.d("list item5", purchasedItem.toString())
         Log.d("Booking Order Header5", bookingOrderHeader.toString())
@@ -122,7 +122,7 @@ class Booking5Fragment : Fragment(), BookingInterface {
         initRvRentalItem()
 
         //RV List Purchased Item
-        initRvPurchasedItem()
+//        initRvPurchasedItem()
 
         return view
     }

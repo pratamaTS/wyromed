@@ -9,14 +9,12 @@ import com.example.wyromed.R
 
 class ListBookingItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvItemName: TextView
-    var tvDateSuccess: TextView
-    var tvTimeSuccess: TextView
+    var tvAmountQty: TextView
     var viewSuccess: ConstraintLayout
 
     init {
         tvItemName = itemView.findViewById(R.id.tvItemStatus)
-        tvDateSuccess = itemView.findViewById(R.id.tvDateStatus)
-        tvTimeSuccess = itemView.findViewById(R.id.tvTimeStatus)
+        tvAmountQty = itemView.findViewById(R.id.tvAmountQty)
         viewSuccess = itemView.findViewById(R.id.view_success)
     }
 }

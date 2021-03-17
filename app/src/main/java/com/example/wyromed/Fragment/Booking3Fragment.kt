@@ -299,7 +299,7 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
             progressBarHolder!!.setAnimation(outAnimation)
             btnNext3!!.setEnabled(true)
 
-            (activity as BookingActivity?)!!.nextStep3()
+            (activity as BookingActivity?)!!.nextStep()
             statusFragment.arguments = bundle
             fragmentManager?.beginTransaction()?.replace(
                 R.id.fragment_booking_container,

@@ -22,7 +22,7 @@ class ListDetailBookingPurchasedItemAdapter(private var mContext: Context, mList
         override fun onBindViewHolder(holder: DetailBookingItemViewHolder, position: Int) {
             holder.itemName.setText(mListDetailBookingPurchasedItem[position].name)
             holder.qty.setText(mListDetailBookingPurchasedItem[position].quantity.toString())
-            holder.dateDetail.setText(mListDetailBookingPurchasedItem[position].start_date)
+//            holder.dateDetail.setText(mListDetailBookingPurchasedItem[position].start_date)
             holder.timeDetail.setText(mListDetailBookingPurchasedItem[position].start_time)
         }
 

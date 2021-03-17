@@ -8,6 +8,8 @@ import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import com.example.wyromed.Fragment.Booking1Fragment
+import com.example.wyromed.Fragment.Booking2Fragment
+import com.example.wyromed.Fragment.Booking3Fragment
 import com.example.wyromed.R
 import com.google.android.material.appbar.AppBarLayout
 import com.shuhart.stepview.StepView
@@ -26,7 +28,7 @@ class BookingActivity: BaseActivity() {
     var toolbar: Toolbar? = null
     var appbar: AppBarLayout? = null
     var fragmentManager: FragmentManager? = null
-    val formDetailFragment: Booking1Fragment = Booking1Fragment()
+    val formDetailFragment: Booking2Fragment = Booking2Fragment()
     var listStep: ArrayList<String> = ArrayList()
     var stepView: StepView? = null
     var myBooking: ImageView? = null
@@ -50,9 +52,7 @@ class BookingActivity: BaseActivity() {
             toast(message.toString()).show()
         }
 
-        listStep.add("Form Detail")
         listStep.add("Rental Item")
-        listStep.add("BMHP Item")
         listStep.add("Preview")
         listStep.add("Finish")
 
@@ -104,11 +104,4 @@ class BookingActivity: BaseActivity() {
         stepView?.go(2, true);
     }
 
-    fun nextStep3() {
-        stepView?.go(3, true);
-    }
-
-    fun nextStep4() {
-        stepView?.go(4, true);
-    }
 }

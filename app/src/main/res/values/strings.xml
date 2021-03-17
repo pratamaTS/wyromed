@@ -141,7 +141,7 @@
     <string name="payment">Payment Status</string>
     <string name="step1">Form Detail</string>
     <string name="step2">Rental Item</string>
-    <string name="step3">BMHP Item</string>
+    <string name="step3">Purchased Item</string>
     <string name="step4">Status</string>
     <string name="step5">Finish</string>
     <string name="operation">Operation</string>

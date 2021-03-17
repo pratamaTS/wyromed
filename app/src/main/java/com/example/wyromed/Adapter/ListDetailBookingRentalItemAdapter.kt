@@ -21,7 +21,7 @@ class ListDetailBookingRentalItemAdapter(private var mContext: Context, mListDet
         override fun onBindViewHolder(holder: DetailBookingItemViewHolder, position: Int) {
             holder.itemName.setText(mListDetailBookingRentalItem[position].product_name)
             holder.qty.setText(mListDetailBookingRentalItem[position].quantity.toString())
-            holder.dateDetail.setText(mListDetailBookingRentalItem[position].start_date)
+//            holder.dateDetail.setText(mListDetailBookingRentalItem[position].start_date)
             holder.timeDetail.setText(mListDetailBookingRentalItem[position].start_time)
         }
 

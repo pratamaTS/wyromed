@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -30,12 +31,17 @@ import com.example.wyromedapp.Adapter.ListRentalItemAdapter
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.*
 import java.util.Calendar.getInstance
 import kotlin.collections.ArrayList
 
 class Booking2Fragment : Fragment(), RentalItemInterface {
-    val purchasedItemFragment: Booking3Fragment = Booking3Fragment()
+    val purchasedItemFragment: Booking4Fragment = Booking4Fragment()
+    var txtFormDetailDate: TextView? = null
+    var txtFormDetailTime: TextView? = null
     var edtStartDate: EditText? = null
     var edtEndDate: EditText? = null
     var edtStartTime: EditText? = null
@@ -84,6 +90,9 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
     var endDateTime: String? = null
     var totalQuantity: Int? = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    val currentDateTime: LocalDateTime = LocalDateTime.now()
+
 //    companion object {
 //        fun newInstance(myList : ArrayList<RentalItem>): Booking2Fragment {
 //            val args = Bundle()
@@ -94,6 +103,7 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
 //        }
 //    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -103,33 +113,46 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
         view.context
 
         //Init View
-        edtStartDate = view.findViewById(R.id.edt_start_date)
-        edtStartTime = view.findViewById(R.id.edt_start_time)
-        showStartCalendar = view.findViewById(R.id.show_start_calendar_btn)
-        showStartTime = view.findViewById(R.id.show_start_time_btn)
-        edtEndDate = view.findViewById(R.id.edt_end_date)
-        edtEndTime = view.findViewById(R.id.edt_end_time)
-        showEndCalendar = view.findViewById(R.id.show_end_calendar_btn)
-        showEndTime = view.findViewById(R.id.show_end_time_btn)
+//        edtStartDate = view.findViewById(R.id.edt_start_date)
+//        edtStartTime = view.findViewById(R.id.edt_start_time)
+//        showStartCalendar = view.findViewById(R.id.show_start_calendar_btn)
+//        showStartTime = view.findViewById(R.id.show_start_time_btn)
+//        edtEndDate = view.findViewById(R.id.edt_end_date)
+//        edtEndTime = view.findViewById(R.id.edt_end_time)
+//        showEndCalendar = view.findViewById(R.id.show_end_calendar_btn)
+//        showEndTime = view.findViewById(R.id.show_end_time_btn)
+        txtFormDetailDate = view.findViewById(R.id.form_detail_date)
+        txtFormDetailTime = view.findViewById(R.id.form_detail_time)
         btnAddRItem = view.findViewById(R.id.btn_add_item)
         btnNext2 = view.findViewById(R.id.btn_next_book2)
         rvListRentalItem = view.findViewById(R.id.rv_rental_item)
-        hospitalID = arguments?.getString("hospital_id")
-        hospitalName = arguments?.getString("hospital_name")
-        patientID = arguments?.getString("patient_id")
-        patientName = arguments?.getString("patient_name")
-        medrecPatient = arguments?.getString("medrec_patient")
-        paymentPatient = arguments?.getBoolean("payment_patient")
+//        hospitalID = arguments?.getString("hospital_id")
+//        hospitalName = arguments?.getString("hospital_name")
+//        patientID = arguments?.getString("patient_id")
+//        patientName = arguments?.getString("patient_name")
+//        medrecPatient = arguments?.getString("medrec_patient")
+//        paymentPatient = arguments?.getBoolean("payment_patient")
 
-        bundle.putString("hospital_name", hospitalName)
-        bundle.putString("patient_name", patientName)
-        bundle.putString("medrec_patient", medrecPatient)
-        bundle.putBoolean("payment_patient", paymentPatient!!)
+//        bundle.putString("hospital_name", hospitalName)
+//        bundle.putString("patient_name", patientName)
+//        bundle.putString("medrec_patient", medrecPatient)
+//        bundle.putBoolean("payment_patient", paymentPatient!!)
 
-        edtStartDate!!.isEnabled = false
-        edtStartTime!!.isEnabled = false
-        edtEndDate!!.isEnabled = false
-        edtEndTime!!.isEnabled = false
+        txtFormDetailDate!!.text = currentDateTime.format(
+            DateTimeFormatter.ofLocalizedDate(
+                FormatStyle.LONG
+            )
+        )
+        txtFormDetailTime!!.text = currentDateTime.format(
+            DateTimeFormatter.ofLocalizedTime(
+                FormatStyle.MEDIUM
+            )
+        )
+
+//        edtStartDate!!.isEnabled = false
+//        edtStartTime!!.isEnabled = false
+//        edtEndDate!!.isEnabled = false
+//        edtEndTime!!.isEnabled = false
 
         //Bottom Sheet
         mBottomSheetDialog = RoundedBottomSheetDialog(requireContext())
@@ -143,10 +166,10 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
         mBottomSheetDialog!!.setContentView(sheetView)
 
         // init Calendar
-        initCalendar()
+//        initCalendar()
 
         // init Time Picker
-        initTimePicker()
+//        initTimePicker()
 
         // init Button
         initActionButton()
@@ -164,167 +187,163 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
         RentalItemPresenter(this@Booking2Fragment).getAllRentalItem(requireContext(), startDateTime, endDateTime)
     }
 
-    private fun initCalendar() {
-        //Calendar
-        calendar = getInstance()
-        year = calendar!!.get(Calendar.YEAR)
-        month = calendar!!.get(Calendar.MONTH)
-        day = calendar!!.get(Calendar.DAY_OF_MONTH)
-        val calendarEndDate = getInstance()
-
-        showStartCalendar!!.onClick{
-            val startDatePicker = DatePickerDialog(requireContext(), { view, thisYear, thisMonth, thisDay ->
-                // Display Selected date in TextView
-                month = thisMonth + 1
-                day = thisDay
-                year = thisYear
-                edtStartDate!!.setText("" + thisDay + "/" + month + "/" + thisYear)
-                calendarEndDate.set(thisYear, thisMonth, thisDay)
-
-                dateStartValue =  year.toString() + "-" + month.toString() + "-" + day.toString()
-                Log.d("start date rental", dateStartValue.toString())
-            }, year!!, month!!, day!!)
-
-            startDatePicker.datePicker.minDate = calendar!!.timeInMillis
-            startDatePicker.show()
-        }
-        var newCalendarEndDate = getInstance()
-        var yearEndDate = newCalendarEndDate!!.get(Calendar.YEAR)
-        var monthEndDate = newCalendarEndDate!!.get(Calendar.MONTH)
-        var dayEndDate = newCalendarEndDate!!.get(Calendar.DAY_OF_MONTH)
-
-        showEndCalendar!!.onClick{
-            if(dateStartValue != null && timeStartValue != null) {
-                val endDatePicker = DatePickerDialog(
-                    requireContext(),
-                    { view, thisYearEnd, thisMonthEnd, thisDayEnd ->
-                        // Display Selected date in TextView
-                        monthEndDate = thisMonthEnd + 1
-                        dayEndDate = thisDayEnd
-                        yearEndDate = thisYearEnd
-                        edtEndDate!!.setText("" + thisDayEnd + "/" + monthEndDate + "/" + thisYearEnd)
-
-                        dateEndValue =
-                            yearEndDate.toString() + "-" + monthEndDate.toString() + "-" + dayEndDate.toString()
-                        Log.d("end date rental", dateEndValue.toString())
-                    },
-                    yearEndDate!!,
-                    monthEndDate!!,
-                    dayEndDate!!
-                )
-
-                endDatePicker.datePicker.minDate = calendarEndDate!!.timeInMillis
-                endDatePicker.show()
-            }else if(dateStartValue == null){
-                toast("Please fill the start date first!")
-            }else if(timeStartValue == null){
-                toast("Please fill the start time first!")
-            }else{
-                toast("Please fill the start date & start time first!")
-            }
-        }
-    }
-
-    private fun initTimePicker() {
-        //Time
-        currentTime = getInstance()
-        hour = currentTime!!.get(Calendar.HOUR_OF_DAY)
-        minute = currentTime!!.get(Calendar.MINUTE)
-        second = currentTime!!.get(Calendar.SECOND)
-
-        showStartTime!!.onClick {
-            if(dateStartValue != null) {
-                timePicker =
-                    TimePickerDialog(requireContext(), object : TimePickerDialog.OnTimeSetListener {
-                        override fun onTimeSet(
-                            view: TimePicker?,
-                            hourOfDay: Int,
-                            minuteOfDay: Int
-                        ) {
-                            edtStartTime!!.setText(
-                                String.format(
-                                    "%02d : %02d",
-                                    hourOfDay,
-                                    minuteOfDay
-                                )
-                            )
-                            timeStartValue =
-                                String.format("%02d:%02d:%02d", hourOfDay, minuteOfDay, second)
-                            Log.d("end date rental", timeStartValue.toString())
-                        }
-                    }, hour!!, minute!!, true)
-                timePicker!!.show()
-            }else{
-                toast("Please fill the start date first!")
-            }
-        }
-
-        showEndTime!!.onClick {
-            if(dateStartValue != null && timeStartValue != null && dateEndValue != null) {
-                timePicker =
-                    TimePickerDialog(requireContext(), object : TimePickerDialog.OnTimeSetListener {
-                        override fun onTimeSet(
-                            view: TimePicker?,
-                            hourOfDay: Int,
-                            minuteOfDay: Int
-                        ) {
-                            edtEndTime!!.setText(
-                                String.format(
-                                    "%02d : %02d",
-                                    hourOfDay,
-                                    minuteOfDay
-                                )
-                            )
-
-                            timeEndValue =
-                                String.format("%02d:%02d:%02d", hourOfDay, minuteOfDay, second)
-                            Log.d("end date rental", timeEndValue.toString())
-                        }
-                    }, hour!!, minute!!, true)
-                timePicker!!.show()
-            }else if(dateStartValue == null){
-                toast("Please fill the start date first!")
-            }else if(timeStartValue == null){
-                toast("Please fill the start time first!")
-            }else if(dateEndValue == null){
-                toast("Please fill the end date first!")
-            }else{
-                toast("Please fill the start date, start time, end date first!")
-            }
-        }
-    }
+//    private fun initCalendar() {
+//        //Calendar
+//        calendar = getInstance()
+//        year = calendar!!.get(Calendar.YEAR)
+//        month = calendar!!.get(Calendar.MONTH)
+//        day = calendar!!.get(Calendar.DAY_OF_MONTH)
+//        val calendarEndDate = getInstance()
+//
+//        showStartCalendar!!.onClick{
+//            val startDatePicker = DatePickerDialog(requireContext(), { view, thisYear, thisMonth, thisDay ->
+//                // Display Selected date in TextView
+//                month = thisMonth + 1
+//                day = thisDay
+//                year = thisYear
+//                edtStartDate!!.setText("" + thisDay + "/" + month + "/" + thisYear)
+//                calendarEndDate.set(thisYear, thisMonth, thisDay)
+//
+//                dateStartValue =  year.toString() + "-" + month.toString() + "-" + day.toString()
+//                Log.d("start date rental", dateStartValue.toString())
+//            }, year!!, month!!, day!!)
+//
+//            startDatePicker.datePicker.minDate = calendar!!.timeInMillis
+//            startDatePicker.show()
+//        }
+//        var newCalendarEndDate = getInstance()
+//        var yearEndDate = newCalendarEndDate!!.get(Calendar.YEAR)
+//        var monthEndDate = newCalendarEndDate!!.get(Calendar.MONTH)
+//        var dayEndDate = newCalendarEndDate!!.get(Calendar.DAY_OF_MONTH)
+//
+//        showEndCalendar!!.onClick{
+//            if(dateStartValue != null && timeStartValue != null) {
+//                val endDatePicker = DatePickerDialog(
+//                    requireContext(),
+//                    { view, thisYearEnd, thisMonthEnd, thisDayEnd ->
+//                        // Display Selected date in TextView
+//                        monthEndDate = thisMonthEnd + 1
+//                        dayEndDate = thisDayEnd
+//                        yearEndDate = thisYearEnd
+//                        edtEndDate!!.setText("" + thisDayEnd + "/" + monthEndDate + "/" + thisYearEnd)
+//
+//                        dateEndValue =
+//                            yearEndDate.toString() + "-" + monthEndDate.toString() + "-" + dayEndDate.toString()
+//                        Log.d("end date rental", dateEndValue.toString())
+//                    },
+//                    yearEndDate!!,
+//                    monthEndDate!!,
+//                    dayEndDate!!
+//                )
+//
+//                endDatePicker.datePicker.minDate = calendarEndDate!!.timeInMillis
+//                endDatePicker.show()
+//            }else if(dateStartValue == null){
+//                toast("Please fill the start date first!")
+//            }else if(timeStartValue == null){
+//                toast("Please fill the start time first!")
+//            }else{
+//                toast("Please fill the start date & start time first!")
+//            }
+//        }
+//    }
+//
+//    private fun initTimePicker() {
+//        //Time
+//        currentTime = getInstance()
+//        hour = currentTime!!.get(Calendar.HOUR_OF_DAY)
+//        minute = currentTime!!.get(Calendar.MINUTE)
+//        second = currentTime!!.get(Calendar.SECOND)
+//
+//        showStartTime!!.onClick {
+//            if(dateStartValue != null) {
+//                timePicker =
+//                    TimePickerDialog(requireContext(), object : TimePickerDialog.OnTimeSetListener {
+//                        override fun onTimeSet(
+//                            view: TimePicker?,
+//                            hourOfDay: Int,
+//                            minuteOfDay: Int
+//                        ) {
+//                            edtStartTime!!.setText(
+//                                String.format(
+//                                    "%02d : %02d",
+//                                    hourOfDay,
+//                                    minuteOfDay
+//                                )
+//                            )
+//                            timeStartValue =
+//                                String.format("%02d:%02d:%02d", hourOfDay, minuteOfDay, second)
+//                            Log.d("end date rental", timeStartValue.toString())
+//                        }
+//                    }, hour!!, minute!!, true)
+//                timePicker!!.show()
+//            }else{
+//                toast("Please fill the start date first!")
+//            }
+//        }
+//
+//        showEndTime!!.onClick {
+//            if(dateStartValue != null && timeStartValue != null && dateEndValue != null) {
+//                timePicker =
+//                    TimePickerDialog(requireContext(), object : TimePickerDialog.OnTimeSetListener {
+//                        override fun onTimeSet(
+//                            view: TimePicker?,
+//                            hourOfDay: Int,
+//                            minuteOfDay: Int
+//                        ) {
+//                            edtEndTime!!.setText(
+//                                String.format(
+//                                    "%02d : %02d",
+//                                    hourOfDay,
+//                                    minuteOfDay
+//                                )
+//                            )
+//
+//                            timeEndValue =
+//                                String.format("%02d:%02d:%02d", hourOfDay, minuteOfDay, second)
+//                            Log.d("end date rental", timeEndValue.toString())
+//                        }
+//                    }, hour!!, minute!!, true)
+//                timePicker!!.show()
+//            }else if(dateStartValue == null){
+//                toast("Please fill the start date first!")
+//            }else if(timeStartValue == null){
+//                toast("Please fill the start time first!")
+//            }else if(dateEndValue == null){
+//                toast("Please fill the end date first!")
+//            }else{
+//                toast("Please fill the start date, start time, end date first!")
+//            }
+//        }
+//    }
 
     private fun initActionButton() {
         //Button
         btnAddRItem!!.onClick {
-            if(dateStartValue != null && timeStartValue != null && dateEndValue != null && timeEndValue != null) {
                 getAllRentalItem()
 
                 mBottomSheetDialog!!.show()
-            }else{
-                toast("Please fill the start & end field first")
-            }
         }
 
         btnNext2!!.onClick {
             if(listChooseRitem.isNullOrEmpty()){
                 toast("There is no rental item")
             }else {
-                bookingOrderHeader!!.hospital_id = hospitalID!!.toInt()
-                bookingOrderHeader!!.patient_id = patientID!!.toInt()
-                bookingOrderHeader!!.start_date = startDateTime
-                bookingOrderHeader!!.end_date = endDateTime
-                bookingOrderHeader!!.bpjs = paymentPatient
-                bookingOrderHeader!!.hospital_name = hospitalName
-                bookingOrderHeader!!.patient_name = patientName
-                bookingOrderHeader!!.patient_number = medrecPatient
+//                bookingOrderHeader!!.hospital_id = hospitalID!!.toInt()
+//                bookingOrderHeader!!.patient_id = patientID!!.toInt()
+//                bookingOrderHeader!!.start_date = startDateTime
+//                bookingOrderHeader!!.end_date = endDateTime
+//                bookingOrderHeader!!.bpjs = paymentPatient
+//                bookingOrderHeader!!.hospital_name = hospitalName
+//                bookingOrderHeader!!.patient_name = patientName
+//                bookingOrderHeader!!.patient_number = medrecPatient
                 bookingOrderHeader!!.total_quantity = totalQuantity!!.toInt()
                 bookingOrderHeader!!.note = "Testing auto generate number"
 
 
                 bundle.putParcelable("booking_order_header", bookingOrderHeader)
 
-                (activity as BookingActivity?)!!.nextStep2()
+                (activity as BookingActivity?)!!.nextStep()
                 purchasedItemFragment.arguments = bundle
                 fragmentManager?.beginTransaction()?.replace(
                     R.id.fragment_booking_container,

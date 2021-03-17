@@ -21,8 +21,7 @@ class ListBookingRItemAdapter(private var mContext: Context, mListBookingPurchas
 
     override fun onBindViewHolder(holder: ListBookingItemViewHolder, position: Int) {
         holder.tvItemName.setText(mListBookingPurchasedItem[position].product_name)
-        holder.tvDateSuccess.setText(mListBookingPurchasedItem[position].start_date)
-        holder.tvTimeSuccess.setText(mListBookingPurchasedItem[position].start_time)
+        holder.tvAmountQty.setText(mListBookingPurchasedItem[position].start_date)
     }
 
     override fun getItemCount(): Int {

@@ -34,7 +34,7 @@ class Booking4Fragment : Fragment() {
     var time: TextView? = null
     var btnNext4: Button? = null
     var rvListRentalItem: RecyclerView? = null
-    var rvListPurchasedItem: RecyclerView? = null
+//    var rvListPurchasedItem: RecyclerView? = null
     var adapterR: ListBookingRItemAdapter? = null
     var adapterP: ListBookingPItemAdapter? = null
     val bundle: Bundle = Bundle()
@@ -59,7 +59,7 @@ class Booking4Fragment : Fragment() {
         btnNext4 = view.findViewById(R.id.btn_next_book4)
         btnBack = view.findViewById(R.id.btn_back_book4)
         rvListRentalItem = view.findViewById(R.id.rv_rental_item4)
-        rvListPurchasedItem = view.findViewById(R.id.rv_purchased_item4)
+//        rvListPurchasedItem = view.findViewById(R.id.rv_purchased_item4)
 
         totalQuantity = arguments?.getInt("total_quantity")
         hospitalName = arguments?.getString("hospital_name")
@@ -110,7 +110,7 @@ class Booking4Fragment : Fragment() {
         initRvRentalItem()
 
         //RV List Purchased Item
-        initRvPurchasedItem()
+//        initRvPurchasedItem()
 
         //Button
         initActionButton()
@@ -142,13 +142,13 @@ class Booking4Fragment : Fragment() {
         )
     }
 
-    private fun initRvPurchasedItem(){
-        Log.d("pItem4", purchasedItem.toString())
-        adapterP = ListBookingPItemAdapter(requireContext(), purchasedItem)
-        rvListPurchasedItem?.setLayoutManager(LinearLayoutManager(context))
-        rvListPurchasedItem?.setAdapter(adapterP)
-        rvListPurchasedItem?.setItemAnimator(DefaultItemAnimator())
-    }
+//    private fun initRvPurchasedItem(){
+//        Log.d("pItem4", purchasedItem.toString())
+//        adapterP = ListBookingPItemAdapter(requireContext(), purchasedItem)
+//        rvListPurchasedItem?.setLayoutManager(LinearLayoutManager(context))
+//        rvListPurchasedItem?.setAdapter(adapterP)
+//        rvListPurchasedItem?.setItemAnimator(DefaultItemAnimator())
+//    }
 
     private fun initActionButton() {
         btnBack!!.onClick {
@@ -157,7 +157,7 @@ class Booking4Fragment : Fragment() {
 
         btnNext4!!.onClick {
 
-            (activity as BookingActivity?)!!.nextStep4()
+            (activity as BookingActivity?)!!.nextStep2()
             finalFragment.arguments = bundle
             fragmentManager?.beginTransaction()?.replace(
                 R.id.fragment_booking_container,
