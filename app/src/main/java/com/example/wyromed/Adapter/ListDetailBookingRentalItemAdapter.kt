@@ -22,7 +22,7 @@ class ListDetailBookingRentalItemAdapter(private var mContext: Context, mListDet
             holder.itemName.setText(mListDetailBookingRentalItem[position].product_name)
             holder.qty.setText(mListDetailBookingRentalItem[position].quantity.toString())
 //            holder.dateDetail.setText(mListDetailBookingRentalItem[position].start_date)
-            holder.timeDetail.setText(mListDetailBookingRentalItem[position].start_time)
+//            holder.timeDetail.setText(mListDetailBookingRentalItem[position].start_time)
         }
 
         override fun getItemCount(): Int {

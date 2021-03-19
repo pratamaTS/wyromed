@@ -23,7 +23,7 @@ class ListDetailBookingPurchasedItemAdapter(private var mContext: Context, mList
             holder.itemName.setText(mListDetailBookingPurchasedItem[position].name)
             holder.qty.setText(mListDetailBookingPurchasedItem[position].quantity.toString())
 //            holder.dateDetail.setText(mListDetailBookingPurchasedItem[position].start_date)
-            holder.timeDetail.setText(mListDetailBookingPurchasedItem[position].start_time)
+//            holder.timeDetail.setText(mListDetailBookingPurchasedItem[position].start_time)
         }
 
         override fun getItemCount(): Int {

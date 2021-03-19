@@ -9,12 +9,12 @@ class DetailBookingItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
     val itemName: TextView
     val qty: TextView
 //    val dateDetail: TextView
-    val timeDetail: TextView
+//    val timeDetail: TextView
 
     init{
         itemName = itemView!!.findViewById(R.id.tv_detail_booking_item_name)
         qty = itemView!!.findViewById(R.id.tv_detail_booking_item_qty)
 //        dateDetail = itemView!!.findViewById(R.id.tv_detail_booking_date)
-        timeDetail = itemView!!.findViewById(R.id.tv_detail_booking_hours)
+//        timeDetail = itemView!!.findViewById(R.id.tv_detail_booking_hours)
     }
 }
