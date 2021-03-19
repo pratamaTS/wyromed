@@ -74,13 +74,45 @@
 
     </LinearLayout>
 
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/constraintPatientId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_header"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <EditText
+            android:id="@+id/edt_hospital"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:background="@drawable/container_edit_text"
+            android:hint="@string/hospital"
+            android:inputType="number"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
     <RelativeLayout
         android:id="@+id/container_header_rent_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_header">
+        app:layout_constraintTop_toBottomOf="@+id/constraintPatientId">
 
         <TextView
             android:id="@+id/tv_item"

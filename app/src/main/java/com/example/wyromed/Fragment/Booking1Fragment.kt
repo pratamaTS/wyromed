@@ -60,7 +60,7 @@ class Booking1Fragment : Fragment(), PatientInterface {
         txtFormDetailTime = view.findViewById(R.id.form_detail_time)
         btnNext1 = view.findViewById(R.id.btn_next_book1)
         btnAddPatient = view.findViewById(R.id.btn_add_patient)
-        txtHospital = view.findViewById(R.id.tv_hospital)
+//        txtHospital = view.findViewById(R.id.tv_hospital)
         spinnerPatient = view.findViewById(R.id.patient_id)
         tvListPatient = view.findViewById(R.id.list_patient)
 
@@ -115,46 +115,46 @@ class Booking1Fragment : Fragment(), PatientInterface {
         }
 
         //Spinner Patient
-        spinnerPatient?.setItem(patientName)
-        spinnerPatient?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                val item = patient[position]
-                patientId = item.id
-                patientPosition = position
-                val patientName = item.name
-                val hospitalID = item.hospitalId
-                val hospital = item.hospitalName
-                val medrecPatient = item.medicNumber
-                val paymentPatient = item.isBpjs
-
-                if (position != 0) {
-                    txtHospital!!.text = hospital
-                    txtMedicalRecord!!.text = medrecPatient
-                    if (paymentPatient == "1") {
-                        txtPaymentStat!!.text = "BPJS"
-                        bundle.putBoolean("payment_patient", true)
-                    } else {
-                        txtPaymentStat!!.text = "Non BPJS"
-                        bundle.putBoolean("payment_patient", false)
-                    }
-                }
-
-                bundle.putString("patient_id", patientId)
-                bundle.putString("hospital_id", hospitalID)
-                bundle.putString("hospital_name", hospital)
-                bundle.putString("patient_name", patientName)
-                bundle.putString("medrec_patient", medrecPatient)
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                toast("There is no patient")
-            }
-        })
+//        spinnerPatient?.setItem(patientName)
+//        spinnerPatient?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                adapterView: AdapterView<*>?,
+//                view: View,
+//                position: Int,
+//                id: Long
+//            ) {
+//                val item = patient[position]
+//                patientId = item.id
+//                patientPosition = position
+//                val patientName = item.name
+//                val hospitalID = item.hospitalId
+//                val hospital = item.hospitalName
+//                val medrecPatient = item.medicNumber
+//                val paymentPatient = item.isBpjs
+//
+//                if (position != 0) {
+//                    txtHospital!!.text = hospital
+//                    txtMedicalRecord!!.text = medrecPatient
+//                    if (paymentPatient == "1") {
+//                        txtPaymentStat!!.text = "BPJS"
+//                        bundle.putBoolean("payment_patient", true)
+//                    } else {
+//                        txtPaymentStat!!.text = "Non BPJS"
+//                        bundle.putBoolean("payment_patient", false)
+//                    }
+//                }
+//
+//                bundle.putString("patient_id", patientId)
+//                bundle.putString("hospital_id", hospitalID)
+//                bundle.putString("hospital_name", hospital)
+//                bundle.putString("patient_name", patientName)
+//                bundle.putString("medrec_patient", medrecPatient)
+//            }
+//
+//            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+//                toast("There is no patient")
+//            }
+//        })
 
     }
 

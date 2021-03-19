@@ -42,6 +42,7 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
     val purchasedItemFragment: Booking4Fragment = Booking4Fragment()
     var txtFormDetailDate: TextView? = null
     var txtFormDetailTime: TextView? = null
+    var edtHospital: EditText? = null
     var edtStartDate: EditText? = null
     var edtEndDate: EditText? = null
     var edtStartTime: EditText? = null
@@ -123,6 +124,7 @@ class Booking2Fragment : Fragment(), RentalItemInterface {
 //        showEndTime = view.findViewById(R.id.show_end_time_btn)
         txtFormDetailDate = view.findViewById(R.id.form_detail_date)
         txtFormDetailTime = view.findViewById(R.id.form_detail_time)
+        edtHospital = view.findViewById(R.id.edt_hospital)
         btnAddRItem = view.findViewById(R.id.btn_add_item)
         btnNext2 = view.findViewById(R.id.btn_next_book2)
         rvListRentalItem = view.findViewById(R.id.rv_rental_item)
