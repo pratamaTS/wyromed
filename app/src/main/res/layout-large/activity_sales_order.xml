@@ -91,7 +91,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=""
+                    tools:text="A-112"
                     android:textColor="@color/colorGrey"
                     android:textSize="16sp" />
 
@@ -127,7 +127,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=""
+                    tools:text="29 July 2020"
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -163,7 +163,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=""
+                    tools:text="RS. Omni Pulomas"
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -199,10 +199,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=""
+                    android:text="@string/tv_select_patient"
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
-                    tools:ignore="MissingConstraints" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
 
             </RelativeLayout>
 
@@ -235,7 +238,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=""
+                    android:text="@string/tv_empty"
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -271,7 +274,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=""
+                    android:text="@string/tv_empty"
                     android:textColor="@color/colorGray"
                     android:textSize="16sp"
                     tools:ignore="MissingConstraints" />
@@ -566,8 +569,8 @@
                         app:backgroundTint="@null"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/montserrat_regular"
                         android:foreground="?android:attr/selectableItemBackground"
+                        android:fontFamily="@font/montserrat_regular"
                         android:text="@string/btn_send_so"
                         android:textAllCaps="false"
                         android:textColor="@color/colorGreen"

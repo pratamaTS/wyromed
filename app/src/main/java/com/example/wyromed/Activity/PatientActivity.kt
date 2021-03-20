@@ -69,20 +69,20 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
         setContentView(R.layout.activity_patient)
 
         //INIT VIEW
-        edtMedrec = findViewById(R.id.edt_medrec)
-        edtPatientName = findViewById(R.id.edt_patient_name)
-        edtEmail = findViewById(R.id.edt_patient_email)
-        edtPostalCode = findViewById(R.id.edt_postal_code)
-        edtNoBpjs = findViewById(R.id.edt_no_bpjs)
-        edtDateBirth = findViewById(R.id.edt_date_patient)
-        edtNoHp = findViewById(R.id.edt_phone_number)
-        edtAddress = findViewById(R.id.edt_address)
-        edtState = findViewById(R.id.edt_state)
-        edtCity = findViewById(R.id.edt_city)
-        showDateBirth = findViewById(R.id.show_calendarpat_btn)
-        spnGender = findViewById(R.id.gender_id)
-        spinnerHospital = findViewById(R.id.hospital_id)
-        spnPaymentStat = findViewById(R.id.payment_status_id)
+//        edtMedrec = findViewById(R.id.edt_medrec)
+//        edtPatientName = findViewById(R.id.edt_patient_name)
+//        edtEmail = findViewById(R.id.edt_patient_email)
+//        edtPostalCode = findViewById(R.id.edt_postal_code)
+//        edtNoBpjs = findViewById(R.id.edt_no_bpjs)
+//        edtDateBirth = findViewById(R.id.edt_date_patient)
+//        edtNoHp = findViewById(R.id.edt_phone_number)
+//        edtAddress = findViewById(R.id.edt_address)
+//        edtState = findViewById(R.id.edt_state)
+//        edtCity = findViewById(R.id.edt_city)
+//        showDateBirth = findViewById(R.id.show_calendarpat_btn)
+//        spnGender = findViewById(R.id.gender_id)
+//        spinnerHospital = findViewById(R.id.hospital_id)
+//        spnPaymentStat = findViewById(R.id.payment_status_id)
 
         //Calendar
         initCalendarMethod()
@@ -230,54 +230,54 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
     }
 
     private fun initActionButton(){
-        btn_save.onClick {
-            //Validation\
-            edtMedrec!!.validate("you haven't fill the medrec number yet") { s -> s.isEmpty() }
-            edtPatientName!!.validate("you haven't fill the name yet") { s -> s.isEmpty()}
-            edtDateBirth!!.validate("you haven't fill the date of birth yet") { s -> s.isEmpty() }
-            edtEmail!!.validate("Wrong format email") { s -> s.isValidEmail() }
-            edtNoHp!!.validate("you haven't fill the phone number yet") { s -> s.isEmpty() }
-            edtAddress!!.validate("you haven't fill the address yet") { s -> s.isEmpty() }
-            edtState!!.validate("you haven't fill the Province yet") { s -> s.isEmpty() }
-            edtCity!!.validate("you haven't fill the city yet") { s -> s.isEmpty() }
-            edtPostalCode!!.validate("you haven't fill the postal code yet") { s -> s.isEmpty() }
-
-            patient!!.medic_number = edtMedrec!!.text.toString()
-            patient!!.name = edtPatientName!!.text.toString()
-            patient!!.email = edtEmail!!.text.toString()
-            patient!!.phone = edtNoHp!!.text.toString()
-            patient!!.address = edtAddress!!.text.toString()
-            patient!!.state = edtState!!.text.toString()
-            patient!!.city = edtCity!!.text.toString()
-            patient!!.postal_code = edtPostalCode!!.text.toString()
-            patient!!.bpjs = edtNoBpjs!!.text.toString()
-
-            Log.d("medic number", patient!!.medic_number.toString())
-            Log.d("nama pasien", patient!!.name.toString())
-            Log.d("email pasien", patient!!.email.toString())
-            Log.d("nomor pasien", patient!!.phone.toString())
-            Log.d("alamat pasien", patient!!.address.toString())
-            Log.d("Kecamatan", patient!!.state.toString())
-            Log.d("Kota", patient!!.city.toString())
-            Log.d("Postal Code", patient!!.postal_code.toString())
-            Log.d("BPJS", patient!!.bpjs.toString())
-
-            if(edtMedrec!!.text.isNotEmpty() &&
-                edtPatientName!!.text.isNotEmpty() &&
-                edtDateBirth!!.text.isNotEmpty() &&
-                edtNoHp!!.text.isNotEmpty() &&
-                edtAddress!!.text.isNotEmpty() &&
-                edtState!!.text.isNotEmpty() &&
-                edtCity!!.text.isNotEmpty() &&
-                edtPostalCode!!.text.isNotEmpty()) {
-                StorePatientPresenter(this@PatientActivity).storePatient(
-                    this@PatientActivity,
-                    patient!!
-                )
-            } else {
-                toast("Please check again before submit")
-            }
-        }
+//        btn_save.onClick {
+//            //Validation\
+//            edtMedrec!!.validate("you haven't fill the medrec number yet") { s -> s.isEmpty() }
+//            edtPatientName!!.validate("you haven't fill the name yet") { s -> s.isEmpty()}
+//            edtDateBirth!!.validate("you haven't fill the date of birth yet") { s -> s.isEmpty() }
+//            edtEmail!!.validate("Wrong format email") { s -> s.isValidEmail() }
+//            edtNoHp!!.validate("you haven't fill the phone number yet") { s -> s.isEmpty() }
+//            edtAddress!!.validate("you haven't fill the address yet") { s -> s.isEmpty() }
+//            edtState!!.validate("you haven't fill the Province yet") { s -> s.isEmpty() }
+//            edtCity!!.validate("you haven't fill the city yet") { s -> s.isEmpty() }
+//            edtPostalCode!!.validate("you haven't fill the postal code yet") { s -> s.isEmpty() }
+//
+//            patient!!.medic_number = edtMedrec!!.text.toString()
+//            patient!!.name = edtPatientName!!.text.toString()
+//            patient!!.email = edtEmail!!.text.toString()
+//            patient!!.phone = edtNoHp!!.text.toString()
+//            patient!!.address = edtAddress!!.text.toString()
+//            patient!!.state = edtState!!.text.toString()
+//            patient!!.city = edtCity!!.text.toString()
+//            patient!!.postal_code = edtPostalCode!!.text.toString()
+//            patient!!.bpjs = edtNoBpjs!!.text.toString()
+//
+//            Log.d("medic number", patient!!.medic_number.toString())
+//            Log.d("nama pasien", patient!!.name.toString())
+//            Log.d("email pasien", patient!!.email.toString())
+//            Log.d("nomor pasien", patient!!.phone.toString())
+//            Log.d("alamat pasien", patient!!.address.toString())
+//            Log.d("Kecamatan", patient!!.state.toString())
+//            Log.d("Kota", patient!!.city.toString())
+//            Log.d("Postal Code", patient!!.postal_code.toString())
+//            Log.d("BPJS", patient!!.bpjs.toString())
+//
+//            if(edtMedrec!!.text.isNotEmpty() &&
+//                edtPatientName!!.text.isNotEmpty() &&
+//                edtDateBirth!!.text.isNotEmpty() &&
+//                edtNoHp!!.text.isNotEmpty() &&
+//                edtAddress!!.text.isNotEmpty() &&
+//                edtState!!.text.isNotEmpty() &&
+//                edtCity!!.text.isNotEmpty() &&
+//                edtPostalCode!!.text.isNotEmpty()) {
+//                StorePatientPresenter(this@PatientActivity).storePatient(
+//                    this@PatientActivity,
+//                    patient!!
+//                )
+//            } else {
+//                toast("Please check again before submit")
+//            }
+//        }
         ic_back.onClick { finish() }
     }
 

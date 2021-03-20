@@ -11,7 +11,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,475 +55,169 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/neomorphFrameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:neomorph_background_color="@color/neomorph_background_color"
+            app:neomorph_corner_radius="25dp"
+            app:neomorph_elevation="6dp"
+            app:neomorph_highlight_color="@color/neomorph_highlight_color"
+            app:neomorph_shadow_color="@color/neomorph_shadow_color"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/hospital_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edit_text"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingStart="16dp"
+                android:spinnerMode="dialog"
+                app:smsp_enableErrorLabel="false"
+                app:smsp_enableFloatingLabel="true"
+                app:smsp_floatingLabelText=""
+                app:smsp_hint="Hospital"
+                app:smsp_hintColor="@color/colorDarkGrey"
+                app:smsp_isSearchable="true"
+                app:smsp_itemColor="@color/colorDarkGrey"
+                app:smsp_itemListColor="@color/colorDarkGrey"
+                app:smsp_itemListHintBackgroundColor="@color/colorPrimary"
+                app:smsp_itemListHintColor="@color/neomorph_background_color"
+                app:smsp_multilineError="false"
+                app:smsp_searchBackgroundColor="@color/white"
+                app:smsp_searchHeaderBackgroundColor="@color/colorPrimary"
+                app:smsp_searchHeaderText="@string/select_item"
+                app:smsp_searchTextColor="@color/colorDarkGrey"
+                app:smsp_selectedItemListColor="@color/colorPrimary"
+                app:smsp_underlineSize="0dp"
+                tools:ignore="RtlSymmetry" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraintMedrec"
+            app:layout_constraintTop_toBottomOf="@+id/constraintHospitalId"
+            app:neomorph_background_color="@color/neomorph_background_color"
+            app:neomorph_corner_radius="25dp"
+            app:neomorph_elevation="6dp"
+            app:neomorph_highlight_color="@color/neomorph_highlight_color"
+            app:neomorph_shadow_color="@color/neomorph_shadow_color"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular"
+            tools:layout_editor_absoluteX="10dp">
+
+            <EditText
+                android:id="@+id/edt_patient_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:background="@drawable/container_edit_text"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/patient_name"
+                android:inputType="textAutoComplete"
+                android:maxLength="100"
+                android:padding="16dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/constraintPatientName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintHospitalId"
+            app:neomorph_background_color="@color/neomorph_background_color"
+            app:neomorph_corner_radius="25dp"
+            app:neomorph_elevation="6dp"
+            app:neomorph_highlight_color="@color/neomorph_highlight_color"
+            app:neomorph_shadow_color="@color/neomorph_shadow_color"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <EditText
+                android:id="@+id/edt_medrec"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:background="@drawable/container_edit_text"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/medical_record"
+                android:inputType="text"
+                android:maxLength="20"
+                android:padding="16dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:neomorph_background_color="@color/neomorph_background_color"
+            app:neomorph_corner_radius="25dp"
+            app:neomorph_elevation="6dp"
+            app:neomorph_highlight_color="@color/neomorph_highlight_color"
+            app:neomorph_shadow_color="@color/neomorph_shadow_color"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/payment_status_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edit_text"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingStart="16dp"
+                android:spinnerMode="dialog"
+                app:smsp_enableErrorLabel="false"
+                app:smsp_enableFloatingLabel="true"
+                app:smsp_floatingLabelText=""
+                app:smsp_hint="Payment Status"
+                app:smsp_hintColor="@color/colorDarkGrey"
+                app:smsp_isSearchable="true"
+                app:smsp_itemColor="@color/colorDarkGrey"
+                app:smsp_itemListColor="@color/colorDarkGrey"
+                app:smsp_itemListHintBackgroundColor="@color/colorPrimary"
+                app:smsp_itemListHintColor="@color/neomorph_background_color"
+                app:smsp_multilineError="false"
+                app:smsp_searchBackgroundColor="@color/white"
+                app:smsp_searchHeaderBackgroundColor="@color/colorPrimary"
+                app:smsp_searchHeaderText="@string/select_item"
+                app:smsp_searchTextColor="@color/colorDarkGrey"
+                app:smsp_selectedItemListColor="@color/colorPrimary"
+                app:smsp_underlineSize="0dp"
+                tools:ignore="RtlSymmetry" />
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+    </LinearLayout>
+
     <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintHospitalId"
+        android:id="@+id/neomorphFrameLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular">
-
-        <Spinner
-            android:id="@+id/hospital_id"
-            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:spinnerMode="dropdown"
-            app:smsp_errorText="This is error text. You can show it as single line or multiple lines using attr smsp_multilineError"
-            app:smsp_floatingLabelColor="@color/colorDarkGrey"
-            app:smsp_floatingLabelText="Floating Label Text"
-            app:smsp_itemListHintBackgroundColor="#808080"
-            app:smsp_itemListHintColor="#FFFFFF"
-            app:smsp_multilineError="false"
-            app:smsp_selectedItemListColor="@color/colorGreen" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintMedrec"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintPatientName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintHospitalId"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular">
-
-        <EditText
-            android:id="@+id/edt_medrec"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:maxLength="20"
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/medrec"
-            android:inputType="text"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintPatientName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/constraintMedrec"
-        app:layout_constraintTop_toBottomOf="@+id/constraintHospitalId"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <EditText
-            android:id="@+id/edt_patient_name"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:maxLength="100"
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/patient_name"
-            android:inputType="textAutoComplete"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintGender"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintMedrec"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <Spinner
-            android:id="@+id/gender_id"
-            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:spinnerMode="dropdown"
-            app:smsp_errorText="This is error text. You can show it as single line or multiple lines using attr smsp_multilineError"
-            app:smsp_floatingLabelColor="@color/colorDarkGrey"
-            app:smsp_floatingLabelText="Floating Label Text"
-            app:smsp_hint="Gender"
-            app:smsp_hintColor="#388E3C"
-            app:smsp_itemListHintBackgroundColor="#808080"
-            app:smsp_itemListHintColor="#FFFFFF"
-            app:smsp_multilineError="false"
-            app:smsp_selectedItemListColor="@color/colorGreen" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/constraintGender"
-        app:layout_constraintTop_toBottomOf="@+id/constraintPatientName"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <EditText
-            android:id="@+id/edt_date_patient"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/date_birth"
-            android:inputType="date"
-            android:enabled="false"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGray"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/show_calendarpat_btn"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="@string/todo"
-            android:onClick="ShowCalendar"
-            android:padding="5dp"
-            android:src="@drawable/ic_calendar"
-            tools:ignore="OnClick" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintPhone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintGender"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <EditText
-            android:id="@+id/edt_patient_email"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/hint_email_register"
-            android:maxLength="100"
-            android:inputType="textEmailAddress"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/constraintEmail"
-        app:layout_constraintTop_toBottomOf="@+id/constraintDate"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <EditText
-            android:id="@+id/edt_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/hint_no_handphone_register"
-            android:inputType="phone|number"
-            android:maxLength="13"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintEmail"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular">
-
-        <EditText
-            android:id="@+id/edt_address"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/address"
-            android:inputType="textLongMessage"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintState"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintCity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintAddress"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <AutoCompleteTextView
-            android:id="@+id/edt_state"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/state"
-            android:inputType="text"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:maxLength="50"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintCity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/constraintState"
-        app:layout_constraintTop_toBottomOf="@+id/constraintAddress"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <AutoCompleteTextView
-            android:id="@+id/edt_city"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/city"
-            android:inputType="text"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:maxLength="50"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintPostalCode"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintPayment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintState"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <EditText
-            android:id="@+id/edt_postal_code"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:maxLength="5"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/postal_code"
-            android:inputType="number"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintPayment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintNoBpjs"
-        app:layout_constraintStart_toEndOf="@+id/constraintPostalCode"
-        app:layout_constraintTop_toBottomOf="@+id/constraintState"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <Spinner
-            android:id="@+id/payment_status_id"
-            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:spinnerMode="dropdown"
-            app:smsp_errorText="This is error text. You can show it as single line or multiple lines using attr smsp_multilineError"
-            app:smsp_floatingLabelColor="@color/colorDarkGrey"
-            app:smsp_floatingLabelText="Floating Label Text"
-            app:smsp_hint="Payment Status"
-            app:smsp_hintColor="#388E3C"
-            app:smsp_itemListHintBackgroundColor="#808080"
-            app:smsp_itemListHintColor="#FFFFFF"
-            app:smsp_multilineError="false"
-            app:smsp_selectedItemListColor="@color/colorGreen" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/constraintNoBpjs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/constraintPayment"
-        app:layout_constraintTop_toBottomOf="@+id/constraintCity"
-        app:neomorph_background_color="@color/neomorph_background_color"
-        app:neomorph_corner_radius="25dp"
-        app:neomorph_elevation="6dp"
-        app:neomorph_highlight_color="@color/neomorph_highlight_color"
-        app:neomorph_shadow_color="@color/neomorph_shadow_color"
-        app:neomorph_shadow_type="outer"
-        app:neomorph_view_type="rectangular"
-        tools:layout_editor_absoluteX="10dp">
-
-        <EditText
-            android:id="@+id/edt_no_bpjs"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:background="@drawable/container_edit_text"
-            android:hint="@string/no_bpjs"
-            android:inputType="number"
-            android:visibility="gone"
-            android:maxLength="16"
-            android:paddingStart="15dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorGreen"
-            android:textSize="16sp" />
-
-    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-        android:id="@+id/layout_btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparant"
-        android:layout_marginBottom="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:neomorph_background_color="@color/light"
-        app:neomorph_corner_radius="16dp"
+        app:neomorph_corner_radius="25dp"
         app:neomorph_elevation="6dp"
         app:neomorph_highlight_color="@color/neomorph_highlight_color"
         app:neomorph_layer_type="software"
@@ -532,10 +226,10 @@
         app:neomorph_view_type="rectangular">
 
         <Button
-            android:id="@+id/btn_save"
+            android:id="@+id/btn_save_new_patient"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@drawable/bg_button_rounded_green"
+            android:background="@drawable/bg_button_circle_green"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/montserrat_regular"
