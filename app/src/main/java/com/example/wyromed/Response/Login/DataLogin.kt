@@ -31,6 +31,9 @@ class DataLogin: ResponseLogin() {
 	@field:SerializedName("email")
 	var email: String? = null
 
+	@field:SerializedName("phone")
+	var phone: String? = null
+
 	@field:SerializedName("token_type")
 	var token_type: String? = null
 

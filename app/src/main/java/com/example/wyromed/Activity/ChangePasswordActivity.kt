@@ -110,12 +110,12 @@ class ChangePasswordActivity: BaseActivity(), ChangePasswordInterface {
     private fun initActionButton() {
         back!!.onClick {
             finish()
-            insertNewPassword()
         }
 
         btnSave!!.onClick {
             if(edtoldPass?.text!!.isNotEmpty() && edtChangePass?.text!!.isNotEmpty() && edtCfChangePass?.text!!.isNotEmpty()){
                 loadingDialog.show()
+                insertNewPassword()
             }else if(edtoldPass?.text!!.isEmpty()){
                 toast("Old Password still empty").show()
             }else if(edtChangePass?.text!!.isEmpty()){
@@ -130,6 +130,7 @@ class ChangePasswordActivity: BaseActivity(), ChangePasswordInterface {
         loadingDialog.dismiss()
         edtoldPass?.text?.clear()
         edtChangePass?.text?.clear()
+        edtCfChangePass?.text?.clear()
         edtCfChangePass?.clearFocus()
         Toast.makeText(this, "Your password just changed!", Toast.LENGTH_LONG).show()
     }

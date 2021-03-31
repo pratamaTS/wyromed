@@ -52,6 +52,11 @@ interface WyromedService {
     @POST(Constants.CHANGE_PASSWORD)
     fun changePassword(@Body changePasswordBody: ChangePasswordBody): Call<MetaPassword>
 
+    //edit profile
+    @Multipart
+    @POST(Constants.EDIT_PROFILE)
+    fun editProfile(@PartMap bodyMap: HashMap<String, Any>?) : Call<MetaPassword>
+
     //Sing Up
     @POST(Constants.SIGNUP_URL)
     fun signup(@QueryMap queryMap: MutableMap<String, String>?, @Body signupBody: RegisterBody): Call<DataLogin>

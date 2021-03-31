@@ -149,6 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:autofillHints=""
+            android:enabled="false"
             android:background="@drawable/container_edit_text"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/hint_email_edit"
