@@ -1,13 +1,11 @@
 package com.example.wyromed.Activity.Presenter
 
 import android.content.Context
-import android.widget.Toast
 import com.example.wyromed.Activity.Interface.BookingInterface
 import com.example.wyromed.Api.NetworkConfig
-import com.example.wyromed.Model.Body.BookingOrderDetails
-import com.example.wyromed.Model.Body.BookingOrderHeader
+import com.example.wyromed.Data.Model.BookingOrderDetails
+import com.example.wyromed.Data.Model.BookingOrderHeader
 import com.example.wyromed.Response.Booking.ResponseBooking
-import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

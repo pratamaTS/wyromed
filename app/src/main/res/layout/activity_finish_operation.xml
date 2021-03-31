@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/neomorph_background_color"
-    tools:context=".Activity.FinishOperationActivity">
+    tools:context="Activity.FinishOperationActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -108,25 +107,78 @@
                     app:layout_constraintTop_toBottomOf="@+id/linear_layout_rental_item"
                     tools:ignore="MissingConstraints">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_marginTop="30dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="@string/order_status_purchased"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="20sp" />
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:text="@string/title_order_purchased_item"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="14sp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/order_status_purchased"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="3dp"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:text="@string/title_order_purchased_item"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="end">
+
+                            <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                app:neomorph_background_color="@color/neomorph_background_color"
+                                app:neomorph_corner_radius="16dp"
+                                app:neomorph_elevation="6dp"
+                                app:neomorph_highlight_color="@color/neomorph_highlight_color"
+                                app:neomorph_shadow_color="@color/neomorph_shadow_color"
+                                app:neomorph_shadow_type="outer"
+                                app:neomorph_view_type="rectangular">
+
+                                <Button
+                                    android:id="@+id/btn_add_item_purchased_finish"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_button_rounded_green"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:foreground="?android:attr/selectableItemBackground"
+                                    android:text="@string/btn_add_item_purchased"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
+
+                            </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_order_purchased_finish"

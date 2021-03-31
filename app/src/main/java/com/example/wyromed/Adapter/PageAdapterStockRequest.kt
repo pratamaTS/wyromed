@@ -12,6 +12,7 @@ import com.example.wyromed.Model.Body.StockRequestDetails
 import com.example.wyromed.Model.StockRequestItem
 
 class PageAdapterStockRequest(
+    val warehouseId: Int,
     val stockTambah: ArrayList<StockRequestDetails?>?,
     val stockMinus: ArrayList<StockRequestDetails?>?,
     stockRequestActivity: StockRequestActivity?,
@@ -24,6 +25,7 @@ class PageAdapterStockRequest(
         var bundle: Bundle = Bundle()
         var checkTambah: Boolean = false
         var checkMinus: Boolean = false
+        bundle.putInt("warehouse_id", warehouseId)
         bundle.putParcelableArrayList("stock_request_add", stockTambah)
         bundle.putParcelableArrayList("stock_request_min", stockMinus)
 

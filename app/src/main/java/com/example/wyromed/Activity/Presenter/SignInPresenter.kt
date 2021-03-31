@@ -4,10 +4,12 @@ import android.content.Context
 import android.util.Log
 import com.example.wyromed.Api.NetworkConfig
 import com.example.wyromed.Model.Body.SignInBody
-import com.example.wyromed.Model.User
 import com.example.wyromed.Response.Login.DataLogin
 import com.example.wyromed.Activity.Interface.SignInInterface
-import com.example.wyromed.Api.SessionManager
+import com.example.wyromed.Api.ErrorUtils.parseError
+import com.example.wyromed.Data.Connection.SessionManager
+import com.example.wyromed.Data.Model.BaseMeta
+import com.example.wyromed.Data.Model.ResponseError
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,14 +31,14 @@ class SignInPresenter(val signInInterface: SignInInterface) {
 
                 override fun onResponse(call: Call<DataLogin>, response : Response<DataLogin>){
                     val body = response.body()
-                    val error = response.errorBody()
                     if (response.isSuccessful){
-                        Log.d("token login", body?.data?.token.toString())
                         sessionManager.saveAuthToken(body?.data?.token.toString())
                         signInInterface.onSuccessLogin(body?.data?.token_type, body?.data?.token, body?.meta?.message)
                     }
                     else {
-                        signInInterface.onErrorLogin(error.toString())
+                        val error: ResponseError? = parseError(response, context)
+
+                        signInInterface.onErrorLogin(error?.meta?.error.toString())
                     }
                 }
             })

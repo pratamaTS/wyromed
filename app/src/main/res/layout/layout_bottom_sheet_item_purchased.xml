@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:id="@+id/bottom_sheet_container_purchased">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_item"
+        android:textSize="20sp"
+        android:textColor="@color/colorDarkGrey"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/tv_clear_ritem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:text="@string/clear"
+        android:textColor="@color/colorGrey"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"/>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+            android:id="@+id/purchased_item_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/container_edit_text"
+            android:fontFamily="@font/montserrat_regular"
+            android:paddingStart="20dp"
+            android:spinnerMode="dialog"
+            app:smsp_enableErrorLabel="false"
+            app:smsp_enableFloatingLabel="true"
+            app:smsp_floatingLabelText=""
+            app:smsp_hint="@string/select_item"
+            app:smsp_hintColor="@color/colorDarkGrey"
+            app:smsp_underlineSize="0dp"
+            app:smsp_isSearchable="true"
+            app:smsp_itemColor="@color/colorDarkGrey"
+            app:smsp_itemListColor="@color/colorDarkGrey"
+            app:smsp_itemListHintBackgroundColor="@color/colorGreen"
+            app:smsp_itemListHintColor="@color/neomorph_background_color"
+            app:smsp_multilineError="false"
+            app:smsp_searchBackgroundColor="@color/white"
+            app:smsp_searchHeaderBackgroundColor="@color/colorGreen"
+            app:smsp_searchHeaderText="@string/select_item"
+            app:smsp_searchTextColor="@color/colorDarkGrey"
+            app:smsp_selectedItemListColor="@color/colorGreen"
+            tools:ignore="RtlSymmetry" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neomorphFrameLayout5"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <EditText
+            android:id="@+id/edt_amount_pitem"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:autofillHints=""
+            android:background="@drawable/container_edit_text"
+            android:hint="@string/amount"
+            android:inputType="number"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorGreen"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_add_pItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_layer_type="software"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <Button
+            android:id="@+id/btn_add_purchased"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_circle_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/add"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+</LinearLayout>

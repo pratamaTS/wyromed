@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wyromed.Data.Model.BookingOrderDetails
 import com.example.wyromed.Model.RentalItem
 import com.example.wyromed.R
 import com.example.wyromed.ViewHolder.DetailBookingItemViewHolder
 
-class ListDetailBookingRentalItemAdapter(private var mContext: Context, mListDetailBookingRentalItem: ArrayList<RentalItem>) :
+class ListDetailBookingRentalItemAdapter(private var mContext: Context, mListDetailBookingRentalItem: ArrayList<BookingOrderDetails>) :
     RecyclerView.Adapter<DetailBookingItemViewHolder>() {
-        private val mListDetailBookingRentalItem: ArrayList<RentalItem>
+        private val mListDetailBookingRentalItem: ArrayList<BookingOrderDetails>
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailBookingItemViewHolder {
             val v: View =
                 LayoutInflater.from(parent.context).inflate(R.layout.item_list_detail_booking_item, parent, false)
@@ -21,8 +22,6 @@ class ListDetailBookingRentalItemAdapter(private var mContext: Context, mListDet
         override fun onBindViewHolder(holder: DetailBookingItemViewHolder, position: Int) {
             holder.itemName.setText(mListDetailBookingRentalItem[position].product_name)
             holder.qty.setText(mListDetailBookingRentalItem[position].quantity.toString())
-//            holder.dateDetail.setText(mListDetailBookingRentalItem[position].start_date)
-//            holder.timeDetail.setText(mListDetailBookingRentalItem[position].start_time)
         }
 
         override fun getItemCount(): Int {
@@ -34,7 +33,7 @@ class ListDetailBookingRentalItemAdapter(private var mContext: Context, mListDet
             notifyItemRemoved(position)
         }
 
-        fun restoreItem(rentalItem: RentalItem, position: Int) {
+        fun restoreItem(rentalItem: BookingOrderDetails, position: Int) {
             mListDetailBookingRentalItem.add(position, rentalItem)
             notifyItemInserted(position)
         }

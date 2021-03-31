@@ -11,38 +11,26 @@ import retrofit2.Response
 import java.net.SocketTimeoutException
 
 class RentalItemPresenter(val rentalItemInterface: RentalItemInterface) {
-    fun getAllRentalItem(context: Context, start: String?, end: String?){
+    fun getAllRentalItem(context: Context, start: String){
 
         // Query Param Map
         val queryMap: MutableMap<String, String> = HashMap()
-        queryMap["start"] = start.toString()
-        queryMap["end"] = end.toString()
+        queryMap["start"] = start
 
         NetworkConfig.service(context)
             .getAllRentalItem(queryMap)
             .enqueue(object : Callback<ResponseRentalItem> {
 
                 override fun onFailure(call: Call<ResponseRentalItem>, t: Throwable) {
-                    try {
-                        getAllRentalItem(context, start, end)
-                    } catch (e: SocketTimeoutException) {
-                        rentalItemInterface.onErrorGetRentalItem(t.localizedMessage)
-                    }
+                    rentalItemInterface.onErrorGetRentalItem(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseRentalItem>, response: Response<ResponseRentalItem>) {
                     if (response.isSuccessful) {
                         val data = response.body()?.data
                         rentalItemInterface.onSuccessGetRentalItem(data)
-
-                        Log.d("Data Body", data.toString())
                     } else {
-                        val message = response.body()?.meta?.message
-                        try {
-                            getAllRentalItem(context, start, end)
-                        } catch (e: SocketTimeoutException) {
-                            rentalItemInterface.onErrorGetRentalItem(message)
-                        }
+                        rentalItemInterface.onErrorGetRentalItem("error")
                     }
                 }
             })

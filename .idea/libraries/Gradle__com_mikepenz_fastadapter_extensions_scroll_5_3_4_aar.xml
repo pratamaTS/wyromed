@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mikepenz:fastadapter-extensions-scroll:5.3.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/76a66ef52da96928d2256620ebeae028/jetified-fastadapter-extensions-scroll-5.3.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/76a66ef52da96928d2256620ebeae028/jetified-fastadapter-extensions-scroll-5.3.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/76a66ef52da96928d2256620ebeae028/jetified-fastadapter-extensions-scroll-5.3.4/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mikepenz/fastadapter-extensions-scroll/5.3.4/8b4227f87c4690dfb47ecf4e95d2f4be7fbf1242/fastadapter-extensions-scroll-5.3.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mikepenz/fastadapter-extensions-scroll/5.3.4/d0c1629e2451dc1e53d2e23894a9df7b7bf1bd01/fastadapter-extensions-scroll-5.3.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

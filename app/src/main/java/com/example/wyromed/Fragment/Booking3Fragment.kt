@@ -1,6 +1,5 @@
 package com.example.wyromed.Fragment
 
-import android.R.attr.button
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,6 @@ import android.view.animation.AlphaAnimation
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -21,8 +19,8 @@ import com.example.wyromed.Activity.BookingActivity
 import com.example.wyromed.Activity.Interface.PurchasedItemInterface
 import com.example.wyromed.Activity.Presenter.PurchasedItemPresenter
 import com.example.wyromed.Adapter.SpinnerDialogItemAdapter
-import com.example.wyromed.Model.Body.BookingOrderDetails
-import com.example.wyromed.Model.Body.BookingOrderHeader
+import com.example.wyromed.Data.Model.BookingOrderDetails
+import com.example.wyromed.Data.Model.BookingOrderHeader
 import com.example.wyromed.Model.PurchasedItem
 import com.example.wyromed.Model.RentalItem
 import com.example.wyromed.R
@@ -30,7 +28,6 @@ import com.example.wyromed.Response.PurchasedItem.DataPurchasedItem
 import com.example.wyromedapp.Adapter.ListPurchasedItemAdapter
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 import java.util.concurrent.TimeUnit
 
 
@@ -299,13 +296,13 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
             progressBarHolder!!.setAnimation(outAnimation)
             btnNext3!!.setEnabled(true)
 
-            (activity as BookingActivity?)!!.nextStep()
-            statusFragment.arguments = bundle
-            fragmentManager?.beginTransaction()?.replace(
-                R.id.fragment_booking_container,
-                statusFragment
-            )
-                ?.commit()
+//            (activity as BookingActivity?)!!.nextStep()
+//            statusFragment.arguments = bundle
+//            fragmentManager?.beginTransaction()?.replace(
+//                R.id.fragment_booking_container,
+//                statusFragment
+//            )
+//                ?.commit()
         }
 
         override fun doInBackground(vararg params: Void?): Void? {

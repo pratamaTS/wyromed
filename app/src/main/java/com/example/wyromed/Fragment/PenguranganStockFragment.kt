@@ -38,6 +38,7 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
     var stockRequestItem: ArrayList<StockRequestDetails?> = ArrayList()
     var checkDifReq: Boolean? = null
     var stockRequested: DataStockRequest = DataStockRequest()
+    var warehouseId: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +54,7 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
         tvNoItem = view.findViewById(R.id.empty_view_pengurangan)
 
         //List Request
+        warehouseId = arguments?.getInt("warehouse_id")
         checkDifReq = arguments?.getBoolean("check_tambah")
         stockRequestItem = arguments?.getParcelableArrayList("stock_request_min")!!
 
@@ -79,9 +81,9 @@ class PenguranganStockFragment : Fragment(), StoreStockRequestInterface {
             btnSubmit!!.isEnabled = false
 
             // Insert Header
-            stockRequestHeader!!.warehousePusatId = 1
+            stockRequestHeader!!.warehousePusatId = warehouseId
             stockRequestHeader!!.type = "SUBTRACTION"
-            stockRequestHeader!!.note = "Pengajuan Pengurangan Stock sukses!"
+            stockRequestHeader!!.note = "Pengajuan Pengurangan Stock"
 
             StoreStockRequestPresenter(this@PenguranganStockFragment).storeStockRequest(requireContext(), stockRequestHeader, stockRequestItem)
         }

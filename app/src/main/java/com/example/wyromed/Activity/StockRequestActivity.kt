@@ -20,6 +20,7 @@ class StockRequestActivity: BaseActivity() {
         val MESSAGE = "message"
         val PLUS = "plus"
         val MINUS = "minus"
+        val WAREHOUSEID = "warehouse_id"
     }
 
     var tabLayout: TabLayout? = null
@@ -27,6 +28,7 @@ class StockRequestActivity: BaseActivity() {
     var viewPager: ViewPager? = null
     var stockRequestItem: ArrayList<StockRequestDetails?>? = ArrayList()
     var stockRequestItemMin: ArrayList<StockRequestDetails?>? = ArrayList()
+    var warehouseId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +43,12 @@ class StockRequestActivity: BaseActivity() {
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Penambahan"))
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Pengurangan"))
 
+        warehouseId = intent.getIntExtra("warehouse_id", 0)
         stockRequestItem = intent.getParcelableArrayListExtra<StockRequestDetails>("plus")
         stockRequestItemMin = intent.getParcelableArrayListExtra<StockRequestDetails>("minus")
 
         val pageAdapterStockRequest = PageAdapterStockRequest(
-           stockRequestItem, stockRequestItemMin, this,
+            warehouseId!!, stockRequestItem, stockRequestItemMin, this,
             supportFragmentManager, tabLayout!!.tabCount
         )
 

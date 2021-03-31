@@ -36,6 +36,7 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
     var stockRequestItem: ArrayList<StockRequestDetails?> = ArrayList()
     var checkDifReq: Boolean? = null
     var stockRequested: DataStockRequest = DataStockRequest()
+    var warehouseId: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +51,7 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
         btnSubmit = view.findViewById(R.id.btn_submit_penambahan)
 
         //List Request
+        warehouseId = arguments?.getInt("warehouse_id")
         checkDifReq = arguments?.getBoolean("check_minus")
         stockRequestItem = arguments?.getParcelableArrayList("stock_request_add")!!
         val layoutBtnSubmit = view.findViewById<NeomorphFrameLayout>(R.id.layout_btn_submit_penambahan)
@@ -79,9 +81,9 @@ class PenambahanStockFragment : Fragment(), StoreStockRequestInterface {
             btnSubmit!!.isEnabled = false
 
             // Insert Header
-            stockRequestHeader!!.warehousePusatId = 1
-            stockRequestHeader!!.type = "ADDITION"
-            stockRequestHeader!!.note = "Pengajuan Penambahan Stock Sukses!"
+            stockRequestHeader.warehousePusatId = warehouseId
+            stockRequestHeader.type = "ADDITION"
+            stockRequestHeader.note = "Pengajuan Penambahan Stock"
 
             StoreStockRequestPresenter(this@PenambahanStockFragment).storeStockRequest(requireContext(), stockRequestHeader, stockRequestItem)
         }

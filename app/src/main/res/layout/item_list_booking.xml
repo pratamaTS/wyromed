@@ -58,10 +58,10 @@
                     android:text="1"
                     android:textColor="@color/colorGrey"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvItemStatus"/>
 
                 <TextView
+                    android:id="@+id/tvPcs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -70,7 +70,6 @@
                     android:text="Pcs"
                     android:textColor="@color/colorGrey"
                     android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvAmountQty"
                     app:layout_constraintTop_toBottomOf="@+id/tvItemStatus" />
 

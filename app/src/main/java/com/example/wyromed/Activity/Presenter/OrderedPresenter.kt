@@ -1,13 +1,8 @@
 package com.example.wyromed.Activity.Presenter
 
 import android.content.Context
-import android.util.Log
-import com.example.wyromed.Activity.Interface.BookingInterface
 import com.example.wyromed.Activity.Interface.OrderedInterface
 import com.example.wyromed.Api.NetworkConfig
-import com.example.wyromed.Model.Body.BookingOrderDetails
-import com.example.wyromed.Model.Body.BookingOrderHeader
-import com.example.wyromed.Response.Booking.ResponseBooking
 import com.example.wyromed.Response.Order.ResponseOrder
 import retrofit2.Call
 import retrofit2.Callback

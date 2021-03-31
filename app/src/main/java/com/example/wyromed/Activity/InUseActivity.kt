@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wyromed.Adapter.InUsePurchasedAdapter
 import com.example.wyromed.Adapter.InUseRentalAdapter
-import com.example.wyromed.Model.Body.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
 import com.example.wyromed.R
@@ -56,7 +55,6 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
 
         id = intent.getIntExtra("id", 0)
         inUseItemRental = intent.getParcelableArrayListExtra<HandoverRentalItem>("rental") as ArrayList<HandoverRentalItem>
-        inUseItemPurchased = intent.getParcelableArrayListExtra<HandoverPurchasedItem>("bmhp") as ArrayList<HandoverPurchasedItem>
 
         //Setup adapter rental
         inUseRentalAdapter = InUseRentalAdapter(this, this, inUseItemRental, alreadyStart)

@@ -1,62 +1,35 @@
 package com.example.wyromed.Fragment
 
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wyromed.Activity.Interface.BookingInterface
-import com.example.wyromed.Activity.OrderedActivity
-import com.example.wyromed.Activity.Presenter.BookingPresenter
-import com.example.wyromed.Adapter.ListDetailBookingPurchasedItemAdapter
 import com.example.wyromed.Adapter.ListDetailBookingRentalItemAdapter
-import com.example.wyromed.Model.Body.BookingOrderDetails
-import com.example.wyromed.Model.Body.BookingOrderHeader
-import com.example.wyromed.Model.PurchasedItem
-import com.example.wyromed.Model.RentalItem
+import com.example.wyromed.Data.Model.BookingOrderDetails
+import com.example.wyromed.Data.Model.BookingOrderHeader
 import com.example.wyromed.R
-import com.example.wyromed.Response.Booking.DataBooking
-import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Booking5Fragment : Fragment(), BookingInterface {
-    var purchasedItem: ArrayList<PurchasedItem> = ArrayList()
-    var rentalItem: ArrayList<RentalItem> = ArrayList()
+class Booking5Fragment : Fragment() {
     var bookingOrderHeader: BookingOrderHeader = BookingOrderHeader()
     var bookingOrderDetails: ArrayList<BookingOrderDetails> = ArrayList()
     var date: TextView? = null
     var time: TextView? = null
     var tvHospital: TextView? = null
-    var tvPatientName: TextView? = null
-    var tvMedrec: TextView? = null
     var tvTotalItem: TextView? = null
-    var btnBooking: Button? = null
     var rvListRentalItem: RecyclerView? = null
-    var rvListPurchasedItem: RecyclerView? = null
     var adapterR: ListDetailBookingRentalItemAdapter? = null
-    var adapterP: ListDetailBookingPurchasedItemAdapter? = null
     val bundle: Bundle = Bundle()
-    var dateStart: String? = null
-    var startTime: String? = null
     var hospitalName: String? = null
     var patientName: String? = null
-    var medrecPatient: String? = null
-    var paymentPatient: Boolean? = null
-    var totalQuantity: Int? = 0
-    var bookedItem: DataBooking? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,122 +39,36 @@ class Booking5Fragment : Fragment(), BookingInterface {
         view.context
 
         //Init View
-        btnBooking = view.findViewById(R.id.btn_booking)
         rvListRentalItem = view.findViewById(R.id.rv_detail_rental_item)
-//        rvListPurchasedItem = view.findViewById(R.id.rv_detail_purchased_item)
         date = view.findViewById(R.id.tv_booking_date)
         time = view.findViewById(R.id.tv_booking_time)
-        tvHospital = view.findViewById(R.id.tv_detail_hospital)
-        tvPatientName = view.findViewById(R.id.tv_detail_patient_name)
-        tvMedrec = view.findViewById(R.id.tv_detail_medical_record)
+//        tvHospital = view.findViewById(R.id.tv_detail_hospital)
         tvTotalItem = view.findViewById(R.id.tv_total_item_booking)
 
-        totalQuantity = arguments?.getInt("total_quantity")
-//        hospitalName = arguments?.getString("hospital_name")
-//        patientName = arguments?.getString("patient_name")
-//        medrecPatient = arguments?.getString("medrec_patient")
-//        paymentPatient = arguments?.getBoolean("payment_patient")
-//        dateStart = arguments?.getString("start_date_only")
-//        val dateEnd = arguments?.getString("end_date_only")
-//        startTime = arguments?.getString("start_time_only")
-//        val endTime = arguments?.getString("end_time_only")
-        rentalItem = arguments?.getParcelableArrayList("rental_item")!!
-        if(arguments?.getParcelableArrayList<PurchasedItem>("purchased_item") != null){
-            purchasedItem = arguments?.getParcelableArrayList("purchased_item")!!
-        }
         bookingOrderHeader = arguments?.getParcelable("booking_order_header")!!
         bookingOrderDetails = arguments?.getParcelableArrayList("booking_order_details")!!
 
-//        val pattern = "dd-MMM-yyyy"
-//        val simpleDateFormat = SimpleDateFormat(pattern)
-//        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-//
-//        val dateFormat: Date = inputFormat.parse(dateStart)
-//        val dateAfterFormat: String = simpleDateFormat.format(dateFormat)
+        val dates = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(bookingOrderHeader.start_date)
+        val newDate = SimpleDateFormat("dd MMM yyyy").format(dates)
+        val newTime = SimpleDateFormat("HH:mm:ss").format(dates)
 
-//        date!!.text = dateAfterFormat
-//        time!!.text = startTime.toString()
-//        tvHospital!!.text = hospitalName.toString()
-//        tvPatientName!!.text = patientName.toString()
-//        tvMedrec!!.text = medrecPatient.toString()
-        tvTotalItem!!.text = totalQuantity.toString()
+        date!!.text = newDate
+        time!!.text = newTime + " WIB"
+        tvTotalItem!!.text = bookingOrderHeader.total_quantity.toString()
 
-        Log.d("Start Date5", dateStart.toString())
-//        Log.d("End Date5", dateEnd.toString())
-//        Log.d("Start Time5", startTime.toString())
-//        Log.d("End Time5", endTime.toString())
-        Log.d("list item5", rentalItem.toString())
-        Log.d("list item5", purchasedItem.toString())
         Log.d("Booking Order Header5", bookingOrderHeader.toString())
         Log.d("Booking Order Details5", bookingOrderDetails.toString())
 
-        //Button
-        initActionButton()
-
         //RV List Rental Item
         initRvRentalItem()
-
-        //RV List Purchased Item
-//        initRvPurchasedItem()
 
         return view
     }
 
     private fun initRvRentalItem(){
-        adapterR = ListDetailBookingRentalItemAdapter(requireContext(), rentalItem)
+        adapterR = ListDetailBookingRentalItemAdapter(requireContext(), bookingOrderDetails)
         rvListRentalItem?.setLayoutManager(LinearLayoutManager(context))
         rvListRentalItem?.setAdapter(adapterR)
         rvListRentalItem?.setItemAnimator(DefaultItemAnimator())
-    }
-
-    private fun initRvPurchasedItem(){
-        adapterP = ListDetailBookingPurchasedItemAdapter(requireContext(), purchasedItem)
-        rvListPurchasedItem?.setLayoutManager(LinearLayoutManager(context))
-        rvListPurchasedItem?.setAdapter(adapterP)
-        rvListPurchasedItem?.setItemAnimator(DefaultItemAnimator())
-    }
-
-    private fun initActionButton() {
-        btnBooking!!.onClick {
-            btnBooking!!.isEnabled = false
-            btnBooking!!.setBackgroundResource(R.drawable.bg_button_gray)
-            BookingPresenter(this@Booking5Fragment).booking(
-                requireContext(),
-                bookingOrderHeader,
-                bookingOrderDetails
-            )
-        }
-    }
-
-    override fun onSuccessBooking(message: String?, dataBooking: DataBooking?) {
-        bookedItem = dataBooking as DataBooking
-
-        val openDialog = Dialog(requireActivity())
-        openDialog.setContentView(R.layout.item_dialog_booking_success)
-        val tvNoRequest = openDialog.findViewById<TextView>(R.id.tv_dialog_no_booking)
-        val btnOk = openDialog.findViewById<Button>(R.id.dialog_btn_oke_booking)
-
-        // Set Value
-        tvNoRequest.text = bookedItem!!.boNumber
-
-        // Open Dialog
-        openDialog.setCanceledOnTouchOutside(true)
-
-        btnOk.onClick {
-            openDialog.dismiss()
-            startActivity<OrderedActivity>(
-                OrderedActivity.TAGS.MESSAGE to message
-            )
-
-            activity?.finish()
-        }
-
-        openDialog.show()
-    }
-
-    override fun onErrorBooking(msg: String?) {
-        btnBooking!!.isEnabled = true
-        btnBooking!!.setBackgroundResource(R.drawable.bg_button_green)
-        toast(msg.toString())
     }
 }

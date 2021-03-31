@@ -26,7 +26,9 @@
     <string name="btn_forget_password">Forget Password ?</string>
     <string name="btn_sign_in">Sign In</string>
     <string name="no_account_yet">No account yet ?</string>
+    <string name="didn_t_receive_the_link">Didn\'t receive the email?</string>
     <string name="to_sign_up">Sign Up</string>
+    <string name="resend">Resend</string>
 
     <!-- sign up screen -->
     <string name="title_sign_up">Sign Up</string>
@@ -49,7 +51,7 @@
     <!-- check email screen -->
     <string name="title_check_your_email">Check your email</string>
     <string name="we_have_sent_a_password_recovery_instruction_to_your_email">We have sent a password recovery instruction to your email</string>
-    <string name="btn_oke">Oke</string>
+    <string name="btn_oke">Sign In</string>
 
     <!-- new password screen -->
     <string name="title_create_new_password">Create new password</string>
@@ -238,7 +240,8 @@
     <string name="your_booking_submitted">Congrats Your Booking has been submitted</string>
 
     <!-- in use screen -->
-    <string name="app_bar_in_use">In Use</string>
+    <string name="app_bar_in_use">Operation</string>
+    <string name="btn_add_item_purchased">Add Item</string>
     <string name="btn_finish">Finish</string>
 
     <!-- finishing screen -->

@@ -174,7 +174,7 @@
                     android:id="@+id/tv_stopwatch_rental_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="@string/tv_countdown"
                     android:textColor="@color/colorGreen"

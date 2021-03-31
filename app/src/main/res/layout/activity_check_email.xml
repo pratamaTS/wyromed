@@ -36,10 +36,63 @@
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/colorGray"/>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layout_btn_oke"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="108dp"
+            android:layout_marginEnd="114dp"
+            android:layout_marginBottom="1dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/tv_no_account_yet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/didn_t_receive_the_link"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/tv_no_account_yet"
+                android:background="@color/transparant"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="@string/resend"
+                android:textAllCaps="false"
+                android:textColor="@color/colorGrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_countdown_timer_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/btn_resend"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="15"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="14sp" />
+        </RelativeLayout>
 
         <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
             android:id="@+id/layout_btn_oke"
