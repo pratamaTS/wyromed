@@ -184,7 +184,7 @@ class OperationActivity : AppCompatActivity(), View.OnClickListener, OperationRe
                     rvOrderPurchased.setAdapter(operationPurchasedAdapter)
                     rvOrderPurchased.setHasFixedSize(false)
 
-                    bottomSheetDialog!!.dismiss()
+//                    bottomSheetDialog!!.dismiss()
                     etAmount!!.text.clear()
                 }
             }

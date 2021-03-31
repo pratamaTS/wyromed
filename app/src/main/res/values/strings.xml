@@ -258,6 +258,7 @@
 
     <!-- handover screen -->
     <string name="app_bar_handover">Handover</string>
+    <string name="app_bar_confirmation">Confirmation</string>
     <string name="order_status_rental">Order Status</string>
     <string name="title_order_rental_item">Rental Item</string>
     <string name="order_status_purchased">Order Status</string>
@@ -346,6 +347,7 @@
     <string name="edt_payment_status_botsheet">Payment Status</string>
     <string name="btn_add_patient">Add Patient</string>
     <string name="btn_save_patient">Save</string>
+
 
 
 </resources>

@@ -104,6 +104,7 @@
             app:smsp_floatingLabelText=""
             app:smsp_hint="Select Hospital"
             app:smsp_hintColor="@color/colorDarkGrey"
+            app:smsp_underlineSize="0dp"
             app:smsp_isSearchable="true"
             app:smsp_itemColor="@color/colorDarkGrey"
             app:smsp_itemListColor="@color/colorDarkGrey"
@@ -116,15 +117,6 @@
             app:smsp_searchTextColor="@color/colorDarkGrey"
             app:smsp_selectedItemListColor="@color/colorGreen"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="16dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_dropdown" />
     </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
     <RelativeLayout

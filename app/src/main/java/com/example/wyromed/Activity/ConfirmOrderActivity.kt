@@ -60,7 +60,7 @@ class ConfirmOrderActivity: BaseActivity(), View.OnClickListener {
         when (v.id) {
             R.id.ic_back -> finish()
             R.id.btn_start_operation -> {
-                startActivity<InUseActivity>(
+                startActivity<OperationActivity>(
                     OperationActivity.TAGS.SOHEADER to salesOrderHeader,
                     OperationActivity.TAGS.RENTAL to orderRentalItemList
                 )
