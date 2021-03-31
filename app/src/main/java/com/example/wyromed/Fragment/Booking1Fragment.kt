@@ -86,19 +86,6 @@ class Booking1Fragment : Fragment(), PatientInterface {
 
     private fun initActionButton() {
         btnAddPatient!!.onClick { startActivity<PatientActivity>() }
-        btnNext1!!.onClick {
-            if(patientId.isNullOrEmpty() || patientPosition == 0){
-                toast("There is no patient data")
-            }else {
-                (activity as BookingActivity?)!!.nextStep()
-                rentalFragment.arguments = bundle
-                fragmentManager?.beginTransaction()?.replace(
-                    R.id.fragment_booking_container,
-                    rentalFragment
-                )
-                    ?.commit()
-            }
-        }
     }
 
     fun getAllMaster() {

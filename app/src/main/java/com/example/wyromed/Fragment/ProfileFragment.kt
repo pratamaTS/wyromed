@@ -1,25 +1,22 @@
 package com.example.wyromed.Fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.wyromed.Activity.*
 import com.example.wyromed.Activity.Interface.UserInterface
 import com.example.wyromed.Activity.Presenter.UserPresenter
-import com.example.wyromed.Api.SessionManager
+import com.example.wyromed.Data.Connection.SessionManager
 import com.example.wyromed.R
 import com.example.wyromed.Response.Login.DataLogin
-import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -67,11 +64,23 @@ class ProfileFragment : Fragment(), UserInterface {
             HistoryTransactionsActivity.TAGS.MESSAGE to message)
         }
         menuSignOut!!.onClick {
-            val sessionManager = SessionManager(requireContext())
-            sessionManager.deleteAuthToken()
-            startActivity<OnBoardingActivity>(
-                OnBoardingActivity.TAGS.MESSAGE to message)
-            activity?.finish()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("Are you sure want to sign out ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    // Delete selected note from database
+                    val sessionManager = SessionManager(requireContext())
+                    sessionManager.deleteAuthToken()
+                    startActivity<OnBoardingActivity>(
+                        OnBoardingActivity.TAGS.MESSAGE to message)
+                    activity?.finish()
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
         }
     }
 

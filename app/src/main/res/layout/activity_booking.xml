@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.BookingActivity">
@@ -99,12 +100,83 @@
         app:sv_stepViewStyle="@style/StepView" />
 
     <FrameLayout
-        android:id="@+id/fragment_booking_container"
+        android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/layout_btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/step_view" />
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_back_booking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/neomorph_background_color"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/layout_btn_next"
+        app:neomorph_background_color="@color/neomorph_background_color"
+        app:neomorph_corner_radius="16dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_layer_type="software"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <Button
+            android:id="@+id/btn_back_book"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_rounded_white"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@color/colorGreen"
+            android:textSize="18sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+    <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+        android:id="@+id/layout_btn_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/neomorph_background_color"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layout_btn_back_booking"
+        app:neomorph_background_color="@color/light"
+        app:neomorph_corner_radius="25dp"
+        app:neomorph_elevation="6dp"
+        app:neomorph_highlight_color="@color/neomorph_highlight_color"
+        app:neomorph_layer_type="software"
+        app:neomorph_shadow_color="@color/neomorph_shadow_color"
+        app:neomorph_shadow_type="outer"
+        app:neomorph_view_type="rectangular">
+
+        <Button
+            android:id="@+id/btn_next_book"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_circle_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

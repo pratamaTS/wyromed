@@ -3,6 +3,9 @@ package com.example.wyromed.Api
 import android.content.Context
 import com.example.wyromed.Api.Interceptor.AuthInterceptor
 import com.example.wyromed.BuildConfig
+import com.example.wyromed.Data.Connection.Interceptor
+import com.example.wyromed.Data.Connection.SessionManager
+import com.example.wyromed.Data.Connection.WyromedService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,15 +15,12 @@ import java.util.concurrent.TimeUnit
 object NetworkConfig {
     //untuk melakukan logging untuk melihat logcat
     private fun getInterceptor(context: Context): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val logginInterceptor = HttpLoggingInterceptor()
+        logginInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return  OkHttpClient().newBuilder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(5, TimeUnit.SECONDS)
-            .writeTimeout(5, TimeUnit.SECONDS)
-            .addInterceptor(AuthInterceptor(context))
-            .addInterceptor(interceptor)
+            .addInterceptor(Interceptor(SessionManager(context)))
+            .addInterceptor(logginInterceptor)
             .build()
     }
 

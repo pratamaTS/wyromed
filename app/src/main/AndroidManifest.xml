@@ -20,6 +20,18 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.CheckEmailActivity"></activity>
         <activity
+            android:name=".Activity.ConfirmOrderActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.OperationActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".Activity.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

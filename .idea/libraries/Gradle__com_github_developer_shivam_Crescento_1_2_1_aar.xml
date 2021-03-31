@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f89f4746102c5c540e1ff5642631a02d/jetified-Crescento-1.2.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f89f4746102c5c540e1ff5642631a02d/jetified-Crescento-1.2.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f89f4746102c5c540e1ff5642631a02d/jetified-Crescento-1.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5669ce4cfe3586745666f53f1458522f/jetified-Crescento-1.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5669ce4cfe3586745666f53f1458522f/jetified-Crescento-1.2.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5669ce4cfe3586745666f53f1458522f/jetified-Crescento-1.2.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

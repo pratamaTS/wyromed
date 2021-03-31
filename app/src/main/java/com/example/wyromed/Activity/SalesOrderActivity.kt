@@ -2,23 +2,19 @@ package com.example.wyromed.Activity
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wyromed.Activity.Interface.BookingInterface
 import com.example.wyromed.Activity.Interface.HeaderMessageBookingInterface
 import com.example.wyromed.Activity.Presenter.HeaderMessageBookingPresenter
 import com.example.wyromed.Adapter.SalesOrderPurchasedItemAdapter
 import com.example.wyromed.Adapter.SalesOrderRentItemAdapter
-import com.example.wyromed.Model.Body.SalesOrderHeader
+import com.example.wyromed.Data.Model.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
 import com.example.wyromed.R
@@ -28,7 +24,6 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -230,29 +225,29 @@ class SalesOrderActivity : BaseActivity(), HeaderMessageBookingInterface, View.O
         tvPatientName?.text = dataHeaderMessageBooking?.patientName
         tvMedicalRecord?.text = dataHeaderMessageBooking?.patientNumber
 
-        when(dataHeaderMessageBooking?.bpjs){
-            "0" -> {
-                tvPaymentStatus?.text = "BPJS"
-                salesOrderHeader!!.bpjs = false
-            }
-            "1" -> {
-                tvPaymentStatus?.text = "Non-BPJS"
-                salesOrderHeader!!.bpjs = true
-            }
-        }
+//        when(dataHeaderMessageBooking?.bpjs){
+//            "0" -> {
+//                tvPaymentStatus?.text = "BPJS"
+//                salesOrderHeader.paymentType = false
+//            }
+//            "1" -> {
+//                tvPaymentStatus?.text = "Non-BPJS"
+//                salesOrderHeader.paymentType = true
+//            }
+//        }
 
-        salesOrderHeader!!.note = dataHeaderMessageBooking!!.note
-        salesOrderHeader!!.totalPrice = 0.0
-        salesOrderHeader!!.bookingDate = dataHeaderMessageBooking!!.startDate
-        salesOrderHeader!!.endTime = dataHeaderMessageBooking!!.endDate
-        salesOrderHeader!!.hospitalId = dataHeaderMessageBooking!!.hospitalId
-        salesOrderHeader!!.patientNumber = dataHeaderMessageBooking!!.patientNumber
-        salesOrderHeader!!.bookingId = dataHeaderMessageBooking!!.bookingOrderId
-        salesOrderHeader!!.startTime = dataHeaderMessageBooking!!.startDate
-        salesOrderHeader!!.bookingNumber = dataHeaderMessageBooking!!.number
-        salesOrderHeader!!.patientId = dataHeaderMessageBooking!!.patientId
-        salesOrderHeader!!.patientName = dataHeaderMessageBooking!!.patientName
-        salesOrderHeader!!.hospitalName = dataHeaderMessageBooking!!.hospitalName
+//        salesOrderHeader!!.note = dataHeaderMessageBooking!!.note
+//        salesOrderHeader!!.totalPrice = 0.0
+//        salesOrderHeader!!.bookingDate = dataHeaderMessageBooking!!.startDate
+//        salesOrderHeader!!.endTime = dataHeaderMessageBooking!!.endDate
+//        salesOrderHeader!!.hospitalId = dataHeaderMessageBooking!!.hospitalId
+//        salesOrderHeader!!.patientNumber = dataHeaderMessageBooking!!.patientNumber
+//        salesOrderHeader!!.bookingId = dataHeaderMessageBooking!!.bookingOrderId
+//        salesOrderHeader!!.startTime = dataHeaderMessageBooking!!.startDate
+//        salesOrderHeader!!.bookingNumber = dataHeaderMessageBooking!!.number
+//        salesOrderHeader!!.patientId = dataHeaderMessageBooking!!.patientId
+//        salesOrderHeader!!.patientName = dataHeaderMessageBooking!!.patientName
+//        salesOrderHeader!!.hospitalName = dataHeaderMessageBooking!!.hospitalName
     }
 
     override fun onErrorHeaderMessageBooking(msg: String?) {

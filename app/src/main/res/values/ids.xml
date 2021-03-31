@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="container_loading_content" type="id"/>
+    <item name="container_empty_data" type="id"/>
+    <item name="item_address" type="id"/>
+    <item name="item_bank" type="id"/>
+    <item name="item_product_review" type="id"/>
+    <item name="item_rental" type="id"/>
+    <item name="item_unavailable_date" type="id"/>
+    <item name="item_my_booking" type="id"/>
+    <item name="item_my_booking_history" type="id"/>
+    <item name="item_my_invoice" type="id"/>
+
+</resources>

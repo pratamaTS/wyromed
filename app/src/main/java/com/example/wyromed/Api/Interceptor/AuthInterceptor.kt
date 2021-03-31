@@ -1,7 +1,7 @@
 package com.example.wyromed.Api.Interceptor
 
 import android.content.Context
-import com.example.wyromed.Api.SessionManager
+import com.example.wyromed.Data.Connection.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 

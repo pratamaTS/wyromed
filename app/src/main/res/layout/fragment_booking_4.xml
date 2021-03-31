@@ -28,92 +28,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/container_button_step_3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_ritem" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_button_step_3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/layout_btn_back_booking"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/neomorph_background_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/layout_btn_next_booking"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="16dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_layer_type="software"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
-
-            <Button
-                android:id="@+id/btn_back_book4"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_button_rounded_white"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_regular"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/back"
-                android:textAllCaps="false"
-                android:textColor="@color/colorGreen"
-                android:textSize="18sp" />
-
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:id="@+id/layout_btn_next_booking"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/neomorph_background_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/layout_btn_back_booking"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neomorph_background_color="@color/neomorph_background_color"
-            app:neomorph_corner_radius="16dp"
-            app:neomorph_elevation="6dp"
-            app:neomorph_highlight_color="@color/neomorph_highlight_color"
-            app:neomorph_layer_type="software"
-            app:neomorph_shadow_color="@color/neomorph_shadow_color"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
-
-            <Button
-                android:id="@+id/btn_next_book4"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_button_rounded_green"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_regular"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/next"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@ package com.example.wyromed.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.wyromed.Api.SessionManager
+import com.example.wyromed.Data.Connection.SessionManager
 import com.example.wyromed.R
 import java.util.Timer
 import kotlin.concurrent.schedule

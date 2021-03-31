@@ -1,7 +1,6 @@
 package com.example.wyromed.Activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
 import com.example.wyromed.Activity.Interface.HandoverDetailBookingInterface
 import com.example.wyromed.Activity.Presenter.DetailHeaderBookingPresenter
-import com.example.wyromed.Model.Body.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
 import com.example.wyromed.R

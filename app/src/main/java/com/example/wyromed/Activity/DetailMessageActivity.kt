@@ -14,7 +14,7 @@ import com.example.wyromed.Activity.Presenter.*
 import com.example.wyromed.Adapter.DetailTablePesananAdapter
 import com.example.wyromed.Adapter.DetailTablePesananSOAdapter
 import com.example.wyromed.Adapter.DetailTablePesananSRAdapter
-import com.example.wyromed.Model.Body.SalesOrderHeader
+import com.example.wyromed.Data.Model.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
 import com.example.wyromed.R
@@ -24,8 +24,6 @@ import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.Da
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.DataDetailMessageStockReq
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Header.DataHeaderMessageSalesOrder
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Header.DataHeaderMessageStockReq
-import com.example.wyromedapp.Adapter.ListHandoverPItemAdapter
-import com.example.wyromedapp.Adapter.ListHandoverRItemAdapter
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -69,7 +67,7 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     var layoutBtnCancelPesanan: NeomorphFrameLayout? = null
     var layoutBtnConfirmPesanan: NeomorphFrameLayout? = null
     var layoutBtnCheckPesanan: NeomorphFrameLayout? = null
-    var salesOrderHeader: SalesOrderHeader = SalesOrderHeader()
+    var salesOrderHeader: SalesOrderHeader? = null
     var choose: Int = 0
     var id: Int = 0
     var title: String? = null
@@ -134,7 +132,7 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     fun onClick(v: View) {
         when (v.id) {
             R.id.btn_confirm_pesanan -> {
-                val confim = Intent(this@DetailMessageActivity, HandoverActivity::class.java)
+                val confim = Intent(this@DetailMessageActivity, ConfirmOrderActivity::class.java)
                 startActivity(confim)
             }
         }
@@ -142,9 +140,11 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
 
     private fun initActionButton(){
         btnConfirmPesanan!!.onClick {
-            startActivity<HandoverActivity>(
-                HandoverActivity.TAGS.MESSAGE to message,
-                HandoverActivity.TAGS.ID to id
+            startActivity<ConfirmOrderActivity>(
+                ConfirmOrderActivity.TAGS.MESSAGE to message,
+                ConfirmOrderActivity.TAGS.ID to id,
+                ConfirmOrderActivity.TAGS.SOHEADER to salesOrderHeader,
+                ConfirmOrderActivity.TAGS.BOOKING to orderRentalItemList
             )
             finish()
         }
@@ -181,6 +181,12 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
         tvNoPesanan!!.text = dataHeaderMessageBooking!!.number
         tvTanggalPesanan!!.text = dataHeaderMessageBooking!!.day.toString() + " " + dataHeaderMessageBooking!!.month + " " + dataHeaderMessageBooking!!.year.toString()
         tvStatusPesanan!!.text = dataHeaderMessageBooking!!.status
+
+
+        salesOrderHeader?.hospitalId = dataHeaderMessageBooking.hospitalId
+        salesOrderHeader?.bookingNumber = dataHeaderMessageBooking.number
+        salesOrderHeader?.startTime = dataHeaderMessageBooking.startDate
+        salesOrderHeader?.hospitalName = dataHeaderMessageBooking.hospitalName
     }
 
     override fun onErrorHeaderMessageBooking(msg: String?) {

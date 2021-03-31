@@ -21,6 +21,7 @@ import org.jetbrains.anko.toast
 class SignInActivity : AppCompatActivity(), SignInInterface {
     var etPassword: EditText? = null
     var userAuth: SignInBody? = SignInBody()
+    var loginCheck: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +35,18 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
         val email: String? = prefs.getString("email", "")
         val pwd: String? = prefs.getString("password", "")
 
+        if(intent.hasExtra("login_check")){
+            loginCheck = intent.getBooleanExtra("login_check", false)
+        }
+
         Log.d("Email", email.toString())
         Log.d("Pwd", pwd.toString())
-        if(email!!.isNotEmpty() && pwd!!.isNotEmpty()){
+        if(email!!.isNotEmpty() && pwd!!.isNotEmpty() || loginCheck == false){
             et_identity_login.setText(email)
             etPassword!!.setText(pwd)
+        }else{
+            et_identity_login.setText(email)
+            etPassword!!.text.clear()
         }
 
         initActionButton()
@@ -66,12 +74,11 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
             btn_forgot_password.isEnabled = false
             btn_signup_to_layout.isEnabled = false
 
-            val user = User()
             if(et_identity_login.text.length > 0 && et_password_login.text.length > 0) {
                 userAuth!!.email = et_identity_login.text.toString()
                 userAuth!!.password = et_password_login.text.toString()
 
-                val prefs = getSharedPreferences(userAuth!!.email, MODE_PRIVATE)
+                val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
                 val editor = prefs.edit()
                 editor.putString("email", userAuth!!.email)
                 editor.putString("password", userAuth!!.password)
@@ -99,7 +106,7 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
 
     override fun onSuccessLogin(tokenType: String?, token: String?, message: String?) {
         startActivity<MainActivity>(
-            BaseActivity.TAGS.MESSAGE to message
+            BaseActivity.TAGS.MESSAGE to "Welcome aboard!"
         )
         finish()
     }

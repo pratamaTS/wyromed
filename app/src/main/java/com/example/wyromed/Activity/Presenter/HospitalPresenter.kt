@@ -34,11 +34,7 @@ class HospitalPresenter(val hospitalInterface: HospitalInterface) {
                         Log.d("Data Body", data.toString())
                     } else {
                         val message = response.errorBody().toString()
-                        try {
-                            getAllHospital(context)
-                        } catch (e: SocketTimeoutException) {
-                            hospitalInterface.onErrorGetHospital(message)
-                        }
+                        hospitalInterface.onErrorGetHospital(message)
                     }
                 }
             })
