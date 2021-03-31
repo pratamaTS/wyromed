@@ -2,6 +2,7 @@ package com.example.wyromed.Data.Connection
 
 import com.example.wyromed.Data.Connection.Url.Constants
 import com.example.wyromed.Data.Model.BasePagingResp
+import com.example.wyromed.Data.Model.ChangePasswordBody
 import com.example.wyromed.Data.Model.Hospital
 import com.example.wyromed.Data.Model.RentalItem
 import com.example.wyromed.Model.Body.*
@@ -46,6 +47,10 @@ interface WyromedService {
     //Send Email Forgot password
     @POST(Constants.SEND_EMAIL_PASS)
     fun forgotPassword(@Body forgotPasswordBody: ForgotPasswordBody): Call<MetaPassword>
+
+    //Change password
+    @POST(Constants.CHANGE_PASSWORD)
+    fun changePassword(@Body changePasswordBody: ChangePasswordBody): Call<MetaPassword>
 
     //Sing Up
     @POST(Constants.SIGNUP_URL)

@@ -45,7 +45,7 @@
         app:neomorph_view_type="rectangular">
 
         <Button
-            android:id="@+id/btn_add_item_purchased"
+            android:id="@+id/btn_add_items_purchased"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@drawable/container_edit_text"

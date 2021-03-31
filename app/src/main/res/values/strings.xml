@@ -304,11 +304,18 @@
 
     <!-- change password screen -->
     <string name="app_bar_change_password">Change Password</string>
+    <string name="hint_old_password_change">Old Password</string>
     <string name="hint_new_password_change">New Password</string>
     <string name="hint_repeat_password_change">Repeat Password</string>
     <string name="btn_save_password">Save</string>
     <string name="title_new_password">New Password</string>
     <string name="create_a_new_password_for_the_account_with_email">Create a new password for the account with email</string>
+
+    <!-- privacy policy screen -->
+    <string name="app_bar_privacy_policy">Privacy Policy</string>
+
+    <!-- term condition screen -->
+    <string name="app_bar_term_condition">Terms and Condition</string>
 
     <!-- list item history stock item screen -->
     <string name="no_request_stock">No. Request</string>

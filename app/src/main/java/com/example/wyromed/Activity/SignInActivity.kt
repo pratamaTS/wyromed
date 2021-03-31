@@ -33,20 +33,16 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
 
         val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
         val email: String? = prefs.getString("email", "")
-        val pwd: String? = prefs.getString("password", "")
 
         if(intent.hasExtra("login_check")){
             loginCheck = intent.getBooleanExtra("login_check", false)
         }
 
         Log.d("Email", email.toString())
-        Log.d("Pwd", pwd.toString())
-        if(email!!.isNotEmpty() && pwd!!.isNotEmpty() || loginCheck == false){
+        if(email!!.isNotEmpty() || loginCheck == false){
             et_identity_login.setText(email)
-            etPassword!!.setText(pwd)
         }else{
             et_identity_login.setText(email)
-            etPassword!!.text.clear()
         }
 
         initActionButton()
@@ -81,7 +77,6 @@ class SignInActivity : AppCompatActivity(), SignInInterface {
                 val prefs = getSharedPreferences("UserData", MODE_PRIVATE)
                 val editor = prefs.edit()
                 editor.putString("email", userAuth!!.email)
-                editor.putString("password", userAuth!!.password)
                 editor.commit()
 
                 SignInPresenter(this@SignInActivity).signin(this@SignInActivity, userAuth!!)

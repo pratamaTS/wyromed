@@ -77,7 +77,7 @@ class Booking3Fragment : Fragment(), PurchasedItemInterface {
         view.context
 
         //Init View
-        btnAddItem = view.findViewById(R.id.btn_add_item_purchased)
+        btnAddItem = view.findViewById(R.id.btn_add_items_purchased)
         btnAddPItem = view.findViewById(R.id.btn_add_item)
         btnSkip3 = view.findViewById(R.id.btn_skip_book3)
         btnNext3 = view.findViewById(R.id.btn_next_book3)

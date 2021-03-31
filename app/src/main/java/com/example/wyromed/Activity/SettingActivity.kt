@@ -31,7 +31,7 @@ class SettingActivity: BaseActivity() {
         //INIT VIEW
         back = findViewById(R.id.ic_back)
         menuProfile = findViewById(R.id.menu_profile_settings)
-        menuNotification = findViewById(R.id.menu_notification_settings)
+//        menuNotification = findViewById(R.id.menu_notification_settings)
         menuChangePassword = findViewById(R.id.menu_change_password_settings)
         menuPrivacyPolicy = findViewById(R.id.menu_privacy_policy_settings)
         menuTermsConditions = findViewById(R.id.menu_terms_conditions_settings)
@@ -54,15 +54,23 @@ class SettingActivity: BaseActivity() {
                 EditProfileActivity.TAGS.MESSAGE to message
             )
         }
-        menuNotification!!.onClick {
-            startActivity<NotificationActivity>(
-                NotificationActivity.TAGS.MESSAGE to message
+//        menuNotification!!.onClick {
+//            startActivity<NotificationActivity>(
+//                NotificationActivity.TAGS.MESSAGE to message
+//            )
+//        }
+        menuChangePassword!!.onClick {
+            startActivity<ChangePasswordActivity>(
+                ChangePasswordActivity.TAGS.MESSAGE to message
             )
         }
-        menuNotification!!.onClick {
-            startActivity<NotificationActivity>(
-                NotificationActivity.TAGS.MESSAGE to message
-            )
+
+        menuPrivacyPolicy!!.onClick {
+            startActivity<PrivacyPolicyActivity>()
+        }
+
+        menuTermsConditions!!.onClick {
+            startActivity<TermConditionActivity>()
         }
     }
 }

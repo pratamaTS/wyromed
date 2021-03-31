@@ -23,4 +23,5 @@ object Constants {
     const val GET_PROVINCE_URL = "states/102"
     const val GET_INBOX_URL = "inbox"
     const val SEND_EMAIL_PASS = "users/forgotpassword/web"
+    const val CHANGE_PASSWORD = "users/password"
 }

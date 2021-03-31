@@ -96,38 +96,38 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="@color/colorLine"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
+<!--            <View-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="@color/colorLine"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginEnd="16dp"/>-->
 
-            <LinearLayout
-                android:id="@+id/menu_notification_settings"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/menu_notification_settings"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="75dp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_notification_settings"
-                    android:layout_marginStart="16dp"
-                    android:contentDescription="@string/todo"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/ic_notification_settings"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:contentDescription="@string/todo"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/menu_notification"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorGreySolid"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_marginStart="24dp"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/menu_notification"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@color/colorGreySolid"-->
+<!--                    android:fontFamily="@font/montserrat_bold"-->
+<!--                    android:layout_marginStart="24dp"/>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             <View
                 android:layout_width="wrap_content"
