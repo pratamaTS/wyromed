@@ -24,6 +24,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.wyromed.Activity.Interface.UpdateStatusBookingInterface
 import com.example.wyromed.Activity.Presenter.UpdateStatusBookingPresenter
+import com.example.wyromed.Data.Model.SalesOrderDetail
+import com.example.wyromed.Data.Model.SalesOrderHeader
 import com.example.wyromed.R
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,6 +42,11 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
         val TOKENTYPE = "token_type"
         val ID = "id"
         val CONFIRM = "confirm"
+        val URLDOCTOR = "url_doctor"
+        val URLNURSE = "url_nurse"
+        val URLSALES = "url_sales"
+        val SODETAIL = "so_detail"
+        val SOHEADER = "so_header"
     }
 
     private var signaturePad: SignaturePad? = null
@@ -52,6 +59,12 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
     var stringUrl: String? = null
     var sign: Int? = 0
     var urlPhoto: String? = null
+    var photoFile: File? = null
+    var urlDoctor: String? = null
+    var urlNurse: String? = null
+    var urlSales: String? = null
+    var salesOrderHeader: SalesOrderHeader? = null
+    var salesOrderDetails: ArrayList<SalesOrderDetail> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +80,12 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
         confirm = intent.getBooleanExtra("confirm", false)
         if(intent.hasExtra("sign")) {
             sign = intent.getIntExtra("sign", 0)
+            salesOrderHeader = intent.getParcelableExtra("so_header")
+            salesOrderDetails = intent.getParcelableArrayListExtra<SalesOrderDetail>("so_detail") as ArrayList<SalesOrderDetail>
+
+            urlDoctor = intent.getStringExtra("url_doctor")
+            urlNurse = intent.getStringExtra("url_nurse")
+            urlSales = intent.getStringExtra("url_sales")
         }
         signaturePad?.setOnSignedListener(object : SignaturePad.OnSignedListener {
             override fun onStartSigning() {
@@ -96,19 +115,28 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
                 when(sign) {
                     1-> {
                         startActivity<AcceptSignatureActivity>(
-                            AcceptSignatureActivity.TAGS.URLDOCTOR to urlPhoto
+                            AcceptSignatureActivity.TAGS.URLDOCTOR to urlPhoto,
+                            AcceptSignatureActivity.TAGS.SODETAIL to salesOrderDetails,
+                            AcceptSignatureActivity.TAGS.SOHEADER to salesOrderHeader
                         )
                         finish()
                     }
                     2-> {
                         startActivity<AcceptSignatureActivity>(
-                            AcceptSignatureActivity.TAGS.URLNURSE to urlPhoto
+                            AcceptSignatureActivity.TAGS.URLDOCTOR to urlDoctor,
+                            AcceptSignatureActivity.TAGS.URLNURSE to urlPhoto,
+                            AcceptSignatureActivity.TAGS.SODETAIL to salesOrderDetails,
+                            AcceptSignatureActivity.TAGS.SOHEADER to salesOrderHeader
                         )
                         finish()
                     }
                     3-> {
                         startActivity<AcceptSignatureActivity>(
-                            AcceptSignatureActivity.TAGS.URLSALES to urlPhoto
+                            AcceptSignatureActivity.TAGS.URLDOCTOR to urlDoctor,
+                            AcceptSignatureActivity.TAGS.URLNURSE to urlNurse,
+                            AcceptSignatureActivity.TAGS.URLSALES to urlPhoto,
+                            AcceptSignatureActivity.TAGS.SODETAIL to salesOrderDetails,
+                            AcceptSignatureActivity.TAGS.SOHEADER to salesOrderHeader
                         )
                         finish()
                     }
@@ -198,7 +226,7 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
                     )
                     put(Images.Media.DESCRIPTION, "Nurse Confirmation Signature")
                     put(Images.Media.MIME_TYPE, "image/jpeg")
-                    // Add the date meta data to ensure the image is added at the front of the gallery
+
                     // Add the date meta data to ensure the image is added at the front of the gallery
                     put(Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
                     put(Images.Media.DATE_TAKEN, System.currentTimeMillis())
@@ -282,13 +310,14 @@ class ConfirmSignatureActivity : BaseActivity(), UpdateStatusBookingInterface {
                                     }
                                 }
 
-                                val photo: File = File(
+                                val photo = File(
                                     getAlbumStorageDir("Wyromed/Signature"),
                                     titlePic
                                 )
 
-                                urlPhoto = Environment.DIRECTORY_PICTURES + "Wyromed/Signature/" + titlePic
+                                urlPhoto = photo.absolutePath
 
+                                photoFile = photo
                                 saveBitmapToJPG(signature, photo)
                                 scanMediaFile(photo)
                             }

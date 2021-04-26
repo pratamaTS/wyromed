@@ -52,7 +52,7 @@ class HandoverActivity : BaseActivity(), HandoverDetailBookingInterface {
         rvOrderRental = findViewById(R.id.rv_order_rental_item)
         rvOrderPurchased = findViewById(R.id.rv_order_purchased_item)
         btnAccept = findViewById(R.id.btn_accept_order)
-        btnStart = findViewById(R.id.btn_start_operation)
+        btnStart = findViewById(R.id.btn_starst_operation)
         layoutBtnAccept = findViewById(R.id.layout_btn_accept)
         layoutBtnStart = findViewById(R.id.layout_btn_start)
 

@@ -6,16 +6,20 @@ import android.view.MenuItem
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wyromed.Activity.Interface.GetSalesOrderInterface
+import com.example.wyromed.Activity.Presenter.GetSalesOrderPresenter
 import com.example.wyromed.Adapter.SalesAdapter
-import com.example.wyromed.Model.Sales
 import com.example.wyromed.R
+import com.example.wyromed.Response.SalesOrder.GetAllSO.DataGetSalesOrder
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
-class SalesActivity: BaseActivity() {
+class SalesActivity: BaseActivity(), GetSalesOrderInterface {
     var back: ImageButton? = null
     var rvSales: RecyclerView? = null
     var salesAdapter: SalesAdapter? = null
-    var salesList: ArrayList<Sales>? = ArrayList()
+    var salesList: ArrayList<DataGetSalesOrder>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,30 +29,17 @@ class SalesActivity: BaseActivity() {
         back = findViewById(R.id.ic_back)
         rvSales = findViewById(R.id.rv_sales)
 
-        salesList!!.add(Sales("A-112", "Mon, 30 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-113", "Mon, 30 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-114", "Mon, 30 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-115", "Mon, 30 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-116", "Mon, 30 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-117", "Mon, 31 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-118", "Mon, 31 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-119", "Mon, 31 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-1110", "Mon, 31 Desember 2020", "Finish"))
-        salesList!!.add(Sales("A-1111", "Mon, 01 Januari 2021", "Finish"))
-        salesList!!.add(Sales("A-1112", "Mon, 01 Januari 2021", "Finish"))
-        salesList!!.add(Sales("A-1113", "Mon, 01 Februari 2021", "Finish"))
-
-        //Set up Adapter
-        salesAdapter = SalesAdapter(this, salesList!!)
-        rvSales?.setLayoutManager(LinearLayoutManager(this))
-        rvSales?.setAdapter(salesAdapter)
-        rvSales?.setHasFixedSize(false)
+        loadSalesOrder()
 
         initActionButton()
     }
 
     private fun initActionButton() {
         back!!.onClick { finish() }
+    }
+
+    private fun loadSalesOrder(){
+        GetSalesOrderPresenter(this).getAllSO(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -62,5 +53,17 @@ class SalesActivity: BaseActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onSuccessGetSalesOrder(dataSalesOrder: ArrayList<DataGetSalesOrder?>?) {
+        //Set up Adapter
+        salesAdapter = SalesAdapter(this, dataSalesOrder)
+        rvSales?.setLayoutManager(LinearLayoutManager(this))
+        rvSales?.setAdapter(salesAdapter)
+        rvSales?.setHasFixedSize(false)
+    }
+
+    override fun onErrorGetSalesOrder(msg: String?) {
+        toast(msg.toString()).show()
     }
 }

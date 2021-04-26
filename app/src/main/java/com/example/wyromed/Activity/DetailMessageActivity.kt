@@ -2,9 +2,17 @@ package com.example.wyromed.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +25,11 @@ import com.example.wyromed.Adapter.DetailTablePesananSRAdapter
 import com.example.wyromed.Data.Model.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
+import com.example.wyromed.Model.Header.ListPurchasedItem
 import com.example.wyromed.R
 import com.example.wyromed.Response.DetailMessageBooking.DataDetailMessageBooking
 import com.example.wyromed.Response.HeaderMessageBooking.DataHeaderMessageBooking
+import com.example.wyromed.Response.PurchasedItem.DataPurchasedItem
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.DataDetailMessageSalesOrder
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.DataDetailMessageStockReq
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Header.DataHeaderMessageSalesOrder
@@ -27,6 +37,7 @@ import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Header.Da
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,7 +46,8 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     HeaderMessageStockRequestInterface,
     DetailMessageStockRequestInterface,
     HeaderMessageSalesOrderInterface,
-    DetailMessageSalesOrderInterface
+    DetailMessageSalesOrderInterface,
+    PurchasedItemInterface
 {
     object TAGS{
         val TOKEN = "token"
@@ -51,6 +63,7 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     var detailListSO: ArrayList<DataDetailMessageSalesOrder> = ArrayList()
     var orderRentalItemList: ArrayList<HandoverRentalItem> = ArrayList()
     var orderPurchasedItemList: ArrayList<HandoverPurchasedItem> = ArrayList()
+    var listPurchasedItem: ArrayList<ListPurchasedItem> = ArrayList()
     var rvTableBarangPesanan: RecyclerView? = null
     var tvJudulPesanan: TextView? = null
     var tvWaktuPesanan: TextView? = null
@@ -67,11 +80,13 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     var layoutBtnCancelPesanan: NeomorphFrameLayout? = null
     var layoutBtnConfirmPesanan: NeomorphFrameLayout? = null
     var layoutBtnCheckPesanan: NeomorphFrameLayout? = null
-    var salesOrderHeader: SalesOrderHeader? = null
+    var salesOrderHeader: SalesOrderHeader = SalesOrderHeader()
     var choose: Int = 0
     var id: Int = 0
     var title: String? = null
     var message: String? = null
+
+    private lateinit var loadingDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +110,17 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
         layoutBtnConfirmPesanan?.visibility = View.GONE
         layoutBtnCheckPesanan?.visibility = View.GONE
 
+        if(!this::loadingDialog.isInitialized) {
+            loadingDialog = AlertDialog.Builder(this)
+                .setView(R.layout.layout_loading)
+                .create()
+            loadingDialog.setCanceledOnTouchOutside(false)
+
+            val window = loadingDialog.window
+            window?.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            window?.setGravity(Gravity.CENTER)
+        }
+
         choose = intent.getIntExtra("choose", 0)
         id = intent.getIntExtra("id", 0)
         title = intent.getStringExtra("title")
@@ -111,6 +137,8 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     }
 
     private fun getPesanan(){
+
+        PurchasedItemPresenter(this).getAllPurchasedItem(this)
 
         when(choose){
             1 -> {
@@ -140,13 +168,32 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
 
     private fun initActionButton(){
         btnConfirmPesanan!!.onClick {
-            startActivity<ConfirmOrderActivity>(
-                ConfirmOrderActivity.TAGS.MESSAGE to message,
-                ConfirmOrderActivity.TAGS.ID to id,
-                ConfirmOrderActivity.TAGS.SOHEADER to salesOrderHeader,
-                ConfirmOrderActivity.TAGS.BOOKING to orderRentalItemList
-            )
-            finish()
+            if(listPurchasedItem.isEmpty()){
+                loadingDialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity<ConfirmOrderActivity>(
+                        ConfirmOrderActivity.TAGS.MESSAGE to message,
+                        ConfirmOrderActivity.TAGS.SOHEADER to salesOrderHeader,
+                        ConfirmOrderActivity.TAGS.BOOKING to orderRentalItemList,
+                        ConfirmOrderActivity.TAGS.LIST_BMHP to listPurchasedItem,
+                    )
+                    loadingDialog.dismiss()
+                    finish()
+                }, 4000)
+            }else{
+                loadingDialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity<ConfirmOrderActivity>(
+                        ConfirmOrderActivity.TAGS.MESSAGE to message,
+                        ConfirmOrderActivity.TAGS.SOHEADER to salesOrderHeader,
+                        ConfirmOrderActivity.TAGS.BOOKING to orderRentalItemList,
+                        ConfirmOrderActivity.TAGS.LIST_BMHP to listPurchasedItem,
+                    )
+                    loadingDialog.dismiss()
+                    finish()
+                }, 2000)
+            }
+
         }
         btnCheckPesanan!!.onClick {
             startActivity<InUseActivity>(
@@ -161,7 +208,7 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
     private fun setVisibility(){
         layoutBtnCancelPesanan?.visibility = View.GONE
         layoutBtnConfirmPesanan?.visibility = View.GONE
-        layoutBtnCheckPesanan?.visibility = View.VISIBLE
+        layoutBtnCheckPesanan?.visibility = View.GONE
     }
 
     override fun onSuccessHeaderMessageBooking(
@@ -182,11 +229,17 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
         tvTanggalPesanan!!.text = dataHeaderMessageBooking!!.day.toString() + " " + dataHeaderMessageBooking!!.month + " " + dataHeaderMessageBooking!!.year.toString()
         tvStatusPesanan!!.text = dataHeaderMessageBooking!!.status
 
+        //convert date
+        val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").parse(dataHeaderMessageBooking.startDate)
+        val newFormatDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
 
-        salesOrderHeader?.hospitalId = dataHeaderMessageBooking.hospitalId
-        salesOrderHeader?.bookingNumber = dataHeaderMessageBooking.number
-        salesOrderHeader?.startTime = dataHeaderMessageBooking.startDate
-        salesOrderHeader?.hospitalName = dataHeaderMessageBooking.hospitalName
+
+        salesOrderHeader.bookingId = dataHeaderMessageBooking.bookingOrderId
+        salesOrderHeader.hospitalId = dataHeaderMessageBooking.hospitalId
+        salesOrderHeader.bookingNumber = dataHeaderMessageBooking.number
+        salesOrderHeader.bookingDate = newFormatDate
+        salesOrderHeader.startTime = newFormatDate
+        salesOrderHeader.hospitalName = dataHeaderMessageBooking.hospitalName
     }
 
     override fun onErrorHeaderMessageBooking(msg: String?) {
@@ -301,5 +354,27 @@ class DetailMessageActivity: BaseActivity(), HeaderMessageBookingInterface,
 
     override fun onErrorDetailMessageSO(msg: String?) {
         toast("Failed to get data detail message SO")
+    }
+
+    override fun onSuccessGetPurchasedItem(dataPurchasedItem: ArrayList<DataPurchasedItem?>?) {
+        //Set Value
+        if (dataPurchasedItem != null) {
+            for( i in dataPurchasedItem ){
+                Log.d("idproductbmhp", i?.productId.toString())
+                listPurchasedItem.add(
+                    ListPurchasedItem(
+                        i?.productId!!.toInt(),
+                        0,
+                        i.name,
+                        i.unitName,
+                        i.entity
+                    )
+                )
+            }
+        }
+    }
+
+    override fun onErrorGetPurchasedItem(msg: String?) {
+        toast(msg ?: "Failed to get purchased item").show()
     }
 }

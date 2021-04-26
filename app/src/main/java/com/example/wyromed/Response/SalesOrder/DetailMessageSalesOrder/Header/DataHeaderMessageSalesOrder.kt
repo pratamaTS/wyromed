@@ -28,7 +28,7 @@ class DataHeaderMessageSalesOrder: ResponseHeaderMessageSalesOrder() {
 	@field:SerializedName("decided_by")
 	val decidedBy: Any? = null
 
-	@field:SerializedName("number")
+	@field:SerializedName("so_number")
 	val number: String? = null
 
 	@field:SerializedName("month")

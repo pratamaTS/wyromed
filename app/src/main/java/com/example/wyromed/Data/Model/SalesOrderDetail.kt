@@ -57,12 +57,12 @@ data class SalesOrderDetail(
 		return 0
 	}
 
-	companion object CREATOR : Parcelable.Creator<BookingOrderHeader> {
-		override fun createFromParcel(parcel: Parcel): BookingOrderHeader {
-			return BookingOrderHeader(parcel)
+	companion object CREATOR : Parcelable.Creator<SalesOrderDetail> {
+		override fun createFromParcel(parcel: Parcel): SalesOrderDetail {
+			return SalesOrderDetail(parcel)
 		}
 
-		override fun newArray(size: Int): Array<BookingOrderHeader?> {
+		override fun newArray(size: Int): Array<SalesOrderDetail?> {
 			return arrayOfNulls(size)
 		}
 	}

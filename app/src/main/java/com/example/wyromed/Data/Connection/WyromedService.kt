@@ -26,6 +26,8 @@ import com.example.wyromed.Response.Province.ResponseProvince
 import com.example.wyromed.Response.PurchasedItem.ResponsePurchasedItem
 import com.example.wyromed.Response.QuantityAvailableStock.ResponseTotalQtyStock
 import com.example.wyromed.Response.RentalItem.ResponseRentalItem
+import com.example.wyromed.Response.SalesOrder.GetAllSO.ResponseGetSalesOrder
+import com.example.wyromed.Response.SalesOrder.ResponseSalesOrder
 import com.example.wyromed.Response.SalesOrder.ResponseTotalSalesOrder
 import com.example.wyromed.Response.Stock.ResponseStock
 import com.example.wyromed.Response.StockRequest.DetailMessageStockReq.Detail.ResponseDetailMessageSalesOrder
@@ -36,6 +38,7 @@ import com.example.wyromed.Response.StockRequest.ResponseGetStockRequest
 import com.example.wyromed.Response.StockRequest.ResponseStockRequest
 import com.example.wyromed.Response.Warehouse.ResponseWarehouse
 import io.reactivex.rxjava3.core.Single
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -93,6 +96,10 @@ interface WyromedService {
     @GET(Constants.ALL_STOCK_URL)
     fun getAllStockItem(@QueryMap queryMap: MutableMap<String, String>?): Call<ResponseStock>
 
+    //Get All Sales Order
+    @GET(Constants.GET_SO_URL)
+    fun getAllSO(): Call<ResponseGetSalesOrder>
+
     //Get Total Stock Available
     @GET(Constants.TOTAL_STOCK_AVAILABLE_URL)
     fun getTotalStockItem(@QueryMap queryMap: MutableMap<String, String>?): Call<ResponseTotalQtyStock>
@@ -107,6 +114,11 @@ interface WyromedService {
     @Multipart
     @POST(Constants.STORE_BO_URL)
     fun storeBooking(@PartMap bodyMap: HashMap<String, Any>?) : Call<ResponseBooking>
+
+    //Store Sales Order
+    @Multipart
+    @POST(Constants.STORE_SALES_ORDER)
+    fun storeSalesOrder(@Part bodyDoctor: MultipartBody.Part, @Part bodySales: MultipartBody.Part, @Part bodyNurse: MultipartBody.Part, @PartMap bodyMap: HashMap<String, Any>?) : Call<ResponseBooking>
 
     //Stock Request
     @Multipart

@@ -200,7 +200,7 @@
         tools:ignore="MissingConstraints">
 
         <Button
-            android:id="@+id/btn_start_operation"
+            android:id="@+id/btn_starst_operation"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@drawable/bg_button_circle_green"

@@ -24,11 +24,7 @@ class DetailMessageBookingPresenter(val detailMessageBookingInterface: DetailMes
             .enqueue(object : Callback<ResponseDetailMessageBooking> {
 
                 override fun onFailure(call: Call<ResponseDetailMessageBooking>, t: Throwable) {
-                    try {
-                        getDetailMessageBooking(context, id)
-                    } catch (e: SocketTimeoutException) {
-                        detailMessageBookingInterface.onErrorDetailMessageBooking(t.localizedMessage)
-                    }
+                   detailMessageBookingInterface.onErrorDetailMessageBooking(t.localizedMessage)
                 }
 
                 override fun onResponse(
@@ -44,11 +40,7 @@ class DetailMessageBookingPresenter(val detailMessageBookingInterface: DetailMes
                     if (response.isSuccessful) {
                         detailMessageBookingInterface.onSuccessDetailMessageBooking(message, data)
                     } else {
-                        try {
-                            getDetailMessageBooking(context, id)
-                        } catch (e: SocketTimeoutException) {
-                            detailMessageBookingInterface.onErrorDetailMessageBooking(error)
-                        }
+                        detailMessageBookingInterface.onErrorDetailMessageBooking(error)
                     }
                 }
             })

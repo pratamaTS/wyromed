@@ -158,7 +158,7 @@
                         app:smsp_multilineError="false"
                         app:smsp_searchBackgroundColor="@color/colorWhite"
                         app:smsp_searchHeaderBackgroundColor="@color/colorGreen"
-                        app:smsp_searchHeaderText="Search Hospital"
+                        app:smsp_searchHeaderText="Search Warehouse"
                         app:smsp_searchTextColor="@color/colorDarkGrey"
                         app:smsp_selectedItemListColor="@color/colorGreen" />
 

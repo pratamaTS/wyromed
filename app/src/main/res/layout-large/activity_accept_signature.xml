@@ -91,7 +91,8 @@
                         <ImageView
                             android:id="@+id/im_doctor_signature"
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
+                            android:layout_height="100dp"
+                            android:scaleType="fitXY"
                             android:background="@drawable/bg_image_signature"/>
 
                         <TextView
@@ -143,7 +144,8 @@
                         <ImageView
                             android:id="@+id/im_nurse_signature"
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
+                            android:layout_height="100dp"
+                            android:scaleType="fitXY"
                             android:background="@drawable/bg_image_signature"/>
 
                         <TextView
@@ -196,7 +198,8 @@
                         <ImageView
                             android:id="@+id/im_salesman_signature"
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
+                            android:layout_height="100dp"
+                            android:scaleType="fitXY"
                             android:background="@drawable/bg_image_signature"/>
 
                         <TextView

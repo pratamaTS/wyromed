@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wyromed.Adapter.ConfirmRentalAdapter
 import com.example.wyromed.Data.Model.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
+import com.example.wyromed.Model.Header.ListPurchasedItem
 import com.example.wyromed.R
 import org.jetbrains.anko.startActivity
 
@@ -19,18 +20,21 @@ class ConfirmOrderActivity: BaseActivity(), View.OnClickListener {
         val TOKEN = "token"
         val TOKENTYPE = "token_type"
         val MESSAGE = "message"
-        val ID = "id"
         val SOHEADER = "so_header"
         val BOOKING = "booking_rental_item"
+        val LIST_BMHP = "bmhp"
     }
 
     private lateinit var rvOrderRental: RecyclerView
     private lateinit var rentalItemAdapter: ConfirmRentalAdapter
     private var orderRentalItemList: ArrayList<HandoverRentalItem> = ArrayList()
+    private var listPurchasedItem: ArrayList<ListPurchasedItem> = ArrayList()
 
     private lateinit var back: ImageButton
     private lateinit var btnStart: Button
-    var salesOrderHeader: SalesOrderHeader? = null
+
+    var salesOrderHeader: SalesOrderHeader = SalesOrderHeader()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +49,9 @@ class ConfirmOrderActivity: BaseActivity(), View.OnClickListener {
         back.setOnClickListener(this)
         btnStart.setOnClickListener(this)
 
-        salesOrderHeader = intent.getParcelableExtra("so_header")
+        salesOrderHeader = intent.getParcelableExtra("so_header")!!
         orderRentalItemList = intent.getParcelableArrayListExtra<HandoverRentalItem>("booking_rental_item") as ArrayList<HandoverRentalItem>
+        listPurchasedItem = intent.getParcelableArrayListExtra<ListPurchasedItem>("bmhp") as ArrayList<ListPurchasedItem>
 
         //Set up adapter Rental
         rentalItemAdapter = ConfirmRentalAdapter(this, orderRentalItemList)
@@ -62,7 +67,8 @@ class ConfirmOrderActivity: BaseActivity(), View.OnClickListener {
             R.id.btn_start_operation -> {
                 startActivity<OperationActivity>(
                     OperationActivity.TAGS.SOHEADER to salesOrderHeader,
-                    OperationActivity.TAGS.RENTAL to orderRentalItemList
+                    OperationActivity.TAGS.RENTAL to orderRentalItemList,
+                    OperationActivity.TAGS.LIST_BMHP to listPurchasedItem
                 )
                 finish()
             }

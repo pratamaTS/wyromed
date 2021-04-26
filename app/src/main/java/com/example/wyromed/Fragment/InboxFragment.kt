@@ -100,16 +100,18 @@ class InboxFragment : Fragment(), RecyclerItemTouchHelperListener, InboxInterfac
         listMessagesSearch.clear()
         listMessagesSearch.addAll(listMessages)
 
-        adapter = ListMessageAdapter(requireContext(), listMessagesSearch, this)
-        rvListMessage?.setLayoutManager(LinearLayoutManager(context))
-        rvListMessage?.setAdapter(adapter)
-        rvListMessage?.setItemAnimator(DefaultItemAnimator())
-        rvListMessage?.addItemDecoration(
-            DividerItemDecoration(
-                activity,
-                DividerItemDecoration.VERTICAL
+        if(context != null) {
+            adapter = ListMessageAdapter(requireContext(), listMessagesSearch, this)
+            rvListMessage?.setLayoutManager(LinearLayoutManager(context))
+            rvListMessage?.setAdapter(adapter)
+            rvListMessage?.setItemAnimator(DefaultItemAnimator())
+            rvListMessage?.addItemDecoration(
+                DividerItemDecoration(
+                    activity,
+                    DividerItemDecoration.VERTICAL
+                )
             )
-        )
+        }
 
         searchView?.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {

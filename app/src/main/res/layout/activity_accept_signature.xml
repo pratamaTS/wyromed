@@ -92,6 +92,7 @@
                             android:id="@+id/im_doctor_signature"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
+                            android:scaleType="fitXY"
                             android:background="@drawable/bg_image_signature"/>
 
                         <TextView
@@ -144,6 +145,7 @@
                             android:id="@+id/im_nurse_signature"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
+                            android:scaleType="fitXY"
                             android:background="@drawable/bg_image_signature"/>
 
                         <TextView
@@ -205,6 +207,7 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/title_salesman_signature"
                             android:textSize="16sp"
+                            android:scaleType="fitXY"
                             android:textColor="@color/colorGreen"
                             android:fontFamily="@font/montserrat_regular"
                             android:gravity="center"/>

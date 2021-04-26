@@ -78,4 +78,7 @@ class DataPatient: ResponsePatient() {
 
     @field:SerializedName("medic_number")
     val medicNumber: String? = null
+
+    @field:SerializedName("patient_type")
+    val patientType: Int? = null
 }

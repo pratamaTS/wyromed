@@ -24,11 +24,7 @@ class HeaderMessageBookingPresenter(val headerMessageBookingInterface: HeaderMes
             .enqueue(object : Callback<ResponseHeaderMessageBooking> {
 
                 override fun onFailure(call: Call<ResponseHeaderMessageBooking>, t: Throwable) {
-                    try {
-                        getHeaderMessageBooking(context, id)
-                    } catch (e: SocketTimeoutException) {
-                        headerMessageBookingInterface.onErrorHeaderMessageBooking(t.localizedMessage)
-                    }
+                    headerMessageBookingInterface.onErrorHeaderMessageBooking(t.localizedMessage)
                 }
 
                 override fun onResponse(
@@ -44,11 +40,7 @@ class HeaderMessageBookingPresenter(val headerMessageBookingInterface: HeaderMes
                     if (response.isSuccessful) {
                         headerMessageBookingInterface.onSuccessHeaderMessageBooking(message, data)
                     } else {
-                        try {
-                            getHeaderMessageBooking(context, id)
-                        } catch (e: SocketTimeoutException) {
-                            headerMessageBookingInterface.onErrorHeaderMessageBooking(error)
-                        }
+                        headerMessageBookingInterface.onErrorHeaderMessageBooking(error)
                     }
                 }
             })

@@ -15,7 +15,7 @@ class DetailMessageSalesOrderPresenter(val detailMessageSalesOrderInterface: Det
         context: Context,
         id: Int
     ){
-        val url: String = "stockrequest/details/" + id
+        val url: String = "soandroid/details/" + id
 
         NetworkConfig.service(context)
             .getDetailMessageSO(url)

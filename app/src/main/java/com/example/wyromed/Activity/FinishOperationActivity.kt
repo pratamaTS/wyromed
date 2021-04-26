@@ -13,9 +13,11 @@ import com.example.wyromed.Activity.Presenter.PurchasedItemPresenter
 import com.example.wyromed.Adapter.FinishPurchasedAdapter
 import com.example.wyromed.Adapter.FinishRentalAdapter
 import com.example.wyromed.Adapter.OperationPurchasedAdapter
+import com.example.wyromed.Data.Model.SalesOrderDetail
 import com.example.wyromed.Data.Model.SalesOrderHeader
 import com.example.wyromed.Model.HandoverRentalItem
 import com.example.wyromed.Model.Header.HandoverPurchasedItem
+import com.example.wyromed.Model.Header.ListPurchasedItem
 import com.example.wyromed.R
 import com.example.wyromed.Response.PurchasedItem.DataPurchasedItem
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,20 +25,20 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
 import kotlin.collections.ArrayList
 
-class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackStockFinishInterface,
-    PurchasedItemInterface {
+class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackStockFinishInterface {
     object TAGS{
         val TOKEN = "token"
         val TOKENTYPE = "token_type"
         val MESSAGE = "message"
-        val ID = "id"
         val HOURSOPS = "hours_ops"
         val MINUTESOPS = "minutes_ops"
         val SECONDSOPS = "seconds_ops"
         val RENTAL = "rental"
         val BMHP = "bmhp"
+        val LIST_BMHP = "list_bmhp"
         val SOHEADER = "so_header"
     }
 
@@ -48,8 +50,8 @@ class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackSt
     var finishPurchasedAdapter: FinishPurchasedAdapter? = null
     var finishRentalItemList: ArrayList<HandoverRentalItem> = ArrayList()
     var finishPurchaseItemList: ArrayList<HandoverPurchasedItem> = ArrayList()
-    var salesOrderHeader: SalesOrderHeader? = null
-    var id: Int = 0
+
+    var salesOrderHeader: SalesOrderHeader = SalesOrderHeader()
     var hoursOperation: Long = 0
     var minutesOperation: Long = 0
     var secondsOperation: Long = 0
@@ -66,6 +68,7 @@ class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackSt
     private var productEntity: String? = null
     private var totalQuantity: Int = 0
     var productId: Int? = null
+    var listItemPurchased: ArrayList<ListPurchasedItem> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,14 +81,19 @@ class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackSt
         btnSubmit = findViewById(R.id.btn_submit_sales)
         btnAddItemPurchased = findViewById(R.id.btn_add_item_purchased_finish)
 
-        id = intent.getIntExtra("id", 0)
         hoursOperation = intent.getLongExtra("hours_ops",0)
         minutesOperation = intent.getLongExtra("minutes_ops",0)
         secondsOperation = intent.getLongExtra("seconds_ops",0)
-        salesOrderHeader = intent.getParcelableExtra("so_header")
+        salesOrderHeader = intent.getParcelableExtra("so_header")!!
 
         finishRentalItemList = intent.getParcelableArrayListExtra<HandoverRentalItem>("rental") as ArrayList<HandoverRentalItem>
         finishPurchaseItemList = intent.getParcelableArrayListExtra<HandoverPurchasedItem>("bmhp") as ArrayList<HandoverPurchasedItem>
+        listItemPurchased = intent.getParcelableArrayListExtra<ListPurchasedItem>("list_bmhp") as ArrayList<ListPurchasedItem>
+
+        val duration = SimpleDateFormat("H:m:ss").parse(hoursOperation.toString() + ":" + minutesOperation.toString() + ":" + secondsOperation.toString())
+        val newFormatDuration = SimpleDateFormat("HH:mm:ss").format(duration)
+
+        salesOrderHeader.duration = newFormatDuration
 
         //Setup adapter rental
         finishRentalAdapter = FinishRentalAdapter(this, finishRentalItemList, hoursOperation, minutesOperation, secondsOperation)
@@ -105,13 +113,40 @@ class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackSt
         bottomSheetDialog = RoundedBottomSheetDialog(this)
         bottomSheetDialog?.setContentView(bottomSheetView!!)
 
-        getAllPurchasedItem()
+        setSpinner()
 
         initActionButton()
     }
 
-    fun getAllPurchasedItem() {
-        PurchasedItemPresenter(this).getAllPurchasedItem(this)
+    private fun setSpinner(){
+        //Set Value
+        val itemList: ArrayList<String> = ArrayList()
+        if (listItemPurchased != null) {
+            for( i in listItemPurchased ){
+                itemList.add(i?.name.toString())
+            }
+        }
+
+        // Spinner Purchased Item
+        spnItem?.setItem(itemList)
+        spnItem?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                val item = listItemPurchased?.get(position)
+                productId = item!!.productId
+                itemName = item.name
+                productUnit = item.unitName
+                productEntity = item.entity
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                toast("There is no item").show()
+            }
+        })
     }
 
     private fun showPurchasedItem(){
@@ -125,14 +160,15 @@ class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackSt
     private fun initActionButton(){
         back!!.onClick { finish() }
         btnSubmit!!.onClick {
+
             startActivity<ReceiptActivity>(
                 ReceiptActivity.TAGS.MESSAGE to message,
-                ReceiptActivity.TAGS.ID to id,
                 ReceiptActivity.TAGS.HOURSOPS to hoursOperation,
                 ReceiptActivity.TAGS.MINUTESOPS to minutesOperation,
                 ReceiptActivity.TAGS.SECONDSOPS to secondsOperation,
                 ReceiptActivity.TAGS.RENTAL to finishRentalItemList,
-                ReceiptActivity.TAGS.BMHP to finishPurchaseItemList
+                ReceiptActivity.TAGS.BMHP to finishPurchaseItemList,
+                ReceiptActivity.TAGS.SOHEADER to salesOrderHeader
             )
             finish()
         }
@@ -188,40 +224,5 @@ class FinishOperationActivity: BaseActivity(), FinishPurchasedAdapter.CallbackSt
 
     override fun passDataFinishCallback(stockChange: ArrayList<HandoverPurchasedItem>) {
         finishPurchaseItemList = stockChange
-    }
-
-    override fun onSuccessGetPurchasedItem(dataPurchasedItem: ArrayList<DataPurchasedItem?>?) {
-        //Set Value
-        val itemList: ArrayList<String> = ArrayList()
-        if (dataPurchasedItem != null) {
-            for( i in dataPurchasedItem ){
-                itemList.add(i?.name.toString())
-            }
-        }
-
-        // Spinner Purchased Item
-        spnItem?.setItem(itemList)
-        spnItem?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                val item = dataPurchasedItem?.get(position)
-                productId = item!!.productId
-                itemName = item.name
-                productUnit = item.unitName
-                productEntity = item.entity
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                toast("There is no item").show()
-            }
-        })
-    }
-
-    override fun onErrorGetPurchasedItem(msg: String?) {
-        toast(msg ?: "Failed to get purchased item").show()
     }
 }

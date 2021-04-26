@@ -21,13 +21,12 @@ class ReceiptActivity: BaseActivity() {
         val TOKEN = "token"
         val TOKENTYPE = "token_type"
         val MESSAGE = "message"
-        val ID = "id"
         val HOURSOPS = "hours_ops"
         val MINUTESOPS = "minutes_ops"
         val SECONDSOPS = "seconds_ops"
-        val SALESORDERHEADER = "sales_order_header"
         val RENTAL = "rental"
         val BMHP = "bmhp"
+        val SOHEADER = "so_header"
     }
 
     var rvReceiptRental: RecyclerView? = null
@@ -38,11 +37,11 @@ class ReceiptActivity: BaseActivity() {
     var receiptPurchasedAdapter: ReceiptPurchasedAdapter? = null
     var receiptRentalItemList: ArrayList<HandoverRentalItem> = ArrayList()
     var receiptPurchasedList: ArrayList<HandoverPurchasedItem> = ArrayList()
-    var id: Int = 0
     var hoursOperation: Long = 0
     var minutesOperation: Long = 0
     var secondsOperation: Long = 0
     var message: String? = null
+
     var salesOrderHeader: SalesOrderHeader = SalesOrderHeader()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,10 +54,11 @@ class ReceiptActivity: BaseActivity() {
         rvReceiptPurchased = findViewById(R.id.rv_order_purchased_receipt)
         btnCreateSO = findViewById(R.id.btn_create_so)
 
-        id = intent.getIntExtra("id", 0)
         hoursOperation = intent.getLongExtra("hours_ops",0)
         minutesOperation = intent.getLongExtra("minutes_ops",0)
         secondsOperation = intent.getLongExtra("seconds_ops",0)
+        salesOrderHeader = intent.getParcelableExtra("so_header")!!
+
         if(intent.hasExtra("sales_order_header")) {
             salesOrderHeader = intent.getParcelableExtra<SalesOrderHeader>("sales_order_header")!!
         }
@@ -84,12 +84,12 @@ class ReceiptActivity: BaseActivity() {
         btnCreateSO!!.onClick {
             startActivity<SalesOrderActivity>(
                 SalesOrderActivity.TAGS.MESSAGE to message,
-                SalesOrderActivity.TAGS.ID to id,
                 SalesOrderActivity.TAGS.HOURSOPS to hoursOperation,
                 SalesOrderActivity.TAGS.MINUTESOPS to minutesOperation,
                 SalesOrderActivity.TAGS.SECONDSOPS to secondsOperation,
                 SalesOrderActivity.TAGS.RENTAL to receiptRentalItemList,
-                SalesOrderActivity.TAGS.BMHP to receiptPurchasedList
+                SalesOrderActivity.TAGS.BMHP to receiptPurchasedList,
+                SalesOrderActivity.TAGS.SOHEADER to salesOrderHeader
             )
             finish()
         }

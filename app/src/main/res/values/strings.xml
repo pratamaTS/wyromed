@@ -348,6 +348,9 @@
     <string name="btn_add_patient">Add Patient</string>
     <string name="btn_save_patient">Save</string>
 
-
+    <!-- accept patient screen -->
+    <string name="appbar_patient">Patient</string>
+    <string name="edt_patient_name">Patient Name</string>
+    <string name="edt_medical_record">Medical Record</string>
 
 </resources>

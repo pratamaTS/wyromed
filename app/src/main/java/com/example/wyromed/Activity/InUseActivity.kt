@@ -125,7 +125,6 @@ class InUseActivity : BaseActivity(), InUseRentalAdapter.RentalChronoTickListene
 
             startActivity<FinishOperationActivity>(
                 FinishOperationActivity.TAGS.MESSAGE to message,
-                FinishOperationActivity.TAGS.ID to id,
                 FinishOperationActivity.TAGS.HOURSOPS to hourOperation,
                 FinishOperationActivity.TAGS.MINUTESOPS to minutesOperation,
                 FinishOperationActivity.TAGS.SECONDSOPS to secondsOperation,

@@ -184,8 +184,8 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
                         else -> gen = "F"
                     }
 
-                    patient?.gender = gen
-                    Log.d("gender pasien", patient?.gender.toString())
+//                    patient?.gender = gen
+//                    Log.d("gender pasien", patient?.gender.toString())
                     Log.d("gender position", item.toString())
                 }
             }
@@ -297,7 +297,7 @@ class PatientActivity: BaseActivity(), HospitalInterface, StorePatientInterface,
 
                 dateValue =  year.toString() + "-" + month.toString() + "-" + day.toString()
 
-                patient?.date_of_birth = dateValue!!
+//                patient?.date_of_birth = dateValue!!
             }, year, month, day)
             date.show()
 

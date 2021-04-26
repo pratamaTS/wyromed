@@ -20,9 +20,11 @@ object Constants {
     const val STORE_SR_URL = "stockrequest"
     const val GET_SR_URL = "stockrequest"
     const val GET_BO_URL = "bookingorder"
+    const val GET_SO_URL = "soandroid"
     const val GET_PROVINCE_URL = "states/102"
     const val GET_INBOX_URL = "inbox"
     const val SEND_EMAIL_PASS = "users/forgotpassword/web"
     const val CHANGE_PASSWORD = "users/password"
     const val EDIT_PROFILE = "users/profile"
+    const val STORE_SALES_ORDER = "soandroid"
 }

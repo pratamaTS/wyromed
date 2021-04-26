@@ -16,7 +16,7 @@ class HeaderMessageSalesOrderPresenter(val headerMessageSalesOrderInterface: Hea
         context: Context,
         id: Int
     ){
-        val url: String = "stockrequest/" + id
+        val url: String = "soandroid/" + id
 
         NetworkConfig.service(context)
             .getHeaderMessageSO(url)

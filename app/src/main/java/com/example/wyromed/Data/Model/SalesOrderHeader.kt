@@ -7,25 +7,28 @@ import com.google.gson.annotations.SerializedName
 data class SalesOrderHeader(
 
 	@field:SerializedName("note")
-	val note: String? = null,
+    var note: String? = null,
 
 	@field:SerializedName("total_price")
-	val totalPrice: Double? = null,
+	var totalPrice: Double? = null,
 
 	@field:SerializedName("booking_date")
-	val bookingDate: String? = null,
+	var bookingDate: String? = null,
+
+	@field:SerializedName("duration")
+	var duration: String? = null,
 
 	@field:SerializedName("end_time")
-	val endTime: String? = null,
+    var endTime: String? = null,
 
 	@field:SerializedName("hospital_id")
 	var hospitalId: Int? = null,
 
 	@field:SerializedName("patient_number")
-	val patientNumber: String? = null,
+	var patientNumber: String? = null,
 
 	@field:SerializedName("booking_id")
-	val bookingId: Int? = null,
+	var bookingId: Int? = null,
 
 	@field:SerializedName("start_time")
 	var startTime: String? = null,
@@ -34,19 +37,19 @@ data class SalesOrderHeader(
 	var bookingNumber: String? = null,
 
 	@field:SerializedName("payment_type")
-	val paymentType: String? = null,
+    var paymentType: String? = null,
 
 	@field:SerializedName("patient_type")
-	val patientType: Int? = null,
+    var patientType: Int? = null,
 
 	@field:SerializedName("patient_id")
-	val patientId: Int? = null,
+	var patientId: Int? = null,
 
 	@field:SerializedName("so_due_date")
-	val soDueDate: String? = null,
+	var soDueDate: String? = null,
 
 	@field:SerializedName("patient_name")
-	val patientName: String? = null,
+	var patientName: String? = null,
 
 	@field:SerializedName("hospital_name")
 	var hospitalName: String? = null
@@ -54,6 +57,7 @@ data class SalesOrderHeader(
 	constructor(parcel: Parcel) : this(
 		parcel.readString(),
 		parcel.readValue(Double::class.java.classLoader) as? Double,
+		parcel.readString(),
 		parcel.readString(),
 		parcel.readString(),
 		parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -74,6 +78,7 @@ data class SalesOrderHeader(
 		parcel.writeString(note)
 		parcel.writeValue(totalPrice)
 		parcel.writeString(bookingDate)
+		parcel.writeString(duration)
 		parcel.writeString(endTime)
 		parcel.writeValue(hospitalId)
 		parcel.writeString(patientNumber)
@@ -92,12 +97,12 @@ data class SalesOrderHeader(
 		return 0
 	}
 
-	companion object CREATOR : Parcelable.Creator<BookingOrderHeader> {
-		override fun createFromParcel(parcel: Parcel): BookingOrderHeader {
-			return BookingOrderHeader(parcel)
+	companion object CREATOR : Parcelable.Creator<SalesOrderHeader> {
+		override fun createFromParcel(parcel: Parcel): SalesOrderHeader {
+			return SalesOrderHeader(parcel)
 		}
 
-		override fun newArray(size: Int): Array<BookingOrderHeader?> {
+		override fun newArray(size: Int): Array<SalesOrderHeader?> {
 			return arrayOfNulls(size)
 		}
 	}

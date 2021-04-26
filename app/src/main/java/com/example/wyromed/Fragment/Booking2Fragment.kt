@@ -132,10 +132,10 @@ class Booking2Fragment : Fragment(), HospitalInterface, RentalItemInterface {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getAllRentalItem() {
-        val currentDateTime: LocalDateTime = LocalDateTime.now()
-        val dateTimeNow: String = currentDateTime.format(
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        )
+            val currentDateTime: LocalDateTime = LocalDateTime.now()
+            val dateTimeNow: String = currentDateTime.format(
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            )
 
         bookingOrderHeader.start_date = dateTimeNow
         bookingOrderHeader.end_date = dateTimeNow
@@ -264,7 +264,7 @@ class Booking2Fragment : Fragment(), HospitalInterface, RentalItemInterface {
                 id: Long
             ) {
                 val item = rentalItem[position]
-                productId = item!!.productId
+                productId = item.productId
                 itemName = item.name
                 productUnit = item.unitName
                 productEntity = item.entity

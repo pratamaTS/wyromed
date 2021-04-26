@@ -18,11 +18,7 @@ class UserPresenter(val userInterface: UserInterface) {
             .enqueue(object : Callback<ResponseLogin> {
 
                 override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
-                    try {
-                        getUser(context)
-                    } catch (e: SocketTimeoutException) {
-                        userInterface.onErrorUser(t.localizedMessage)
-                    }
+                    userInterface.onErrorUser(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
@@ -31,11 +27,11 @@ class UserPresenter(val userInterface: UserInterface) {
                     if (response.isSuccessful) {
                         userInterface.onSuccessUser(body?.data)
                     } else {
-                        try {
-                            getUser(context)
-                        } catch (e: SocketTimeoutException) {
+//                        try {
+//                            getUser(context)
+//                        } catch (e: SocketTimeoutException) {
                             userInterface.onErrorUser(body?.meta?.message)
-                        }
+//                        }
                     }
                 }
             })
